@@ -2,3 +2,7 @@ venv/
 .idea/
 __pycache__/
 .pytest_cache/
+.env
+
+# Runtime state written by the API
+data/
