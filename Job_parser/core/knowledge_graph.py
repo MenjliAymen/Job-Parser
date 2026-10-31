@@ -1,43 +1,23 @@
-import re
-import requests
 import json
+import logging
 import os
+import threading
 import uuid
-from sqlalchemy import create_engine, Column, String, Integer, Float, ForeignKey, Table, JSON
-from sqlalchemy.orm import declarative_base, relationship, sessionmaker
+from typing import Any, Dict, List, Optional, Tuple
+
+from pydantic import BaseModel, Field
+from rapidfuzz import fuzz, process
+from rapidfuzz.utils import default_process
+from sqlalchemy import Column, String, Integer, Float, ForeignKey, JSON
+from sqlalchemy.orm import declarative_base, relationship, selectinload, sessionmaker
 from sqlalchemy.ext.mutable import MutableList
 
+from Job_parser.db import make_engine
+from Job_parser.llm import LLMClient
+
+logger = logging.getLogger(__name__)
+
 Base = declarative_base()
-
-PREDEFINED_GROUPS = [
-    "Frontend Development",
-    "Backend Development",
-    "Mobile Development",
-    "Full-Stack Development",
-    "UI/UX Design",
-    "DevOps & Infrastructure",
-    "Data Science & Machine Learning",
-    "Database Management",
-    "Quality Assurance & Testing",
-    "Cybersecurity",
-    "Blockchain & Web3",
-    "Game Development",
-    "Embedded Systems & IoT",
-    "AR/VR Development",
-    "Project Management",
-    "Product Management",
-    "Team Leadership",
-    "Business Analysis",
-    "Technical Writing",
-    "Communication Skills",
-    "Problem Solving",
-    "Agile Methodology",
-    "Sales Engineering",
-    "Customer Support",
-    "Education & Training",
-    "Research & Development"
-]
-
 
 
 class Group(Base):
@@ -66,312 +46,200 @@ class GroupNode(Base):
     node_id = Column(String, ForeignKey("nodes.id"), primary_key=True)
 
 
+class MatchDecision(BaseModel):
+    match: int = Field(0, ge=0, description="1-based index into the candidates, 0 for none")
+    score: float = Field(0, ge=0, le=100)
+
 
 class OllamaGraph:
-    def __init__(self, db_path="sqlite:///job_graph.db", output_path="job_tasks_graph.json", debug=True):
+    """Task knowledge graph. Adding a task costs at most one LLM call, however large the graph is:
+    an exact name/synonym match short-circuits, otherwise a lexical shortlist of the closest
+    ``shortlist_size`` existing tasks is judged by the LLM in a single prompt."""
 
+    def __init__(self, llm: LLMClient, db_path: str = "sqlite:///graph.db", output_path: str = "job_tasks_graph.json"):
+        self.llm = llm
         self.db_path = db_path
         self.output_path = output_path
-        self.debug = debug
 
-
-        self.engine = create_engine(self.db_path, echo=False, future=True)
+        self.engine = make_engine(self.db_path)
         Base.metadata.create_all(self.engine)
         self.Session = sessionmaker(bind=self.engine)
 
-
-        self.similarity_cache = {}
         self.similarity_threshold = 60
+        self.shortlist_size = 8
+        # Ingestion reads candidates and then writes; serialising it keeps concurrent requests from
+        # creating duplicate nodes for the same task.
+        self._write_lock = threading.Lock()
 
-    def save_to_json(self):
-        session = self.Session()
-        nodes = []
-        edges = []
+    # ----------------- Reading -----------------
 
-
-        group_nodes = {}
-        for group in session.query(Group).all():
-            group_id = f"group_{group.id}"
-            group_nodes[group.id] = group_id
-
-
-            total_weight = sum(node.weight for node in group.nodes)
-            task_count = len(group.nodes)
-
-            nodes.append({
-                "id": group_id,
-                "label": f"{group.name} ({task_count} tasks, {total_weight} weight)",
-                "type": "group",
-                "description": group.description,
-                "weight": total_weight,
-                "task_count": task_count,
-                "size": 20 + total_weight * 2
-            })
-
-        # Create task nodes
-        for node in session.query(Node).all():
-
-            nodes.append({
-                "id": node.id,
-                "label": f"{node.name} (weight: {node.weight})",
-                "type": "task",
-                "synonyms": node.synonyms,
-                "weight": node.weight,
-                "size": 10 + node.weight * 1.5
-            })
-
-
-            for group in node.groups:
-                if group.id in group_nodes:
-                    edges.append({
-                        "source": node.id,
-                        "target": group_nodes[group.id],
-                        "type": "belongs_to",
-                        "weight": 1
-                    })
-
-
-        node_map = {n.id: n for n in session.query(Node).all()}
-        for n1 in node_map.values():
-            for n2 in node_map.values():
-                if n1.id < n2.id:
-                    shared_groups = set(g.id for g in n1.groups) & set(g.id for g in n2.groups)
-                    if shared_groups:
-                        edges.append({
-                            "source": n1.id,
-                            "target": n2.id,
-                            "type": "same_group",
-                            "weight": 1
-                        })
-
-        graph_data = {"nodes": nodes, "edges": edges}
-
+    def save_to_json(self) -> str:
+        graph_data = self.to_dict()
+        os.makedirs(os.path.dirname(os.path.abspath(self.output_path)), exist_ok=True)
         with open(self.output_path, "w", encoding="utf-8") as f:
             json.dump(graph_data, f, indent=2)
 
-        session.close()
-        print(f"[GRAPH EXPORT] JSON saved to: {os.path.abspath(self.output_path)}")
+        logger.info("Graph exported to %s", os.path.abspath(self.output_path))
+        return str(self.output_path)
 
-        return self.output_path
+    def to_dict(self, q: Optional[str] = None, limit_per_group: Optional[int] = None) -> Dict[str, Any]:
+        """Group and task nodes plus belongs_to edges. ``q`` filters tasks by name/synonym substring;
+        ``limit_per_group`` keeps only each group's heaviest tasks. Tasks shared by groups are implied by
+        their belongs_to edges, so no pairwise same_group edges are emitted (they grow quadratically)."""
+        needle = (q or "").strip().lower()
 
+        def matches(node: Node) -> bool:
+            return not needle or needle in node.name.lower() or any(needle in s.lower() for s in node.synonyms)
 
-    def _extract_score(self, response_text: str) -> float:
-        score_match = re.search(r'Score:\s*(\d{1,3})', response_text, re.IGNORECASE)
-        if score_match:
-            return float(score_match.group(1))
-        numbers = re.findall(r'\b(\d{1,3})\b', response_text)
-        for num in numbers:
-            value = float(num)
-            if 0 <= value <= 100:
-                return value
-        return 0.0
+        nodes, edges, task_ids = [], [], set()
+        truncated = False
+        with self.Session() as session:
+            groups = session.query(Group).options(selectinload(Group.nodes)).order_by(Group.name).all()
+            for group in groups:
+                total_weight = sum(node.weight for node in group.nodes)
+                kept = sorted((n for n in group.nodes if matches(n)), key=lambda n: (-n.weight, n.name))
+                if limit_per_group is not None and len(kept) > limit_per_group:
+                    kept, truncated = kept[:limit_per_group], True
+                group_id = f"group_{group.id}"
+                nodes.append({
+                    "id": group_id,
+                    "label": f"{group.name} ({len(group.nodes)} tasks, {total_weight} weight)",
+                    "name": group.name,
+                    "type": "group",
+                    "description": group.description,
+                    "weight": total_weight,
+                    "task_count": len(group.nodes),
+                    "size": 20 + total_weight * 2
+                })
+                for node in kept:
+                    if node.id not in task_ids:
+                        task_ids.add(node.id)
+                        nodes.append(self._task_dict(node))
+                    edges.append({"source": node.id, "target": group_id, "type": "belongs_to", "weight": 1})
 
-    def _query_similarity(self, task1: str, task2: str, explanation1: str = "", explanation2: str = "") -> float:
-        cache_key = tuple(sorted([task1.lower() + explanation1.lower(), task2.lower() + explanation2.lower()]))
-        if cache_key in self.similarity_cache:
-            if self.debug:
-                print(f"[SIMILARITY CACHE HIT] {task1} vs {task2}: {self.similarity_cache[cache_key]}")
-            return self.similarity_cache[cache_key]
+            # Tasks without any group.
+            for node in session.query(Node).filter(~Node.groups.any()).all():
+                if matches(node) and node.id not in task_ids:
+                    task_ids.add(node.id)
+                    nodes.append(self._task_dict(node))
 
-        prompt = f"""
-        You are a senior technical recruiter evaluating **functional similarity** between two job responsibilities.
-        Compare these tasks only on functional equivalence.
+            total_tasks = session.query(Node).count()
+        return {"nodes": nodes, "edges": edges, "total_tasks": total_tasks, "truncated": truncated}
 
-        A: "{task1}" ({explanation1})
-        B: "{task2}" ({explanation2})
+    @staticmethod
+    def _task_dict(node: Node) -> Dict[str, Any]:
+        return {
+            "id": node.id,
+            "label": f"{node.name} (weight: {node.weight})",
+            "name": node.name,
+            "type": "task",
+            "synonyms": list(node.synonyms),
+            "weight": node.weight,
+            "size": 10 + node.weight * 1.5
+        }
 
-        Respond ONLY in format:
-        Score: [0-100]
-        """
-
-        try:
-            response = requests.post(
-                "http://localhost:11434/api/generate",
-                json={"model": "mistral", "prompt": prompt.strip(), "stream": False, "options": {"temperature": 0.0}},
-                timeout=60
-            )
-            response.raise_for_status()
-            response_text = response.json().get("response", "").strip()
-            score = self._extract_score(response_text)
-            score = max(0, min(100, score))
-            self.similarity_cache[cache_key] = score
-
-            if self.debug:
-                print(f"[SIMILARITY] '{task1}' vs '{task2}': {score}")
-
-            return score
-        except Exception as e:
-            print(f"[SIMILARITY ERROR] {str(e)}")
-            return 0.0
-
-
-    def _categorize_task(self, task: str, explanation: str = "") -> list:
-
-        groups_list = "\n".join([f"{i + 1}. {group}" for i, group in enumerate(PREDEFINED_GROUPS)])
-
-        prompt = f"""
-        You are an expert in categorizing technical tasks and responsibilities into standardized domains.
-
-        TASK TO CATEGORIZE:
-        "{task}"
-
-        EXPLANATION (if provided):
-        "{explanation}"
-
-        Please categorize this task into ONE OR MORE of the following predefined groups. Choose the most relevant groups:
-
-        {groups_list}
-
-        RESPONSE FORMAT:
-        Return a JSON array with the exact group names you've selected. Example:
-        ["Frontend Development", "UI/UX Design"]
-
-        ONLY use the group names exactly as listed above. Do not create new groups.
-        """
-
-        try:
-            response = requests.post(
-                "http://localhost:11434/api/generate",
-                json={"model": "mistral", "prompt": prompt.strip(), "stream": False, "options": {"temperature": 0.0}},
-                timeout=60
-            )
-            response.raise_for_status()
-            response_text = response.json().get("response", "").strip()
-
-
-            json_match = re.search(r'\[.*\]', response_text)
-            if json_match:
-                try:
-                    groups = json.loads(json_match.group())
-
-                    filtered_groups = [group for group in groups if group in PREDEFINED_GROUPS]
-
-                    if self.debug:
-                        print(f"[CATEGORIZATION] '{task}' -> {filtered_groups}")
-
-                    return filtered_groups
-                except json.JSONDecodeError:
-                    if self.debug:
-                        print(f"[CATEGORIZATION ERROR] Invalid JSON in response: {json_match.group()}")
-                    return []
-            else:
-                print(f"[CATEGORIZATION ERROR] Could not parse response: {response_text}")
+    def get_tasks_by_group(self, group_name: str) -> List[Dict[str, Any]]:
+        with self.Session() as session:
+            group = session.query(Group).filter(Group.name.ilike(group_name)).first()
+            if not group:
                 return []
+            return [{"name": node.name, "weight": node.weight} for node in group.nodes]
 
-        except Exception as e:
-            print(f"[CATEGORIZATION ERROR] {str(e)}")
+    # ----------------- Matching -----------------
+
+    def _shortlist(self, task: str, candidates: List[Node]) -> List[Node]:
+        """The existing tasks lexically closest to ``task``, comparing against names and synonyms."""
+        choices: List[Tuple[str, Node]] = [(alias, n) for n in candidates for alias in [n.name, *n.synonyms]]
+        if not choices:
             return []
+        hits = process.extract(
+            task, [alias for alias, _ in choices], scorer=fuzz.token_set_ratio, processor=default_process,
+            limit=self.shortlist_size * 3,
+        )
+        shortlist: List[Node] = []
+        for _, _, index in hits:
+            node = choices[index][1]
+            if node not in shortlist:
+                shortlist.append(node)
+            if len(shortlist) == self.shortlist_size:
+                break
+        return shortlist
 
+    def _judge_match(self, task: str, explanation: str, candidates: List[Node]) -> Tuple[Optional[Node], float]:
+        """One LLM call: which candidate (if any) is functionally the same task?"""
+        listing = "\n".join(f'{i}. "{n.name}"' for i, n in enumerate(candidates, 1))
+        prompt = f"""
+You are a senior technical recruiter deciding whether a new job task is functionally the same as an existing task.
 
-    def _get_or_create_group(self, session, group_name):
+New task: "{task}" ({explanation})
+
+Existing tasks:
+{listing}
+
+Two tasks are the same if a freelancer doing one is doing the same work as the other, even when they are
+worded differently or name different tools for the same purpose.
+
+Respond ONLY with JSON: {{"match": <number of the matching existing task, or 0 if none>, "score": <0-100 similarity to that task>}}
+"""
+        decision = self.llm.generate_model(prompt.strip(), MatchDecision, temperature=0.0)
+        if 1 <= decision.match <= len(candidates):
+            return candidates[decision.match - 1], decision.score
+        return None, decision.score if decision.match == 0 else 0.0
+
+    # ----------------- Writing -----------------
+
+    def _get_or_create_group(self, session, group_name: str) -> Optional[Group]:
         if not group_name:
-            if self.debug:
-                print("[GROUP ERROR] Group name is None or empty")
             return None
-
-        if self.debug:
-            print(f"[GROUP LOOKUP] Looking for group: '{group_name}'")
 
         group = session.query(Group).filter(Group.name.ilike(group_name)).first()
         if group:
-            if self.debug:
-                print(f"[GROUP FOUND] Found existing group: '{group_name}'")
             return group
 
-        if self.debug:
-            print(f"[GROUP CREATE] Creating new group: '{group_name}'")
-
+        logger.debug("Creating group '%s'", group_name)
         new_group = Group(id=str(uuid.uuid4()), name=group_name)
         session.add(new_group)
         session.commit()
         return new_group
 
-    def _add_or_update_main_action(self, session, task, explanation=None, group=None):
+    def _add_or_update_main_action(self, session, task: str, explanation: str = "", group: Optional[str] = None):
         task = task.strip()
         if not task:
             return None
 
-        if self.debug:
-            print(f"\n[PROCESSING TASK] '{task}'")
-            if group:
-                print(f"[PROVIDED GROUP] Restricting search to group: '{group}'")
-
         group_obj = None
-        candidate_nodes = []
-
-
         if group:
             group_obj = self._get_or_create_group(session, group)
-            if group_obj:
-                candidate_nodes = group_obj.nodes
+            candidate_nodes = list(group_obj.nodes) if group_obj else []
         else:
-
             candidate_nodes = session.query(Node).all()
 
-
-        for node in candidate_nodes:
-            if node.name.lower() == task.lower():
-                if self.debug:
-                    print(f"[EXACT STRING MATCH] '{task}' already exists as node name")
-
-                if group_obj and group_obj not in node.groups:
-                    node.groups.append(group_obj)
-                session.commit()
-                return node.id
-
-            if task in node.synonyms:
-                if self.debug:
-                    print(f"[EXISTING SYNONYM] '{task}' already exists in synonyms of '{node.name}'")
-
-                if group_obj and group_obj not in node.groups:
-                    node.groups.append(group_obj)
-                session.commit()
-                return node.id
-
-
-        existing = next((n for n in candidate_nodes if n.name.lower() == task.lower()), None)
-        if existing:
-            if self.debug:
-                print(f"[EXACT MATCH FOUND] '{task}' == '{existing.name}'")
-
-            if group_obj and group_obj not in existing.groups:
-                existing.groups.append(group_obj)
-                if self.debug:
-                    print(f"[ADDED TO GROUP] '{existing.name}' added to '{group}'")
+        def attach(node: Node) -> str:
+            if group_obj and group_obj not in node.groups:
+                node.groups.append(group_obj)
             session.commit()
-            return existing.id
+            return node.id
 
+        lowered = task.lower()
+        for node in candidate_nodes:
+            if node.name.lower() == lowered or any(s.lower() == lowered for s in node.synonyms):
+                logger.debug("Exact match for '%s' -> '%s'", task, node.name)
+                return attach(node)
 
         best_match, best_score = None, 0.0
-        for node in candidate_nodes:
-            score = self._query_similarity(task, node.name, explanation or "")
-            if score > best_score:
-                best_match, best_score = node, score
+        shortlist = self._shortlist(task, candidate_nodes)
+        if shortlist:
+            best_match, best_score = self._judge_match(task, explanation or "", shortlist)
 
         if best_match and best_score >= self.similarity_threshold:
-            if self.debug:
-                print(f"[SIMILARITY MATCH] '{task}' ~ '{best_match.name}' ({best_score})")
+            logger.debug("Similarity match '%s' ~ '%s' (%s)", task, best_match.name, best_score)
             if task not in best_match.synonyms:
                 best_match.synonyms.append(task)
                 best_match.weight += 1
-                if self.debug:
-                    print(f"[ADDED SYNONYM] '{task}' added to '{best_match.name}' synonyms")
-                    print(f"[WEIGHT INCREMENT] Weight increased to {best_match.weight}")
-            else:
-                if self.debug:
-                    print(f"[SYNONYM EXISTS] '{task}' already in synonyms")
             best_match.last_similarity = best_score
-            if group_obj and group_obj not in best_match.groups:
-                best_match.groups.append(group_obj)
-                if self.debug:
-                    print(f"[ADDED TO GROUP] '{best_match.name}' added to '{group}'")
-            session.commit()
-            return best_match.id
+            return attach(best_match)
 
-
-        if self.debug:
-            print(f"[NEW NODE] Creating new node for '{task}'")
-
+        logger.debug("New node '%s'", task)
         new_node = Node(
             id=str(uuid.uuid4()),
             name=task,
@@ -382,157 +250,36 @@ class OllamaGraph:
         )
         if group_obj:
             new_node.groups.append(group_obj)
-            if self.debug:
-                print(f"[NEW NODE GROUP] '{task}' added to '{group}'")
-
         session.add(new_node)
         session.commit()
         return new_node.id
 
-    def process_main_actions(self, subtasks):
-        if subtasks is None:
-            if self.debug:
-                print("[WARNING] No subtasks provided (subtasks is None)")
+    def process_main_actions(self, subtasks: Optional[List[Any]]) -> List[Dict[str, Any]]:
+        if not subtasks:
             return []
 
-        session = self.Session()
-        processed_node_ids = set()
+        processed_node_ids = []
+        with self._write_lock, self.Session() as session:
+            for item in subtasks:
+                if isinstance(item, dict):
+                    node_id = self._add_or_update_main_action(
+                        session, item.get("task", ""), item.get("explanation") or "", item.get("group")
+                    )
+                else:
+                    node_id = self._add_or_update_main_action(session, str(item))
+                if node_id and node_id not in processed_node_ids:
+                    processed_node_ids.append(node_id)
 
-        if self.debug:
-            print(f"\n{'=' * 50}")
-            print(f"PROCESSING {len(subtasks)} SUBTASKS")
-            print(f"{'=' * 50}")
-
-        # First, process all tasks
-        for i, item in enumerate(subtasks):
-            if self.debug:
-                print(f"\n=== PROCESSING ITEM {i + 1}/{len(subtasks)} ===")
-
-            if isinstance(item, dict):
-                task = item.get("task", "")
-                explanation = item.get("explanation", "")
-                group = item.get("group", None)
-
-                if self.debug:
-                    print(f"[TASK DETAILS] Task: '{task}'")
-                    if explanation:
-                        print(f"[TASK DETAILS] Explanation: '{explanation}'")
-                    if group:
-                        print(f"[TASK DETAILS] Provided Group: '{group}'")
-
-                node_id = self._add_or_update_main_action(
-                    session,
-                    task,
-                    explanation,
-                    group
-                )
-
-                if node_id:
-                    processed_node_ids.add(node_id)
-            else:
-                if self.debug:
-                    print(f"[TASK DETAILS] Task: '{item}'")
-
-                node_id = self._add_or_update_main_action(session, str(item))
-                if node_id:
-                    processed_node_ids.add(node_id)
-
-        # After processing all tasks, get the final state of each processed node
-        processed_nodes = []
-        for node_id in processed_node_ids:
-            node = session.query(Node).filter(Node.id == node_id).first()
-            if node:
-                processed_nodes.append({
-                    "id": node.id,
-                    "name": node.name,
-                    "weight": node.weight,
-                    "synonyms": node.synonyms,
-                    "groups": [g.name for g in node.groups]
-                })
-
-        session.close()
+            # Report the final state of each node, after all merges have been applied.
+            processed_nodes = []
+            for node_id in processed_node_ids:
+                node = session.get(Node, node_id)
+                if node:
+                    processed_nodes.append({
+                        "id": node.id,
+                        "name": node.name,
+                        "weight": node.weight,
+                        "synonyms": list(node.synonyms),
+                        "groups": [g.name for g in node.groups]
+                    })
         return processed_nodes
-
-
-    def get_tasks_by_group(self, group_name):
-        session = self.Session()
-        group = session.query(Group).filter(Group.name.ilike(group_name)).first()
-        if not group:
-            return []
-        return [{"name": node.name, "weight": node.weight} for node in group.nodes]
-
-
-def main():
-
-    test_data = {
-        "subtasks": [
-            {
-                "task": "Design Conversion from Figma to iOS (Swift or Objective-C)",
-                "explanation": "Converting the provided Figma designs into a functional user interface for an iOS application.",
-                "group": "UI/UX Design"
-            },
-            {
-                "task": "Design Conversion from Figma to Android (Kotlin or Java)",
-                "explanation": "Converting the provided Figma designs into a functional user interface for an Android application.",
-                "group": "UI/UX Design"
-            },
-            {
-                "task": "UI Implementation for iOS Applications",
-                "explanation": "Creating user interfaces for iOS apps based on design specifications.",
-                "group": "UI/UX Design"
-            },
-            {
-                "task": "Android UI Development",
-                "explanation": "Building user interfaces for Android applications from design mockups.",
-                "group": "UI/UX Design"
-            },
-            {
-                "task": "Frontend Development using React and TypeScript",
-                "explanation": "Developing the frontend of both iOS and Android applications, leveraging React and TypeScript.",
-                "group": "Frontend Development"
-            },
-            {
-                "task": "React TypeScript Component Development",
-                "explanation": "Creating reusable UI components using React and TypeScript for web applications.",
-                "group": "Frontend Development"
-            },
-            {
-                "task": "Quality Assurance and Testing",
-                "explanation": "Ensuring the developed application functions as intended and is free of bugs, utilizing unit testing, integration testing, and manual testing.",
-                "group": "Quality Assurance & Testing"
-            },
-            {
-                "task": "Software Testing and Quality Control",
-                "explanation": "Performing comprehensive testing to ensure software quality and reliability.",
-                "group": "Quality Assurance & Testing"
-            },
-            {
-                "task": "Cross-platform Mobile App Development",
-                "explanation": "Building applications that work on both iOS and Android platforms using shared codebase.",
-                "group": "Mobile Development"
-            },
-            {
-                "task": "Figma to Code Implementation",
-                "explanation": "Translating Figma design files into functional code for various platforms.",
-                "group": "UI/UX Design"
-            },
-            {
-                "task": "React Native Application Development",
-                "explanation": "Creating cross-platform mobile applications using React Native framework.",
-                "group": "Mobile Development"
-            },
-            {
-                "task": "Comprehensive Software Testing",
-                "explanation": "Implementing various testing methodologies to ensure application quality.",
-                "group": "Quality Assurance & Testing"
-            }
-        ]
-    }
-
-    graph = OllamaGraph(debug=True)
-    graph.process_main_actions(test_data["subtasks"])
-    graph.save_to_json()
-
-
-if __name__ == "__main__":
-    main()

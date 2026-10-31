@@ -1,21 +1,53 @@
-from fastapi import FastAPI, HTTPException, Query
-from pydantic import BaseModel, Field, validator
-from typing import List, Optional, Union, Dict, Any
+import logging
+import mimetypes
+from functools import lru_cache
+from pathlib import Path
+from typing import Optional
+
+from fastapi import Depends, FastAPI, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 
+from Job_parser.config import get_settings
+from Job_parser.llm import LLMError
+from Job_parser.schemas import (
+    DescriptionRequest,
+    ExportGraphResponse,
+    GraphResponse,
+    HealthResponse,
+    IngestSubtasksRequest,
+    LLMStatus,
+    IngestSubtasksResponse,
+    IntentAnalysisResponse,
+    JobAnalysisResponse,
+    JobCompareRequest,
+    JobComparisonResponse,
+    JobRequest,
+    JobSkillComparisonRequest,
+    JobSkillComparisonResponse,
+    JobSkillValidationRequest,
+    ParseRequest,
+    ParseResponse,
+    ProfileRequest,
+    ProfileResponse,
+    SkillValidationResponse,
+    SkillsListCompareRequest,
+    SkillsListComparisonResponse,
+    TasksByGroupResponse,
+    TransformJobResponse,
+)
+from Job_parser.services import Services, build_services
 
-from Job_parser.core.parser import IntelligentResumeParser
-from Job_parser.core.freelance_parser import IntelligentFreelanceJobParser
-from Job_parser.core.profile_builder import ProfileBuilder
-from Job_parser.core.knowledge_graph import OllamaGraph
-from Job_parser.core.Job_Intent_clientExpertise import JobIntentAnalyzer
-from Job_parser.New_pipeline.Job_cleaning import JobDescriptionTransformer
-from Job_parser.New_pipeline.Job_to_job_skill_comparison import JobComparisonAnalyzer
-from Job_parser.New_pipeline.Job_vs_skill_list import JobSkillValidator
-from Job_parser.New_pipeline.Job_Skills_List_Comparison import JobSkillComparator
-from Job_parser.New_pipeline.Skills_comparison import SkillsListComparator
+logging.basicConfig(level=get_settings().log_level, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
+logger = logging.getLogger(__name__)
 
-app = FastAPI(title="Job Parser API", version="1.0.0")
+STATIC_DIR = Path(__file__).resolve().parent / "static"
+# Windows registries often map .js to text/plain, which strict browsers refuse to execute.
+mimetypes.add_type("text/javascript", ".js")
+mimetypes.add_type("text/css", ".css")
+
+app = FastAPI(title="Job Parser API", version="1.1.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -26,243 +58,124 @@ app.add_middleware(
 )
 
 
-
-class ResumeRequest(BaseModel):
-    paragraph: str = Field(..., min_length=1)
-
-
-class ClientInfo(BaseModel):
-    client_from: str
-    client_total_spend: Optional[float] = None
-    client_hires_stat: Optional[str] = None
+@lru_cache
+def get_services() -> Services:
+    return build_services(get_settings())
 
 
-class JobActivity(BaseModel):
-    Proposals: Optional[str] = None
-    Last_viewed_by_client: Optional[str] = None
-    Interviewing: Optional[str] = None
-    Invites_sent: Optional[str] = None
-    Unanswered_invites: Optional[str] = None
+@app.exception_handler(LLMError)
+def llm_error_handler(request: Request, exc: LLMError):
+    logger.error("LLM failure on %s: %s", request.url.path, exc)
+    content = {"detail": str(exc)}
+    if exc.raw_response is not None:
+        content["raw_response"] = exc.raw_response
+    return JSONResponse(status_code=502, content=content)
 
 
-class JobPayload(BaseModel):
-    _id: str
-    title: str
-    summary: str
-    project_type: Optional[str] = None
-    client_info: Optional[ClientInfo] = None
-    job_activity_dict: Optional[JobActivity] = None
-    skills_list: Optional[List[str]] = []
-    update_status: Optional[bool] = None
-    price: Optional[str] = None
-    job_type: Optional[str] = None
-    duration: Optional[str] = None
-    experience: Optional[str] = None
-    category: Optional[str] = None
-    posted_time: Optional[str] = None
+app.mount("/ui", StaticFiles(directory=STATIC_DIR, html=True), name="ui")
 
-
-class JobRequest(BaseModel):
-    text: JobPayload
-
-
-class ProfileRequest(BaseModel):
-    jobs: Union[Dict[str, Any], List[Dict[str, Any]]]
-
-
-class SubtaskItem(BaseModel):
-    task: str = Field(..., min_length=1)
-    explanation: Optional[str] = ""
-    group: Optional[str] = None
-
-
-class IngestSubtasksRequest(BaseModel):
-    subtasks: List[SubtaskItem]
-
-    @validator("subtasks")
-    def must_have_items(cls, v):
-        if not v:
-            raise ValueError("subtasks must contain at least one item")
-        return v
-
-
-class SuggestGroupRequest(BaseModel):
-    task: str = Field(..., min_length=1)
-    explanation: Optional[str] = ""
-
-
-
-class IntentAnalysisRequest(BaseModel):
-    description: str = Field(..., min_length=1, description="Full job description text")
-    #title: [str] = Field(None, description=" job title")
-
-class JobCompareRequest(BaseModel):
-    job1: str
-    job2: str
-
-class JobSkillValidationRequest(BaseModel):
-    job: str = Field(..., description="Full job description text")
-    skills: Dict[str, str] = Field(..., description="Skills list with explanations")
-    strictness: Optional[int] = Field(70, ge=0, le=100, description="Strictness threshold (0–100)")
-
-class JobSkillComparisonRequest(BaseModel):  # NEW
-    job: str
-    skills: Dict[str, str]
-
-class SkillsListCompareRequest(BaseModel):
-    list1: Dict[str, str] = Field(..., description="First skills list {skill: description}")
-    list2: Dict[str, str] = Field(..., description="Second skills list {skill: description}")
-
-
-
-resume_parser = IntelligentResumeParser()
-job_parser = IntelligentFreelanceJobParser()
-profile_builder = ProfileBuilder()
-transformer = JobDescriptionTransformer()
-graph = OllamaGraph(db_path="sqlite:///job_graph.db", output_path="job_tasks_graph.json")
-intent_analyzer = JobIntentAnalyzer()
-comparison_analyzer = JobComparisonAnalyzer()
-skill_validator = JobSkillValidator()
-foundation_divergence_analyzer = JobSkillComparator()
-skills_list_comparator = SkillsListComparator()
 
 @app.get("/")
 def root():
-    return {"status": "ok", "message": "Job Parser API is running"}
+    return {"status": "ok", "message": "Job Parser API is running", "ui": "/ui/", "docs": "/docs"}
 
 
-@app.post("/parse")
-def parse_responsibility(req: ResumeRequest):
+@app.get("/health", response_model=HealthResponse)
+def health(services: Services = Depends(get_services)):
+    fast, reasoning = services.fast_llm, services.reasoning_llm
+    available, error = [], None
     try:
-        return {"result": resume_parser.analyze_responsibilities(req.paragraph)}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        available = fast.list_models()
+    except LLMError as e:
+        error = str(e)
+    if error is None and available:
+        missing = [c.model for c in (fast, reasoning) if not c.has_model(available)]
+        if missing:
+            error = f"model(s) not available from {fast.provider}: {', '.join(dict.fromkeys(missing))}"
+    return HealthResponse(llm=LLMStatus(
+        provider=fast.provider,
+        base_url=fast.base_url,
+        models={"fast": fast.model, "reasoning": reasoning.model},
+        reachable=error is None,
+        error=error,
+        available_models=available,
+    ))
 
 
-@app.post("/analyze_jobs")
-def analyze_jobs(req: JobRequest):
-    try:
-        results = job_parser.analyze(req.text.dict())
-        return {"jobs": results}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+@app.get("/graph", response_model=GraphResponse)
+def get_graph(
+    q: Optional[str] = Query(None, description="Only tasks whose name or synonyms contain this text"),
+    limit_per_group: int = Query(100, ge=1, le=10000, description="Heaviest tasks to return per group"),
+    services: Services = Depends(get_services),
+):
+    return services.graph.to_dict(q=q, limit_per_group=limit_per_group)
 
 
-@app.post("/build_profiles")
-def build_profiles(req: ProfileRequest):
-    try:
-        jobs = req.jobs if isinstance(req.jobs, list) else [req.jobs]
-        results = profile_builder.analyze_jobs(jobs)
-        return {"profiles": results}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+@app.post("/parse", response_model=ParseResponse)
+def parse_responsibility(req: ParseRequest, services: Services = Depends(get_services)):
+    return ParseResponse(result=services.resume_parser.analyze_responsibilities(req.paragraph, req.skills))
 
 
-@app.post("/graph/ingest_subtasks")
-def ingest_subtasks(payload: IngestSubtasksRequest):
-    try:
-        subtasks = [item.dict() for item in payload.subtasks]
-        results = graph.process_main_actions(subtasks)
-        return {
-            "status": "ok",
-            "ingested": len(results),
-            "results": results
-        }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+@app.post("/analyze_jobs", response_model=JobAnalysisResponse)
+def analyze_jobs(req: JobRequest, services: Services = Depends(get_services)):
+    return JobAnalysisResponse(jobs=services.job_parser.analyze(req.text.model_dump()))
 
 
-@app.get("/graph/tasks_by_group")
-def tasks_by_group(name: str = Query(..., min_length=1, description="Exact group name")):
-    try:
-        tasks = graph.get_tasks_by_group(name)
-        return {"group": name, "count": len(tasks), "tasks": tasks}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+@app.post("/build_profiles", response_model=ProfileResponse)
+def build_profiles(req: ProfileRequest, services: Services = Depends(get_services)):
+    jobs = req.jobs if isinstance(req.jobs, list) else [req.jobs]
+    return ProfileResponse(profiles=services.profile_builder.analyze_jobs(jobs))
 
 
-@app.get("/export_graph")
-def export_graph():
-    path = graph.save_to_json()
-    return {"message": f"Graph exported to {path}"}
+@app.post("/graph/ingest_subtasks", response_model=IngestSubtasksResponse)
+def ingest_subtasks(payload: IngestSubtasksRequest, services: Services = Depends(get_services)):
+    results = services.graph.process_main_actions([item.model_dump() for item in payload.subtasks])
+    return IngestSubtasksResponse(ingested=len(results), results=results)
 
 
-
-@app.post("/analyze_intent")
-def analyze_intent(req: IntentAnalysisRequest):
-
-    try:
-
-        job_data = {
-            "description": req.description,
-            #"title": req.title or "Untitled Job"
-        }
-
-        # Analyze the job
-        results = intent_analyzer.analyze(job_data)
-
-        return {
-            "status": "ok",
-            "analysis": results
-        }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+@app.get("/graph/tasks_by_group", response_model=TasksByGroupResponse)
+def tasks_by_group(
+    name: str = Query(..., min_length=1, description="Exact group name"),
+    services: Services = Depends(get_services),
+):
+    tasks = services.graph.get_tasks_by_group(name)
+    return TasksByGroupResponse(group=name, count=len(tasks), tasks=tasks)
 
 
-@app.post("/transform_job")
-def transform_job(req: IntentAnalysisRequest):
-    try:
-        job_data = {"description": req.description}
-        results = transformer.transform(job_data)
-        return {"status": "ok", "transformation": results}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+@app.get("/export_graph", response_model=ExportGraphResponse)
+def export_graph(services: Services = Depends(get_services)):
+    path = services.graph.save_to_json()
+    return ExportGraphResponse(message=f"Graph exported to {path}")
 
-@app.post("/compare_jobs")
-def compare_jobs(req: JobCompareRequest):
-    try:
-        results = comparison_analyzer.compare(
-            {"description": req.job1},
-            {"description": req.job2}
-        )
-        return {
-            "status": "ok",
-            "comparison": results
-        }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
 
-@app.post("/validate_job_skills")
-def validate_job_skills(req: JobSkillValidationRequest):
-    try:
-        results = skill_validator.validate(
-            job=req.job,
-            skills=req.skills,
-            strictness=req.strictness
-        )
-        return {
-            "status": "ok",
-            "validation": results
-        }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+@app.post("/analyze_intent", response_model=IntentAnalysisResponse)
+def analyze_intent(req: DescriptionRequest, services: Services = Depends(get_services)):
+    return IntentAnalysisResponse(analysis=services.intent_analyzer.analyze({"description": req.description}))
 
-@app.post("/compare_job_skills")
-def compare_job_skills(req: JobSkillComparisonRequest):
-    try:
-        results = foundation_divergence_analyzer.compare(
-            {"description": req.job},
-            req.skills
-        )
-        return {"status": "ok", "comparison": results}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
 
-@app.post("/compare_skills_lists")
-def compare_skills_lists(req: SkillsListCompareRequest):
+@app.post("/transform_job", response_model=TransformJobResponse)
+def transform_job(req: DescriptionRequest, services: Services = Depends(get_services)):
+    return TransformJobResponse(transformation=services.transformer.transform({"description": req.description}))
 
-    try:
-        results = skills_list_comparator.compare(req.list1, req.list2)
-        return {"status": "ok", "comparison": results}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/compare_jobs", response_model=JobComparisonResponse)
+def compare_jobs(req: JobCompareRequest, services: Services = Depends(get_services)):
+    comparison = services.job_comparator.compare({"description": req.job1}, {"description": req.job2})
+    return JobComparisonResponse(comparison=comparison)
+
+
+@app.post("/validate_job_skills", response_model=SkillValidationResponse)
+def validate_job_skills(req: JobSkillValidationRequest, services: Services = Depends(get_services)):
+    validation = services.skill_validator.validate(job=req.job, skills=req.skills, strictness=req.strictness)
+    return SkillValidationResponse(validation=validation)
+
+
+@app.post("/compare_job_skills", response_model=JobSkillComparisonResponse)
+def compare_job_skills(req: JobSkillComparisonRequest, services: Services = Depends(get_services)):
+    comparison = services.job_skill_comparator.compare({"description": req.job}, req.skills)
+    return JobSkillComparisonResponse(comparison=comparison)
+
+
+@app.post("/compare_skills_lists", response_model=SkillsListComparisonResponse)
+def compare_skills_lists(req: SkillsListCompareRequest, services: Services = Depends(get_services)):
+    return SkillsListComparisonResponse(comparison=services.skills_list_comparator.compare(req.list1, req.list2))

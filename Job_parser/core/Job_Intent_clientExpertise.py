@@ -1,48 +1,17 @@
-import re
-import json
-import requests
-import time
-from typing import Dict, Any, Optional
-from dataclasses import dataclass
+from typing import Any, Dict
 
-
-
-@dataclass
-class LLMConfig:
-    model: str = "mistral"
-    temperature: float = 0.1
-    timeout: int = 120
-    retry_count: int = 3
-    retry_delay: int = 5
-    endpoint: str = "http://localhost:11434/api/generate"
-
+from Job_parser.llm import LLMClient
+from Job_parser.schemas import IntentAnalysis
 
 
 class JobIntentAnalyzer:
-    def __init__(self, llm_config: Optional[LLMConfig] = None):
-        self.llm_config = llm_config or LLMConfig()
+    def __init__(self, llm: LLMClient):
+        self.llm = llm
 
-    def analyze(self, job: Dict[str, Any]) -> Dict[str, Any]:
-
-        prompt = self._build_prompt(job)
-        response = self._query_llama(prompt)
-
-        if not response:
-            return {"error": "Failed to get response from LLM"}
-
-        try:
-
-            json_match = re.search(r'\{.*\}', response, re.DOTALL)
-            if json_match:
-                data = json.loads(json_match.group())
-                return data
-            else:
-                return {"error": "No JSON found in response", "raw_response": response}
-        except json.JSONDecodeError as e:
-            return {"error": f"JSON decode error: {str(e)}", "raw_response": response}
+    def analyze(self, job: Dict[str, Any]) -> IntentAnalysis:
+        return self.llm.generate_model(self._build_prompt(job), IntentAnalysis, temperature=0.1)
 
     def _build_prompt(self, job: Dict[str, Any]) -> str:
-
         title = job.get('title', 'Untitled Job')
         description = job.get('description', 'No description provided')
 
@@ -77,24 +46,3 @@ Respond with ONLY a JSON object in this exact format:
 
 Provide a confidence score based on how clear the job description is.
 """
-
-    def _query_llama(self, prompt: str) -> str:
-
-        for i in range(self.llm_config.retry_count):
-            try:
-                response = requests.post(
-                    self.llm_config.endpoint,
-                    json={
-                        "model": self.llm_config.model,
-                        "prompt": prompt,
-                        "stream": False,
-                        "options": {"temperature": self.llm_config.temperature}
-                    },
-                    timeout=self.llm_config.timeout,
-                )
-                response.raise_for_status()
-                return response.json().get("response", "").strip()
-            except Exception as e:
-                print(f"[Retry {i + 1}] Error querying LLM: {e}")
-                time.sleep(self.llm_config.retry_delay)
-        return ""

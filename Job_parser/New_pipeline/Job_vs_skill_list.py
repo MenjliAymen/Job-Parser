@@ -1,127 +1,46 @@
-import re
 import json
-import time
-import requests
-from typing import Dict, Any, Optional
-from dataclasses import dataclass
+from typing import Dict, List
 
-# ----------------- CONFIG -----------------
-@dataclass
-class LLMConfig:
-    model: str = "deepseek-r1"
-    temperature: float = 0
-    top_p: float = 1
-    timeout: int = 500
-    retry_count: int = 3
-    retry_delay: int = 5
-    endpoint: str = "http://localhost:11434/api/generate"
+from rapidfuzz import fuzz, process
+from rapidfuzz.utils import default_process
+
+from Job_parser.llm import LLMClient
+from Job_parser.schemas import SkillValidation
 
 
+class JobSkillValidator:
+    def __init__(self, llm: LLMClient):
+        self.llm = llm
 
-class BaseLLMAnalyzer:
-    def __init__(self, llm_config: Optional[LLMConfig] = None):
-        self.llm_config = llm_config or LLMConfig()
-
-    def _query_llm(self, prompt: str) -> str:
-
-        for i in range(self.llm_config.retry_count):
-            try:
-                response = requests.post(
-                    self.llm_config.endpoint,
-                    json={
-                        "model": self.llm_config.model,
-                        "prompt": prompt,
-                        "stream": False,
-                        "options": {
-                            "temperature": self.llm_config.temperature,
-                            "top_p": self.llm_config.top_p,
-                        },
-                    },
-                    timeout=self.llm_config.timeout,
-                )
-                response.raise_for_status()
-                return response.json().get("response", "").strip()
-            except Exception as e:
-                print(f"[Retry {i+1}] Error querying LLM: {e}")
-                time.sleep(self.llm_config.retry_delay)
-        return ""
-
-    def _extract_json(self, response: str) -> Dict[str, Any]:
-
-        try:
-            json_match = re.search(r"\{[\s\S]*\}", response)
-            if not json_match:
-                return {"error": "No JSON found in response", "raw_response": response}
-
-            raw_json = json_match.group()
-            cleaned_json = self._sanitize_json(raw_json)
-            return json.loads(cleaned_json)
-
-        except json.JSONDecodeError as e:
-            return {"error": f"JSON decode error: {str(e)}", "raw_response": response}
-
-    def _sanitize_json(self, raw: str) -> str:
-
-        cleaned = re.sub(r",\s*}\s*", "}", raw)
-        cleaned = re.sub(r",\s*]\s*", "]", cleaned)
-        return cleaned.strip()
-
-
-
-class JobComparisonAnalyzer(BaseLLMAnalyzer):
-    def compare(self, job1: Dict[str, Any], job2: Dict[str, Any]) -> Dict[str, Any]:
-        prompt = self._build_prompt(job1, job2)
-        response = self._query_llm(prompt)
-        if not response:
-            return {"error": "Failed to get response from LLM"}
-        return self._extract_json(response)
-
-    def _build_prompt(self, job1: Dict[str, Any], job2: Dict[str, Any]) -> str:
-        title1 = job1.get("title", "Job 1")
-        desc1 = job1.get("description", "")
-        title2 = job2.get("title", "Job 2")
-        desc2 = job2.get("description", "")
-
-        return f"""
-Compare the following two freelance job descriptions:
-
-Job 1 - {title1}:
-{desc1}
-
-Job 2 - {title2}:
-{desc2}
-
-Your task:
-1. Identify **Base Foundation Skills** (transferable/common skills across both jobs).
-2. Identify **Job-Specific Expertise** (unique to each job individually).
-3. Provide a **Transferability Score** (0–100).
-
-IMPORTANT:
-- Respond ONLY with a valid JSON object.
-- Do NOT include explanations or commentary.
-- JSON must strictly match this format:
-
-{{
-  "base_foundation_skills": ["skill1", "skill2", ...],
-  "job1_specific_expertise": ["skill1", "skill2", ...],
-  "job2_specific_expertise": ["skill1", "skill2", ...],
-  "transferability_score": 0-100
-}}
-"""
-
-
-
-class JobSkillValidator(BaseLLMAnalyzer):
-    def validate(self, job: str, skills: Dict[str, str], strictness: int = 70) -> Dict[str, Any]:
+    def validate(self, job: str, skills: Dict[str, str], strictness: int = 70) -> SkillValidation:
         prompt = self._build_prompt(job, skills, strictness)
-        response = self._query_llm(prompt)
-        if not response:
-            return {"error": "Failed to get response from LLM"}
-        return self._extract_json(response)
+        result = self.llm.generate_model(prompt, SkillValidation, temperature=0, top_p=1)
+        return self._reconcile(result, list(skills))
+
+    def _reconcile(self, result: SkillValidation, listed: List[str]) -> SkillValidation:
+        """Make the answer consistent: every listed skill is either relevant or unnecessary (by its exact
+        listed name), missing skills are never ones already listed, and all_skills_required follows."""
+
+        def canonical(name: str):
+            match = process.extractOne(name, listed, scorer=fuzz.ratio, processor=default_process)
+            return match[0] if match and match[1] >= 85 else None
+
+        relevant = list(dict.fromkeys(c for c in map(canonical, result.relevant_skills) if c))
+        unnecessary = [c for c in dict.fromkeys(map(canonical, result.unnecessary_skills)) if c and c not in relevant]
+        # Skills the model forgot to classify did not stand out as needed.
+        unnecessary += [s for s in listed if s not in relevant and s not in unnecessary]
+        missing = [m for m in dict.fromkeys(s.strip() for s in result.missing_skills) if m and not canonical(m)]
+
+        return result.model_copy(update={
+            "relevant_skills": relevant,
+            "unnecessary_skills": unnecessary,
+            "missing_skills": missing,
+            "all_skills_required": not unnecessary,
+        })
 
     def _build_prompt(self, job: str, skills: Dict[str, str], strictness: int) -> str:
         return f"""
-Compare the following job description against the provided skills list.
+Compare the following job description against a freelancer's skills list.
 
 Job:
 {job}
@@ -129,19 +48,25 @@ Job:
 Skills List:
 {json.dumps(skills, indent=2)}
 
-Strictness Level: {strictness} (0 = lenient, 100 = strict)
+Strictness Level: {strictness} (0 = lenient, 100 = strict). At high strictness a listed skill only counts as
+relevant if the job clearly requires it; at low strictness, skills that would plausibly help also count.
 
-Your task:
-- Return whether ALL listed skills are crucial for completing the job.
-- If not, list which skills are missing or unnecessary.
-- Always include an explanation.
+Your task - classify the skills:
+- relevant_skills: listed skills the job needs (use the exact names from the Skills List)
+- unnecessary_skills: listed skills the job does not need (use the exact names from the Skills List)
+- missing_skills: skills the job needs that are NOT in the Skills List (short names, e.g. "AWS")
+- Every listed skill must appear in exactly one of relevant_skills or unnecessary_skills.
+- all_skills_required is true only if unnecessary_skills is empty.
+- explanation: 1-3 sentences on the overall fit.
 
 IMPORTANT:
 Respond ONLY with valid JSON in this format:
 
 {{
   "all_skills_required": true/false,
-  "missing_skills": ["skill1", "skill2", ...],
+  "relevant_skills": ["skill1", ...],
+  "unnecessary_skills": ["skill1", ...],
+  "missing_skills": ["skill1", ...],
   "explanation": "short explanation"
 }}
 """

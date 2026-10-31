@@ -1,9 +1,7 @@
-fastapi==0.116.1
+# API runtime (Job_parser/). Clustering/ has its own file; tests need requirements-dev.txt.
+fastapi==0.115.12
+uvicorn==0.34.3
 pydantic==2.11.7
-rapidfuzz==3.14.0
-Requests==2.32.5
-sentence_transformers==4.1.0
-spacy==3.7.2
+requests==2.32.4
+rapidfuzz==3.13.0
 SQLAlchemy==2.0.43
-torch==2.7.1
-transformers==4.53.0

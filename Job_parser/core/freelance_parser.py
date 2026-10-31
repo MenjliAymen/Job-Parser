@@ -1,17 +1,14 @@
 import re
-import json
-import requests
-import time
-from typing import List, Dict, Any, Union, Optional
-from dataclasses import dataclass
+from typing import Any, Dict, List, Optional, Tuple
 
-from sqlalchemy import Column, Integer, String, Text, ForeignKey, Float, create_engine
+from sqlalchemy import Column, Integer, String, Text, ForeignKey, Float
 from sqlalchemy.orm import relationship, sessionmaker, declarative_base
 
+from Job_parser.db import make_engine
+from Job_parser.llm import LLMClient
+from Job_parser.schemas import GroupedSubtask, JobAnalysis, RawJobAnalysis, SubtaskAttributes
+
 Base = declarative_base()
-DATABASE_URL = "sqlite:///ollama_graph.db"
-engine = create_engine(DATABASE_URL, echo=False)
-SessionLocal = sessionmaker(bind=engine)
 
 
 class Job(Base):
@@ -49,35 +46,6 @@ class Technology(Base):
     job = relationship("Job", back_populates="technologies")
 
 
-Base.metadata.create_all(engine)
-
-
-def fix_json_formatting(data: Union[str, Dict, List]) -> Union[Dict, List]:
-    if isinstance(data, str):
-        try:
-            data = json.loads(data)
-        except json.JSONDecodeError:
-            data = data.replace("null", "None").replace("false", "False").replace("true", "True")
-            import ast
-            try:
-                data = ast.literal_eval(data)
-            except Exception:
-                return data
-    if isinstance(data, dict):
-        return {k: fix_json_formatting(v) for k, v in data.items()}
-    elif isinstance(data, list):
-        return [fix_json_formatting(v) for v in data]
-    return data
-
-@dataclass
-class LLMConfig:
-    model: str = "mistral"
-    temperature: float = 0.2
-    timeout: int = 120
-    retry_count: int = 3
-    retry_delay: int = 5
-    endpoint: str = "http://localhost:11434/api/generate"
-
 ALLOWED_GROUPS = [
     "Frontend Development",
     "Backend Development",
@@ -102,115 +70,135 @@ ALLOWED_GROUPS = [
     "Research & Development",
     "Other"
 ]
+_GROUP_LOOKUP = {g.lower(): g for g in ALLOWED_GROUPS}
+_PRIORITIES = {"high": "High", "medium": "Medium", "low": "Low"}
+
+WEEKS_PER_MONTH = 4.33
+# Upwork's project length buckets -> representative number of months.
+_MONTH_BUCKETS = [
+    (r"less than (?:1|one) month", 0.75, "<1 month"),
+    (r"1 to 3 months", 2.0, "1-3 months"),
+    (r"3 to 6 months", 4.5, "3-6 months"),
+    (r"more than 6 months", 9.0, ">6 months"),
+]
+# Upwork's weekly-hours buckets -> representative hours per week.
+_WEEKLY_BUCKETS = [
+    (r"less than 30 hrs?/week", 20.0, "<30 hrs/week"),
+    (r"30\+ hrs?/week|more than 30 hrs?/week", 35.0, "30+ hrs/week"),
+]
+_DEFAULT_WEEKLY_HOURS = 20.0
+
+
+def estimate_duration_hours(duration: str) -> Optional[Tuple[float, str]]:
+    """'1 to 3 months, Less than 30 hrs/week' -> (173.2, '1-3 months (~2 mo) x <30 hrs/week (~20 h)').
+
+    Returns None when the project length is unknown. A missing or undecided weekly load
+    ('Hours to be determined', 'Not sure') assumes part-time.
+    """
+    d = (duration or "").lower()
+    months = next(((m, label) for pattern, m, label in _MONTH_BUCKETS if re.search(pattern, d)), None)
+    if months is None:
+        return None
+    weekly = next(((h, label) for pattern, h, label in _WEEKLY_BUCKETS if re.search(pattern, d)), None)
+    hours_per_week, weekly_label = weekly or (_DEFAULT_WEEKLY_HOURS, "weekly hours not given")
+    total = round(months[0] * WEEKS_PER_MONTH * hours_per_week, 1)
+    basis = f"{months[1]} (~{months[0]:g} mo) x {weekly_label} (~{hours_per_week:g} h/week)"
+    return total, basis
+
+
+def relative_priority(share: float, n_subtasks: int) -> str:
+    """Fallback when the LLM gives no priority: compare a subtask's effort share with an even split."""
+    even = 1 / max(n_subtasks, 1)
+    if share >= 1.25 * even:
+        return "High"
+    if share >= 0.75 * even:
+        return "Medium"
+    return "Low"
 
 
 class IntelligentFreelanceJobParser:
-    def __init__(self, llm_config: Optional[LLMConfig] = None):
-        self.llm_config = llm_config or LLMConfig()
-        self.duration_mappings = {
-            "less than 30 hrs/week": 120.0,
-            "1 to 3 months": 300.0,
-            "3 to 6 months": 600.0,
-            "more than 6 months": 1200.0,
-        }
+    def __init__(self, llm: LLMClient, db_url: str = "sqlite:///jobs.db"):
+        self.llm = llm
+        self.engine = make_engine(db_url)
+        Base.metadata.create_all(self.engine)
+        self.Session = sessionmaker(bind=self.engine)
 
-    def analyze(self, job: Dict[str, Any]) -> Dict[str, Any]:
-        job = fix_json_formatting(job)
-        cleaned_skills = self._clean_skills(job.get("skills_list", []))
+    def analyze(self, job: Dict[str, Any]) -> JobAnalysis:
+        cleaned_skills = self._clean_skills(job.get("skills_list") or [])
+        estimate = estimate_duration_hours(job.get("duration") or "")
 
-        duration = job.get("duration", "")
-        has_duration = bool(duration and duration.strip())
-        duration_hours = self._estimate_duration_hours(duration) if has_duration else 0
+        prompt = self._build_prompt(job, cleaned_skills)
+        raw = self.llm.generate_model(prompt, RawJobAnalysis, json_mode=True, temperature=0.2)
 
-        prompt = self._build_prompt(job, cleaned_skills, has_duration, duration_hours)
-        response = self._query_llama(prompt)
+        if cleaned_skills:
+            raw.suggested_technologies = cleaned_skills
+        subtasks = self._process_subtasks(raw, estimate[0] if estimate else None)
 
-        if not response:
-            return {}
+        with self.Session() as session:
+            job_id = self._save_to_db(session, job.get("title", ""), raw, subtasks)
 
-        try:
-            data = json.loads(response)
+        return JobAnalysis(
+            job_id=job_id,
+            summary=raw.summary,
+            suggested_technologies=raw.suggested_technologies,
+            tech_domain=raw.tech_domain,
+            industry_metadata=raw.industry_metadata,
+            subtasks=subtasks,
+            assumptions=raw.assumptions,
+            estimated_hours=estimate[0] if estimate else None,
+            estimated_hours_basis=estimate[1] if estimate else None,
+        )
 
-            if cleaned_skills:
-                data["suggested_technologies"] = cleaned_skills
-
-            data = self._process_subtasks(data, has_duration, duration_hours)
-
-            with SessionLocal() as session:
-                job_id = self._save_to_db(session, job, data)
-                data["job_id"] = job_id
-
-            return data
-        except json.JSONDecodeError:
-            return {}
-
-
-    def _save_to_db(self, session, raw_job: Dict, parsed: Dict) -> int:
+    def _save_to_db(self, session, title: str, parsed: RawJobAnalysis, subtasks: List[GroupedSubtask]) -> int:
         job_obj = Job(
-            title=raw_job.get("title", ""),
-            summary=parsed["summary"],
-            tech_domain=parsed["tech_domain"],
-            assumptions=parsed["assumptions"]
+            title=title,
+            summary=parsed.summary,
+            tech_domain=parsed.tech_domain,
+            assumptions=parsed.assumptions
         )
         session.add(job_obj)
-        session.flush()
 
-        for tech in parsed.get("suggested_technologies", []):
+        for tech in parsed.suggested_technologies:
             session.add(Technology(name=tech, job=job_obj))
 
-        for sub in parsed.get("subtasks", []):
-            s = Subtask(
-                task=sub["task"],
-                explanation=sub["explanation"],
-                group=sub.get("group", "Other"),
-                inherited_time=sub.get("attributes", {}).get("inherited_time"),
-                priority_score=sub.get("attributes", {}).get("priority_score"),
-                remark=sub.get("attributes", {}).get("remark"),
+        for sub in subtasks:
+            attrs = sub.attributes
+            session.add(Subtask(
+                task=sub.task,
+                explanation=sub.explanation,
+                group=sub.group,
+                inherited_time=attrs.inherited_time if attrs else None,
+                priority_score=attrs.priority_score if attrs else None,
+                remark=attrs.remark if attrs else None,
                 job=job_obj,
-            )
-            session.add(s)
+            ))
 
         session.commit()
         return job_obj.id
 
     def _clean_skills(self, skills: List[str]) -> List[str]:
-        return [re.sub(r"\s+", " ", s.strip()) for s in skills]
+        return [re.sub(r"\s+", " ", s.strip()) for s in skills if s and s.strip()]
 
-    def _process_subtasks(self, data: Dict[str, Any], has_duration: bool, duration_hours: float) -> Dict[str, Any]:
-        subtasks = data.get("subtasks", [])
-        if has_duration:
-            total_weight = sum(t.get("weight", 0) for t in subtasks) or 1
-            for task in subtasks:
-                weight = task.get("weight", 0) / total_weight
-                task["attributes"] = {
-                    "inherited_time": round(weight * duration_hours, 1),
-                    "priority_score": round(weight, 2),
-                    "remark": self._priority_remark(weight),
-                }
-                task.pop("weight", None)
-        else:
-            for task in subtasks:
-                task.pop("attributes", None)
-                task.pop("weight", None)
-        return data
+    def _process_subtasks(self, data: RawJobAnalysis, total_hours: Optional[float]) -> List[GroupedSubtask]:
+        n = len(data.subtasks)
+        weights = [max(t.weight, 0) for t in data.subtasks]
+        total_weight = sum(weights)
+        result = []
+        for task, weight in zip(data.subtasks, weights):
+            share = weight / total_weight if total_weight else 1 / max(n, 1)
+            result.append(GroupedSubtask(
+                task=task.task,
+                explanation=task.explanation,
+                group=_GROUP_LOOKUP.get(task.group.strip().lower(), "Other"),
+                attributes=SubtaskAttributes(
+                    inherited_time=round(share * total_hours, 1) if total_hours else None,
+                    priority_score=round(share, 2),
+                    remark=_PRIORITIES.get(task.priority.strip().lower()) or relative_priority(share, n),
+                ),
+            ))
+        return result
 
-    def _priority_remark(self, score: float) -> str:
-        if score > 0.6:
-            return "High"
-        elif score >= 0.3:
-            return "Medium"
-        return "Low"
-
-    def _estimate_duration_hours(self, duration: str) -> float:
-        if not duration:
-            return 100.0
-        d = duration.lower()
-        for k, h in self.duration_mappings.items():
-            if k in d:
-                return h
-        return 100.0
-
-    def _build_prompt(self, job, skills, has_duration, hours) -> str:
+    def _build_prompt(self, job, skills) -> str:
         return f"""
 Analyze this freelance job posting:
 
@@ -223,10 +211,14 @@ Provide:
 - A concise rewritten summary (max 1 sentence).
 - The primary technology domain.
 - Industry metadata (or []).
-- Exactly 4 subtasks with task + explanation.
+- Exactly 4 subtasks that together cover the whole job, each with task + explanation.
 - For each subtask, assign **one group ONLY from this fixed list**:
   {", ".join(ALLOWED_GROUPS)}
-- If duration exists ({hours}h), distribute weights across subtasks (sum=100).
+- For each subtask, a "weight": the share of the total work it takes, as an integer. The 4 weights must sum
+  to 100 and must reflect real differences in effort (building a scraper is more work than writing a README).
+  Only give equal weights if the work is genuinely equal.
+- For each subtask, a "priority": "High" if the job fails without it, "Medium" if it is expected but
+  secondary, "Low" if it is optional or a nice-to-have.
 
 Return valid JSON:
 {{
@@ -235,31 +227,8 @@ Return valid JSON:
   "tech_domain": "...",
   "industry_metadata": [],
   "subtasks": [
-    {{"task": "...", "explanation": "...", "group": "...", "weight": 25}}
+    {{"task": "...", "explanation": "...", "group": "...", "weight": <integer>, "priority": "High|Medium|Low"}}
   ],
   "assumptions": "..."
 }}
 """
-
-    def _query_llama(self, prompt: str) -> str:
-        for i in range(self.llm_config.retry_count):
-            try:
-                r = requests.post(
-                    self.llm_config.endpoint,
-                    json={"model": self.llm_config.model, "prompt": prompt, "stream": False, "format": "json"},
-                    timeout=self.llm_config.timeout,
-                )
-                r.raise_for_status()
-                return r.json().get("response", "").strip()
-            except Exception as e:
-                print(f"[Retry {i+1}] {e}")
-                time.sleep(self.llm_config.retry_delay)
-        return ""
-
-
-if __name__ == "__main__":
-    parser = IntelligentFreelanceJobParser()
-    with open("sample_job.json") as f:
-        job_data = json.load(f)
-    result = parser.analyze(job_data)
-    print(json.dumps(result, indent=2))

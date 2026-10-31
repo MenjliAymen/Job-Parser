@@ -1,40 +1,33 @@
-import requests
-import time
-from typing import List, Dict, Any
+from typing import Any, Dict, List
+
+from Job_parser.llm import LLMClient
+from Job_parser.schemas import Profile
 
 
 class ProfileBuilder:
-    def __init__(self, model: str = "mistral", max_retries: int = 3):
-        self.model = model
-        self.max_retries = max_retries
+    def __init__(self, llm: LLMClient):
+        self.llm = llm
 
-    def analyze_jobs(self, jobs: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-
+    def analyze_jobs(self, jobs: List[Dict[str, Any]]) -> List[Profile]:
         results = []
         for job in jobs:
             summary = job.get("summary", "No summary")
-            subtasks = job.get("subtasks", [])
+            subtasks = job.get("subtasks") or []
 
             if not subtasks:
-                results.append({"job_summary": summary, "profile_breakdown": []})
+                results.append(Profile(job_summary=summary, profile_breakdown=[]))
                 continue
 
-            prompt = self._build_prompt(summary, subtasks)
-            response = self._query_llama(prompt)
-            breakdown = response.strip() if response else "[Error] No response"
-
-
-            breakdown_lines = breakdown.splitlines()
-
-            results.append({
-                "job_summary": summary,
-                "profile_breakdown": breakdown_lines
-            })
+            breakdown = self.llm.generate(self._build_prompt(summary, subtasks), temperature=0.25, num_predict=3500)
+            results.append(Profile(
+                job_summary=summary,
+                profile_breakdown=[line for line in breakdown.splitlines() if line.strip()],
+            ))
         return results
 
     def _build_prompt(self, summary: str, subtasks: list) -> str:
         task_list = "\n".join(
-            f"- {task['task']}: {task['explanation']}"
+            f"- {task.get('task', '')}: {task.get('explanation', '')}"
             for task in subtasks[:8]
         )
 
@@ -73,23 +66,3 @@ CRITICAL RULES:
 6. ALWAYS maintain the exact tree structure with proper symbols (└──, ├──, │)
 7. Start every responsibility with "├──" or "└──" with correct indentation
 """
-
-    def _query_llama(self, prompt: str) -> str:
-        for i in range(self.max_retries):
-            try:
-                response = requests.post(
-                    "http://localhost:11434/api/generate",
-                    json={
-                        "model": self.model,
-                        "prompt": prompt,
-                        "stream": False,
-                        "temperature": 0.25,
-                        "max_tokens": 3500
-                    },
-                    timeout=200
-                )
-                return response.json().get("response", "")
-            except Exception as e:
-                print(f"Attempt {i + 1} failed: {str(e)}")
-                time.sleep(5)
-        return ""
