@@ -1,0 +1,105 @@
+=== PROMPT ===
+
+        [STRICT INSTRUCTIONS]
+        You are a senior HR data scientist. Evaluate similarity with PRECISION:
+
+        1. CORE VERB CLASSIFICATION (40% weight):
+           - Implementation: build, code, develop, implement, optimize
+           - Analysis: analyze, examine, investigate, study
+           - Management: coordinate, manage, oversee, lead
+           - Collaboration: collaborate, liaise, partner, interface
+           - Education: educate, train, mentor, coach
+
+        2. PRIMARY FOCUS (45% weight):
+           - Technical: data, systems, models, infrastructure
+           - Business: stakeholders, strategy, decisions, literacy
+           - Process: workflows, pipelines, projects
+           - People: teams, roles, mentorship
+
+        3. SUBDOMAIN ALIGNMENT (15% bonus):
+           - Must match: data engineering vs ML vs analytics vs management
+           - +15% only for exact subdomain match
+
+        [STRICT RULES]
+        - <70 if:
+          - Different verb classes OR 
+          - Different focus categories OR
+          - Different subdomains
+        - 70-79: Same domain but different verb classes
+        - 80-89: Same verb class + same focus category
+        - 90-100: Same verb class + same focus + same subdomain
+
+        [DOMAIN RULE]
+        Different domains ALWAYS ≤69. Subdomains:
+        - Data Engineering: ETL, pipelines, infrastructure
+        - Machine Learning: models, algorithms, ML
+        - Analytics: analysis, insights, reporting
+        - Management: coordination, leadership
+        - Education: training, literacy, mentoring
+
+        [EXAMPLES]
+        "Build data pipelines" vs "Optimize ETL": 95% (same: implement/tech/data-eng)
+        "Analyze datasets" vs "Coordinate teams": 65% (different: analysis vs management)
+        "Train junior staff" vs "Improve data literacy": 85% (same education focus)
+
+        [OUTPUT FORMAT]
+        First line: "Score: [0-100]"
+        Second line: "VerbClass: []; Focus: []; Subdomain: []"
+
+        [RESPONSIBILITIES]
+        1: "Employ ML techniques to uncover business insights"
+        2: "Stay current on industry best practices"
+        
+
+=== RESPONSE ===
+To evaluate the similarity between the two phrases, I'll break down each component and calculate the precision score.
+
+**CORE VERB CLASSIFICATION**
+
+Phrase 1: "Implement ML techniques"
+- Verb class: implement (matches with implementation)
+- Focus category: not specified (not a match)
+
+Phrase 2: "Stay current on industry best practices"
+- Verb class: stay (not a direct match, but could be considered as part of the education focus)
+- Focus category: education (matches with education)
+
+**PRIMARY FOCUS**
+
+Phrase 1: "Implement ML techniques" (focus category not specified)
+- Focus category: not specified (not a match)
+
+Phrase 2: "Stay current on industry best practices"
+- Focus category: business (matches with business)
+
+**SUBDOMAIN ALIGNMENT**
+
+Phrase 1: "Implement ML techniques"
+- Subdomain: Not explicitly mentioned, but could be considered as part of the data engineering subdomain
+
+Phrase 2: "Stay current on industry best practices"
+- Subdomain: Management (not a direct match, but could be considered as part of the management subdomain)
+
+**PRECISION SCORE CALCULATION**
+
+Since there are different verb classes, focus categories, and subdomains, the score will be below 70.
+
+* Different verb classes: Yes
+* Different focus categories: Yes
+* Different subdomains: Partially (not a direct match for both phrases)
+
+Score calculation:
+
+* Verb class mismatch: -10%
+* Focus category mismatch: -20%
+* Subdomain alignment: +5% (partial match, but not exact)
+* Total score: 65%
+
+**OUTPUT**
+
+Score: 65
+VerbClass: [implementation, education]
+Focus: [business, education]
+Subdomain: [data engineering, management]
+
+Response time: 13.21s

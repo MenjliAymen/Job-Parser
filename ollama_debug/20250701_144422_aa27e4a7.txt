@@ -1,0 +1,37 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Build batch and streaming ingestion workflows"  
+B: "Process raw datasets"
+
+
+=== RESPONSE ===
+Here is the evaluation of the two job responsibilities:
+
+Core A: Build batch and streaming ingestion workflows
+Core B: Process raw datasets
+
+Functionally Equivalent: No
+Score: 20
+Reason: While both tasks involve working with data, they have different focuses. Building ingestion workflows typically involves designing and implementing pipelines to manage large volumes of data, whereas processing raw datasets is a more general task that may not necessarily involve workflow design or management.
+
+Response time: 4.64s

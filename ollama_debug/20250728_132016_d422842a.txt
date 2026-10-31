@@ -1,0 +1,38 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Stay current on industry best practices"  
+B: "Extract, transform, and analyze large datasets"
+
+
+=== RESPONSE ===
+Here is the evaluation of the two job responsibilities:
+
+Core A: Stay current on industry best practices
+Core B: Extract, transform, and analyze large datasets
+Functionally Equivalent: No
+Score: 0
+Reason: While both tasks involve working with data, "stay current on industry best practices" focuses on knowledge acquisition and professional development, whereas "extract, transform, and analyze large datasets" is a specific technical task that involves processing and understanding data. They serve different functions and do not produce the same outcome.
+
+Note: Although both tasks may be related to data work, they are in different technical domains (best practices vs. data engineering/analysis).
+
+Response time: 6.23s

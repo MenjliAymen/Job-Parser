@@ -1,0 +1,66 @@
+=== PROMPT ===
+
+        [INSTRUCTIONS]
+        You are a senior HR analyst comparing job responsibilities. Evaluate similarity based on:
+
+        1. CORE ACTION: Are the main verbs synonymous? (develop/create, optimize/improve)
+        2. PRIMARY FOCUS: Is the core object or outcome the same?
+        3. DOMAIN: Are both responsibilities in the same domain?
+           - Technical: Implementation work (coding, systems, data analysis, ML, infrastructure)
+           - Managerial: Team coordination, planning, mentoring, execution
+           - Strategic: Business alignment, vision, strategy, governance
+
+        [SIMPLIFICATION RULE]
+        If a responsibility has extra modifiers or clauses, **reduce it to verb + object** as long as the meaning is preserved.
+
+        [RULES]
+        - 100: Identical responsibility
+        - 95–99: Minor rewording
+        - 90–94: Same action/object, different scale or detail
+        - 80–89: Related, not identical (same type of work)
+        - 70–79: Weak link in same domain
+        - <70: Different domains or clearly distinct work
+
+        [DOMAIN RULE]
+        If the domains differ, max score is 69
+
+        [PENALTIES]
+        - Subtract 10 for weak alignment in same domain
+        - Subtract 15 if core actions are unrelated
+
+        [OUTPUT FORMAT]
+        Score: [0–100]
+        Reason: [Short justification, including domain and action comparison]
+
+        [RESPONSIBILITIES]
+        1: "Stay current on industry best practices"
+        2: "Improve data literacy across the organization"
+        
+
+=== RESPONSE ===
+Based on the provided instructions, I will evaluate the similarity between the two job responsibilities.
+
+1. CORE ACTION:
+   - Responsibility 1: "Stay current on industry best practices"
+     - Reduced to verb + object: "Stay up-to-date with industry standards"
+   - Responsibility 2: "Improve data literacy across the organization"
+     - Reduced to verb + object: "Enhance data understanding"
+
+   The core actions are not identical, but they both involve staying informed or improving knowledge in a specific area.
+
+2. PRIMARY FOCUS:
+   - Both responsibilities focus on improving knowledge or skills within an organization.
+
+3. DOMAIN:
+   - Responsibility 1: Industry best practices
+     - Domain: Technical (Implementation work)
+   - Responsibility 2: Data literacy
+     - Domain: Technical (Implementation work)
+
+   Both responsibilities are in the same domain, which is a technical implementation work.
+
+Score: 80
+
+Reason: The core actions and primary focus are similar, but not identical. They both involve improving knowledge or skills within an organization, but with different focuses (industry best practices vs. data literacy). Since they share the same domain, the score is not penalized for weak alignment in the same domain.
+
+Response time: 9.31s

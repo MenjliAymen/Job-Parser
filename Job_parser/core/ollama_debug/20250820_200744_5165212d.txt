@@ -1,0 +1,39 @@
+=== PROMPT ===
+
+        You are a senior technical recruiter evaluating **functional similarity** between two job responsibilities.
+
+        ### STEP 1: Extract Core Actions
+        - For each responsibility, extract the primary [**verb + object**] that reflects the main technical task.
+        - Normalize synonyms (e.g., "clean data" → "preprocess data", "build dashboards" → "develop reports").
+
+        ### STEP 2: Compare Function
+        - Do the two tasks aim to achieve the **same outcome or purpose**?
+        - Are they within the **same technical domain**?
+
+        ### OUTPUT FORMAT (Respond ONLY in this format)
+        Core A: [verb + object]  
+        Core B: [verb + object]  
+        Functionally Equivalent: [Yes/No]  
+        Score: [0-100]  
+        Reason: [Brief technical explanation]
+
+        ### RESPONSIBILITIES
+        A: "Create responsive web design"  
+        Explanation A: ""  
+
+        B: "Android App Development"  
+        Explanation B: ""
+        
+
+=== RESPONSE ===
+Core A: Create responsive web design
+Explanation A: This task involves designing and developing websites that adapt to different screen sizes and devices.
+
+Core B: Android App Development
+Explanation B: This task involves designing, coding, testing, and deploying applications for Android operating systems.
+
+Functionally Equivalent: No
+Score: 0
+Reason: Web design and Android app development are two distinct disciplines within the fields of software engineering and user experience (UX) design. While both may involve creating interfaces for users to interact with digital content, they differ in terms of the platforms, technologies, and methodologies used.
+
+Response time: 19.44s

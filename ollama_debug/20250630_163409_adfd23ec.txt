@@ -1,0 +1,66 @@
+=== PROMPT ===
+
+        [INSTRUCTIONS]
+        You are a senior HR analyst comparing job responsibilities. Evaluate similarity based on:
+
+        1. CORE ACTION: Are the main verbs synonymous? (develop/create, optimize/improve)
+        2. PRIMARY FOCUS: Is the core object or outcome the same?
+        3. DOMAIN: Are both responsibilities in the same domain?
+           - Technical: Implementation work (coding, systems, data analysis, ML, infrastructure)
+           - Managerial: Team coordination, planning, mentoring, execution
+           - Strategic: Business alignment, vision, strategy, governance
+
+        [SIMPLIFICATION RULE]
+        If a responsibility has extra modifiers or clauses, **reduce it to verb + object** as long as the meaning is preserved.
+
+        [RULES]
+        - 100: Identical responsibility
+        - 95–99: Minor rewording
+        - 90–94: Same action/object, different scale or detail
+        - 80–89: Related, not identical (same type of work)
+        - 70–79: Weak link in same domain
+        - <70: Different domains or clearly distinct work
+
+        [DOMAIN RULE]
+        If the domains differ, max score is 69
+
+        [PENALTIES]
+        - Subtract 10 for weak alignment in same domain
+        - Subtract 15 if core actions are unrelated
+
+        [OUTPUT FORMAT]
+        Score: [0–100]
+        Reason: [Short justification, including domain and action comparison]
+
+        [RESPONSIBILITIES]
+        1: "Stay current on industry best practices"
+        2: "Extract and analyze large datasets"
+        
+
+=== RESPONSE ===
+Based on the provided instructions, I will evaluate the similarity between the two job responsibilities.
+
+1. CORE ACTION:
+   - Responsibility 1: "Stay current on industry best practices"
+     - Reduced to verb + object: Stay up-to-date
+   - Responsibility 2: "Extract and analyze large datasets"
+     - Reduced to verb + object: Analyze data
+
+   The core actions are not identical, but both involve staying informed or processing data.
+
+2. PRIMARY FOCUS:
+   - Responsibility 1: Industry best practices
+   - Responsibility 2: Large datasets
+
+   The primary focus is different; one involves industry knowledge and the other involves data analysis.
+
+3. DOMAIN:
+   - Responsibility 1: Technical (Industry knowledge)
+   - Responsibility 2: Technical (Data analysis)
+
+   Both responsibilities are in the same domain, which is technical.
+
+Score: 69
+Reason: Weak link in same domain (Domain: Technical; Core actions not identical)
+
+Response time: 8.39s

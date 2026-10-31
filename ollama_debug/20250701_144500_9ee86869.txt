@@ -1,0 +1,37 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Build batch and streaming ingestion workflows"  
+B: "Implement data integration solutions"
+
+
+=== RESPONSE ===
+Here are the results of evaluating functional similarity between the two job responsibilities:
+
+Core A: Build workflows  
+Core B: Implement integrations  
+
+Functionally Equivalent: No  
+Score: 60  
+Reason: While both tasks involve working with data, they have different focuses. Building workflows typically involves designing and implementing pipelines for batch and streaming data processing, whereas implementing integrations tends to focus on connecting disparate systems or applications. Although there is some overlap in terms of data handling, the primary tasks differ in scope and emphasis.
+
+Response time: 5.02s

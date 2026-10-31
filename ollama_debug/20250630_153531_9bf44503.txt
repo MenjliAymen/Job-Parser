@@ -1,0 +1,138 @@
+=== PROMPT ===
+
+        [STRICT INSTRUCTIONS]
+        You are a senior HR data scientist. Evaluate similarity with PRECISION:
+
+        1. CORE VERB CLASSIFICATION (40% weight):
+           - Implementation: build, code, develop, implement, optimize
+           - Analysis: analyze, examine, investigate, study
+           - Management: coordinate, manage, oversee, lead
+           - Collaboration: collaborate, liaise, partner, interface
+           - Education: educate, train, mentor, coach
+
+        2. PRIMARY FOCUS (45% weight):
+           - Technical: data, systems, models, infrastructure
+           - Business: stakeholders, strategy, decisions, literacy
+           - Process: workflows, pipelines, projects
+           - People: teams, roles, mentorship
+
+        3. SUBDOMAIN ALIGNMENT (15% bonus):
+           - Must match: data engineering vs ML vs analytics vs management
+           - +15% only for exact subdomain match
+
+        [STRICT RULES]
+        - <70 if:
+          - Different verb classes OR 
+          - Different focus categories OR
+          - Different subdomains
+        - 70-79: Same domain but different verb classes
+        - 80-89: Same verb class + same focus category
+        - 90-100: Same verb class + same focus + same subdomain
+
+        [DOMAIN RULE]
+        Different domains ALWAYS ≤69. Subdomains:
+        - Data Engineering: ETL, pipelines, infrastructure
+        - Machine Learning: models, algorithms, ML
+        - Analytics: analysis, insights, reporting
+        - Management: coordination, leadership
+        - Education: training, literacy, mentoring
+
+        [EXAMPLES]
+        "Build data pipelines" vs "Optimize ETL": 95% (same: implement/tech/data-eng)
+        "Analyze datasets" vs "Coordinate teams": 65% (different: analysis vs management)
+        "Train junior staff" vs "Improve data literacy": 85% (same education focus)
+
+        [OUTPUT FORMAT]
+        First line: "Score: [0-100]"
+        Second line: "VerbClass: []; Focus: []; Subdomain: []"
+
+        [RESPONSIBILITIES]
+        1: "Collaborate with stakeholders on data science projects"
+        2: "Serve as a subject matter expert on data literacy"
+        
+
+=== RESPONSE ===
+To evaluate the similarity between the two responsibilities, I'll apply the provided rules and weights.
+
+**Core Verb Classification**
+
+The core verbs are:
+- Implementation: build, code, develop, implement, optimize
+- Analysis: analyze, examine, investigate, study
+- Management: coordinate, manage, oversee, lead
+- Collaboration: collaborate, liaise, partner, interface
+- Education: educate, train, mentor, coach
+
+Responsibility 1: "Collaborate with stakeholders on data science projects"
+- Verb class: Collaboration (match)
+- Weighted score for verb class: 0.4 * 1 = 0.4
+
+Responsibility 2: "Serve as a subject matter expert on data literacy"
+- Verb class: Education (match)
+- Weighted score for verb class: 0.4 * 1 = 0.4
+
+**Primary Focus**
+
+The primary focus categories are:
+- Technical: data, systems, models, infrastructure
+- Business: stakeholders, strategy, decisions, literacy
+- Process: workflows, pipelines, projects
+- People: teams, roles, mentorship
+
+Responsibility 1: "Collaborate with stakeholders on data science projects"
+- Focus category: Business (match)
+- Weighted score for focus category: 0.45 * 1 = 0.225
+
+Responsibility 2: "Serve as a subject matter expert on data literacy"
+- Focus category: Education (match)
+- Weighted score for focus category: 0.45 * 1 = 0.225
+
+**Subdomain Alignment**
+
+The subdomains are:
+- Data Engineering: ETL, pipelines, infrastructure
+- Machine Learning: models, algorithms, ML
+- Analytics: analysis, insights, reporting
+- Management: coordination, leadership
+- Education: training, literacy, mentoring
+
+Responsibility 1: "Collaborate with stakeholders on data science projects"
+- Subdomain: Data Engineering (match)
+- Weighted score for subdomain alignment: +0.15 * 1 = 0.15
+
+Responsibility 2: "Serve as a subject matter expert on data literacy"
+- Subdomain: Education (match)
+- Weighted score for subdomain alignment: +0.15 * 1 = 0.15
+
+**Overall Similarity Score**
+
+To calculate the overall similarity score, I'll apply the provided rules:
+
+Responsibility 1:
+- Different verb classes OR different focus categories OR different subdomains: <70
+- Same domain but different verb classes: 70-79
+- Same verb class + same focus category: 80-89
+- Same verb class + same focus + same subdomain: 90-100
+
+Responsibility 1:
+- Different verb classes OR different focus categories OR different subdomains: <70 (different)
+- Same domain but different verb classes: 70-79 (not applicable)
+- Same verb class + same focus category: 80-89 (not applicable)
+- Same verb class + same focus + same subdomain: 90-100 (not applicable)
+
+Responsibility 2:
+- Different verb classes OR different focus categories OR different subdomains: <70
+- Same domain but different verb classes: 70-79 (not applicable)
+- Same verb class + same focus category: 80-89 (applicable)
+- Same verb class + same focus + same subdomain: 90-100 (applicable)
+
+Overall Similarity Score:
+Responsibility 1: <70
+Responsibility 2: 85
+
+**Output Format**
+
+Score: 85
+VerbClass: [Education]; Focus: [Education]; Subdomain: [Data Engineering]
+
+Response time: 24.81s

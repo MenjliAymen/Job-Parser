@@ -1,0 +1,19 @@
+Task1: Secure data access
+Task2: Serve as subject matter expert
+Response: Based on the provided responsibilities:
+
+1. "Secure data access"
+2. "Serve as subject matter expert"
+
+**Core action verb comparison:**
+The core action verbs are different. "Secure" implies a protective or restrictive action, while "Serve" implies providing information or expertise.
+
+**Primary object/target comparison:**
+The primary objects/targets are also different. "Data access" refers to the security of data, while "Subject matter expert" refers to an individual's area of knowledge or expertise.
+
+**Domain alignment assessment:**
+Both responsibilities seem to be related to professional roles that require specialized knowledge or skills. However, one is more focused on security and data protection, while the other is focused on providing expertise in a specific domain.
+
+**Score:** 60
+
+The score is below 70 because the core action verbs and primary objects/targets are not similar, despite both being related to professional roles. The responsibilities seem somewhat related but distinct, with one focusing on security and the other on providing expertise.

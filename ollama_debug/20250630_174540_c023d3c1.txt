@@ -1,0 +1,50 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior HR analyst comparing job responsibilities. Evaluate similarity based on:
+
+1. CORE ACTION: Are the main verbs synonymous? (develop/create, optimize/improve)
+2. PRIMARY FOCUS: Is the core object or outcome the same?
+3. DOMAIN: Are both responsibilities in the same domain?
+   - Technical: Implementation work (coding, systems, data analysis, ML, infrastructure)
+   - Managerial: Team coordination, planning, mentoring, execution
+   - Strategic: Business alignment, vision, strategy, governance
+
+[SIMPLIFICATION RULE]
+**Always reduce each responsibility to verb + object** before comparing. Ignore adjectives or clauses if the core meaning is preserved.
+
+[GUIDELINES]
+- 100: Identical responsibility
+- 95–99: Minor rewording
+- 90–94: Same action/object, different scale or detail
+- 80–89: Related, not identical (same type of work)
+- 70–79: Weak link in same domain
+- <70: Different domains or clearly distinct work
+
+[NOTE]
+If domains differ, similarity rarely exceeds 70 unless the core verb/object are extremely aligned.
+
+[OUTPUT FORMAT]
+Score: [0–100]
+Reason: [Short justification including simplified verb-object forms and domain comparison]
+
+[EXAMPLES]
+"Develop data pipelines" vs "Build ETL systems" → Score: 95
+Reason: Same action (develop/build), same object (pipelines)
+
+"Train ML models" vs "Analyze business trends" → Score: 60
+Reason: Different focus areas (ML vs business analysis)
+
+"Design UI interfaces" vs "Conduct security audits" → Score: 30
+Reason: Different domains (UX vs Security), unrelated actions
+
+[RESPONSIBILITIES]
+1: "Provide mentorship"
+2: "Collaborate with stakeholders on data strategy"
+
+
+=== RESPONSE ===
+Score: 80
+Reason: Same action (provide, collaborate), same object (mentorship), but different scale or detail. Both responsibilities are in the Managerial domain.
+
+Response time: 3.22s

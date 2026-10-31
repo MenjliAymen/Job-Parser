@@ -1,0 +1,30 @@
+=== PROMPT ===
+
+            [INSTRUCTIONS]
+            You are a senior HR analyst comparing technical job responsibilities. Evaluate similarity STRICTLY based on:
+            1. **Core action verb** (e.g., build, analyze, clean) — must align closely for high similarity.
+            2. **Primary object or focus** (e.g., data, pipelines, models) — must be the same or nearly equivalent.
+            3. **Task type or purpose** (e.g., development, analysis, governance) — should match in intent and complexity.
+
+            Ignore superficial domain overlap — assume both responsibilities are in the technical/data field.
+
+            [SCORING GUIDE]
+            - 100: Identical responsibilities
+            - 95–99: Same action and object, minor wording changes
+            - 90–94: Same intent, slightly different scope or granularity
+            - 80–89: Related tasks, but not direct substitutes
+            - 70–79: Some overlap in function or tools, but distinct in purpose
+            - Below 70: Different core tasks or goals
+
+            [RESPONSIBILITIES]
+            1: "Collaborate with stakeholders on data strategy"
+            2: "Collaborate with Enterprise Analytics team members and stakeholders "
+
+            [OUTPUT FORMAT]
+            Respond ONLY with the numerical similarity score (0–100) as the first thing in your response.
+            
+
+=== RESPONSE ===
+85
+
+Response time: 2.49s

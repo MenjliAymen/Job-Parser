@@ -1,0 +1,37 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Apply supervised and unsupervised learning methods"  
+B: "Extract, transform, and analyze large datasets"
+
+
+=== RESPONSE ===
+Core A: Apply
+Core B: Extract, Transform, Analyze
+
+Functionally Equivalent: No
+
+Score: 60
+
+Reason: While both tasks involve working with data, the primary focus differs. Task A focuses on applying machine learning methods to achieve a specific outcome, whereas Task B involves extracting, transforming, and analyzing large datasets for various purposes (e.g., reporting, decision-making). Although there is some overlap in terms of data manipulation, the core tasks are distinct.
+
+Response time: 4.95s

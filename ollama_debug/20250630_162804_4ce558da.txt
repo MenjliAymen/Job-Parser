@@ -1,0 +1,47 @@
+=== PROMPT ===
+
+You are comparing two technical job responsibilities. Rate their similarity on a scale from 0 to 100.
+
+[FOCUS]
+- Compare the core action and object.
+- Examples of actions: build, analyze, implement, lead, monitor
+- Examples of objects: models, dashboards, pipelines, systems
+
+[GUIDELINES]
+- If actions and objects are nearly identical → 95–100
+- If actions are similar and objects are related → 80–94
+- If either is different but still in same technical area → 60–79
+- If they’re unrelated (different domains) → <60
+
+[OUTPUT FORMAT]
+Score: [0-100]
+Why: [1–2 line explanation]
+
+[EXAMPLES]
+1. "Build data pipelines" vs "Develop ETL systems" → Score: 95
+Why: Both involve designing systems to process data
+
+2. "Train ML models" vs "Analyze business trends" → Score: 60
+Why: One is ML-focused, the other is business analysis
+
+3. "Manage cloud infrastructure" vs "Coordinate product roadmap" → Score: 30
+Why: One is technical, the other is strategic planning
+
+[COMPARE]
+1: Manage projects
+2: Stay current on industry best practices
+
+        
+
+=== RESPONSE ===
+Here are my ratings:
+
+1. Manage projects
+Score: 80
+Why: Both involve overseeing and coordinating tasks, but with a focus on project management vs staying current on industry best practices.
+
+2. Stay current on industry best practices
+Score: 60
+Why: This is more focused on professional development and knowledge sharing, rather than hands-on technical work.
+
+Response time: 4.17s

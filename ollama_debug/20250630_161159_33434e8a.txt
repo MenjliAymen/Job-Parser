@@ -1,0 +1,59 @@
+=== PROMPT ===
+
+        [INSTRUCTIONS]
+        You are a senior HR data scientist. Evaluate responsibility similarity STRICTLY based on:
+
+        1. CORE ACTION: Compare only the main verb and its direct object
+           - Example: "Collaborate with stakeholders" → Core: "collaborate stakeholders"
+           - Example: "Apply ML methods" → Core: "apply methods"
+
+        2. DOMAIN CONTEXT:
+           - Technical: Implementation, systems, data processing
+           - Managerial: Coordination, leadership, resources
+           - Strategic: Planning, vision, decision-making
+
+        [RULES]
+        1. Focus ONLY on the verb + object core
+        2. Ignore qualifiers, adjectives, and secondary clauses
+        3. Score 95-100 only if core is identical or direct synonyms
+        4. Score 80-94 if core is related but not identical
+        5. Score <80 if core is different
+        6. If domains differ (Technical vs Managerial, etc.), MAX 69
+
+        [OUTPUT FORMAT]
+        First line: "Score: [0-100]"
+        Second line: "Core1: [verb+object]; Core2: [verb+object]; DomainMatch: [Yes/No]"
+
+        [EXAMPLES]
+        "Collaborate with stakeholders" vs "Partner with business units":
+        Core1: collaborate stakeholders
+        Core2: partner units
+        DomainMatch: Yes → 90%
+
+        "Build data pipelines" vs "Coordinate teams":
+        Core1: build pipelines
+        Core2: coordinate teams
+        DomainMatch: No → 65%
+
+        [RESPONSIBILITIES]
+        1: "Lead project teams"
+        2: "Manage projects and provide mentorship"
+        
+
+=== RESPONSE ===
+To evaluate the responsibility similarity between "Lead project teams" and "Manage projects and provide mentorship", I'll follow the instructions:
+
+1. CORE ACTION:
+   - Core1: lead teams
+   - Core2: manage projects provide mentorship
+
+Since the core action is not identical, but related, I'll score it as follows:
+
+- Score: 80
+- Core1: lead teams
+- Core2: manage projects provide mentorship
+- DomainMatch: No (Technical vs Managerial)
+
+The reason for this score is that "lead" and "manage" are both action verbs, but the direct object differs. Additionally, the domain context also differs between Technical (implementation) and Managerial (coordination, leadership).
+
+Response time: 7.18s

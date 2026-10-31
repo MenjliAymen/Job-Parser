@@ -1,0 +1,123 @@
+=== PROMPT ===
+
+        [STRICT INSTRUCTIONS]
+        You are a senior HR data scientist. Evaluate similarity with PRECISION:
+
+        1. CORE VERB CLASSIFICATION (40% weight):
+           - Implementation: build, code, develop, implement, optimize
+           - Analysis: analyze, examine, investigate, study
+           - Management: coordinate, manage, oversee, lead
+           - Collaboration: collaborate, liaise, partner, interface
+           - Education: educate, train, mentor, coach
+
+        2. PRIMARY FOCUS (45% weight):
+           - Technical: data, systems, models, infrastructure
+           - Business: stakeholders, strategy, decisions, literacy
+           - Process: workflows, pipelines, projects
+           - People: teams, roles, mentorship
+
+        3. SUBDOMAIN ALIGNMENT (15% bonus):
+           - Must match: data engineering vs ML vs analytics vs management
+           - +15% only for exact subdomain match
+
+        [STRICT RULES]
+        - <70 if:
+          - Different verb classes OR 
+          - Different focus categories OR
+          - Different subdomains
+        - 70-79: Same domain but different verb classes
+        - 80-89: Same verb class + same focus category
+        - 90-100: Same verb class + same focus + same subdomain
+
+        [DOMAIN RULE]
+        Different domains ALWAYS ≤69. Subdomains:
+        - Data Engineering: ETL, pipelines, infrastructure
+        - Machine Learning: models, algorithms, ML
+        - Analytics: analysis, insights, reporting
+        - Management: coordination, leadership
+        - Education: training, literacy, mentoring
+
+        [EXAMPLES]
+        "Build data pipelines" vs "Optimize ETL": 95% (same: implement/tech/data-eng)
+        "Analyze datasets" vs "Coordinate teams": 65% (different: analysis vs management)
+        "Train junior staff" vs "Improve data literacy": 85% (same education focus)
+
+        [OUTPUT FORMAT]
+        First line: "Score: [0-100]"
+        Second line: "VerbClass: []; Focus: []; Subdomain: []"
+
+        [RESPONSIBILITIES]
+        1: "Extract, transform, and analyze data from multiple sources"
+        2: "Collaborate with stakeholders on data science projects"
+        
+
+=== RESPONSE ===
+To evaluate the similarity between the two responsibilities, I'll follow the provided instructions.
+
+**Core Verb Classification**
+
+Responsibility 1: "Extract, transform, and analyze data from multiple sources"
+- Implementation: build, code, develop, implement, optimize
+- Analysis: analyze, examine, investigate, study
+- Management: coordinate, manage, oversee, lead
+- Collaboration: collaborate, liaise, partner, interface
+- Education: educate, train, mentor, coach
+
+Responsibility 2: "Collaborate with stakeholders on data science projects"
+- Implementation: build, code, develop, implement, optimize
+- Analysis: analyze, examine, investigate, study
+- Management: coordinate, manage, oversee, lead
+- Collaboration: collaborate, liaise, partner, interface
+- Education: educate, train, mentor, coach
+
+Both responsibilities share the same verb classes: **Analysis** and **Collaboration**.
+
+**Primary Focus**
+
+Responsibility 1: "Extract, transform, and analyze data from multiple sources"
+- Technical: data, systems, models, infrastructure
+- Business: stakeholders, strategy, decisions, literacy
+- Process: workflows, pipelines, projects
+- People: teams, roles, mentorship
+
+Responsibility 2: "Collaborate with stakeholders on data science projects"
+- Technical: data, systems, models, infrastructure
+- Business: stakeholders, strategy, decisions, literacy
+- Process: workflows, pipelines, projects
+- People: teams, roles, mentorship
+
+Both responsibilities share the same focus categories: **Technical**, **Business**, and **Process**.
+
+**Subdomain Alignment**
+
+Responsibility 1: "Extract, transform, and analyze data from multiple sources"
+- Must match: data engineering vs ML vs analytics vs management
+- +15% only for exact subdomain match
+
+Responsibility 2: "Collaborate with stakeholders on data science projects"
+- Must match: data engineering vs ML vs analytics vs management
+- +15% only for exact subdomain match
+
+Neither responsibility matches an exact subdomain.
+
+**Similarity Score Calculation**
+
+Since both responsibilities share the same verb class, focus category, and do not have a matching subdomain, I'll calculate the similarity score based on the provided rules:
+
+* Different domains: ≤69
+* Same domain but different verb classes: 70-79
+* Same verb class + same focus category: 80-89
+* Same verb class + same focus + same subdomain: 90-100
+
+Given that both responsibilities share the same **Analysis** and **Collaboration** verb classes, as well as the same **Technical**, **Business**, and **Process** focus categories, but do not have a matching subdomain, I'll calculate the score based on the domain similarity:
+
+* Different domains: ≤69
+* Same domain (Data Science): 70-79
+
+Since both responsibilities are in the Data Science domain, but do not share an exact subdomain, I'll use the lower end of this range.
+
+**Similarity Score**
+
+Score: 75
+
+Response time: 21.87s

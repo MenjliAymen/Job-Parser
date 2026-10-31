@@ -1,0 +1,37 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Maintain transformation scripts"  
+B: "Organize transformed data"
+
+
+=== RESPONSE ===
+Here is the evaluation of the two job responsibilities:
+
+Core A: Maintain transformation scripts
+Core B: Organize transformed data
+
+Functionally Equivalent: No
+Score: 20
+Reason: While both tasks involve working with data, they have different primary objectives. Maintaining transformation scripts focuses on ensuring the scripts remain functional and up-to-date, whereas organizing transformed data emphasizes structuring and presenting the output in a usable format. These tasks serve distinct functions within the data processing workflow.
+
+Response time: 4.84s

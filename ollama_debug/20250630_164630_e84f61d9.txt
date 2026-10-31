@@ -1,0 +1,56 @@
+=== PROMPT ===
+
+        [INSTRUCTIONS]
+        You are a senior HR analyst comparing job responsibilities. Evaluate similarity based on:
+
+        1. CORE ACTION: Are the main verbs synonymous? (develop/create, optimize/improve)
+        2. PRIMARY FOCUS: Is the core object or outcome the same?
+        3. DOMAIN: Are both responsibilities in the same domain?
+           - Technical: Implementation work (coding, systems, data analysis, ML, infrastructure)
+           - Managerial: Team coordination, planning, mentoring, execution
+           - Strategic: Business alignment, vision, strategy, governance
+
+        [SIMPLIFICATION RULE]
+        If a responsibility has extra modifiers or clauses, **reduce it to verb + object** as long as the meaning is preserved.
+
+        [RULES]
+        - 100: Identical responsibility
+        - 95–99: Minor rewording
+        - 90–94: Same action/object, different scale or detail
+        - 80–89: Related, not identical (same type of work)
+        - 70–79: Weak link in same domain
+        - <70: Different domains or clearly distinct work
+
+        [DOMAIN RULE]
+        If the domains differ, max score is 69
+
+        [PENALTIES]
+        - Subtract 10 for weak alignment in same domain
+        - Subtract 15 if core actions are unrelated
+
+        [OUTPUT FORMAT]
+        Score: [0–100]
+        Reason: [Short justification, including domain and action comparison]
+
+        [RESPONSIBILITIES]
+        1: "Manage projects and mentor other data roles"
+        2: "Stay current on industry best practices"
+        
+
+=== RESPONSE ===
+Based on the provided instructions, I will evaluate the similarity between the two job responsibilities.
+
+1. CORE ACTION:
+The core actions are "manage" (similar to "mentor") and "stay current". While related, they are not identical. Score: 80
+2. PRIMARY FOCUS:
+The primary focus is on "other data roles" and "industry best practices", which are different objects/outcomes. Score: 69 (domain difference)
+3. DOMAIN:
+Both responsibilities are in the Managerial domain.
+
+Since the domains differ, I will apply the domain penalty of subtracting 15 from the total score.
+
+Total Score: 80 - 15 = 65
+
+Reason: The core actions are related but not identical ("manage" vs "stay current"), and the primary focus is on different objects/outcomes (project management vs staying current with industry best practices). The domains differ, which further reduces the similarity score.
+
+Response time: 8.17s

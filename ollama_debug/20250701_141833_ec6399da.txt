@@ -1,0 +1,31 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter comparing two job responsibilities. Your goal is to evaluate whether the two tasks are functionally equivalent, partially related, or unrelated — in the context of tech roles.
+
+[COMPARE BY]
+1. TASK OUTCOME: What work is being accomplished? (e.g., building pipelines, training models)
+2. TOOLCHAIN CONTEXT: Are similar tools, data, or frameworks involved?
+3. TECHNICAL DOMAIN: Are both tasks in the same skill set or job scope?
+
+[SCORING]
+- 95–100: Near-identical function (different phrasing, same outcome)
+- 85–94: Strong similarity (same domain, same goal, minor variation)
+- 70–84: Related area or goal, but differs in depth, scope, or role
+- <70: Different technical domains or unrelated work
+
+[OUTPUT FORMAT]
+Score: [0–100]  
+Reason: [Explain functional overlap and technical domain]
+
+[RESPONSIBILITIES]
+A: "Execute data preprocessing"  
+B: "Process raw datasets"
+
+
+
+=== RESPONSE ===
+Score: 85
+Reason: Both tasks are in the same skill set (data processing) and share a similar goal (preparing data for analysis or modeling). The terms "execute data preprocessing" and "process raw datasets" differ slightly in phrasing, but they convey the same outcome. This suggests that both tasks involve cleaning, transforming, and organizing data to make it usable for further analysis or modeling.
+
+Response time: 4.56s

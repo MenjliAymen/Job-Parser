@@ -1,0 +1,37 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Validate data quality using profiling and sampling techniques"  
+B: "Develop ETL pipelines"
+
+
+=== RESPONSE ===
+Core A: Validate  
+Core B: Develop  
+
+Functionally Equivalent: No  
+
+Score: 20  
+
+Reason: While both tasks involve working with data, the primary focus is different. Task A focuses on ensuring data quality through profiling and sampling, whereas task B involves creating data pipelines for extraction, transformation, and loading (ETL). The outcomes are distinct, with one focusing on data validation and the other on data processing and integration.
+
+Response time: 4.61s

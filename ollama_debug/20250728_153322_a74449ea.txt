@@ -1,0 +1,34 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Serve as a subject matter expert"  
+B: "Design and maintain data transformation workflows"
+
+
+=== RESPONSE ===
+Core A: Serve as a subject matter expert (SME)
+Core B: Design and maintain data transformation workflows (DTW)
+Functionally Equivalent: No
+Score: 0
+Reason: While both roles involve expertise in a specific area, they do not produce the same outcome or serve the same function. The SME role focuses on providing knowledge and guidance, while DTW is about designing and maintaining data processing pipelines. They are in different technical domains, with the SME role being more general and the DTW role being specific to data engineering.
+
+Response time: 21.61s

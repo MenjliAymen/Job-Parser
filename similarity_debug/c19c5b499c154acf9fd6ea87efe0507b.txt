@@ -1,0 +1,27 @@
+Task1: Evangelize data literacy
+Task2: Serve as subject matter expert
+Response: Based on the provided responsibilities:
+
+1. "Evangelize data literacy"
+2. "Serve as subject matter expert"
+
+**Core action verb comparison:**
+
+* Both verbs are related to expertise and knowledge sharing.
+* However, "evangelize" implies a more active and persuasive approach, while "serve" is more neutral.
+Score: 80 (similar focus but different scope)
+
+**Primary object/target comparison:**
+
+* Both responsibilities involve providing expertise or guidance.
+* The primary objects are not identical; "data literacy" refers to the ability to understand and work with data, while "subject matter expert" is a broader term that encompasses various areas of knowledge.
+Score: 60 (related but distinct)
+
+**Professional domain assessment:**
+
+* Both responsibilities fall under the technical domain, as they both involve working with data and expertise.
+Score: 100 (identical domains)
+
+**Final score:** 80
+
+The final score indicates that while the core action verbs are similar in focus, the primary objects and scope of the responsibilities differ. The professional domain alignment is identical, indicating that both responsibilities fall under the technical domain.

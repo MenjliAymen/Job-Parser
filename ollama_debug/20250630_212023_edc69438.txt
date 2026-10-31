@@ -1,0 +1,43 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior HR analyst comparing job responsibilities. Choose one category of similarity based on the core verb and object, and domain of work.
+
+[SIMPLIFY FIRST]
+Reduce each responsibility to its core verb and object.
+
+[CATEGORIES]
+1. Identical responsibility (100)
+2. Minor rewording (95–99)
+3. Same action/object with scope difference (90–94)
+4. Related but not identical (80–89)
+5. Weak link in same domain (70–79)
+6. Domain differs but same concept (60–69)
+7. Different actions or domains (30–59)
+8. Unrelated (0–29)
+
+[EXAMPLES]
+- "Develop data pipelines" vs "Build ETL systems" → Category 2, Score: 96
+- "Train ML models" vs "Analyze customer churn" → Category 4, Score: 85
+- "Write SQL queries" vs "Coordinate product roadmap" → Category 7, Score: 45
+- "Mentor engineers" vs "Plan marketing campaign" → Category 8, Score: 20
+
+[TASKS TO COMPARE]
+A: "Extract, transform, and analyze data"
+B: "Collaborate with stakeholders on data strategy"
+
+[RESPONSE FORMAT]
+Category: [1–8]
+Score: [0–100]
+Reason: [short justification using verb/object/domain]
+
+
+=== RESPONSE ===
+A: "Extract, transform, and analyze data"
+B: "Collaborate with stakeholders on data strategy"
+
+Category: 4
+Score: 92
+Reason: Both involve working with data (object), but one focuses on analysis (action) while the other involves collaboration (domain).
+
+Response time: 4.07s

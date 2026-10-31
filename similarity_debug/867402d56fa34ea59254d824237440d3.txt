@@ -1,0 +1,32 @@
+Task1: Secure data access
+Task2: Mentor junior data roles
+Response: Based on the provided responsibilities:
+
+1. "Secure data access"
+2. "Mentor junior data roles"
+
+**Core action verb comparison:**
+
+* Both actions are focused on a specific outcome or result.
+* However, one is more focused on security and control ("Secure"), while the other is more focused on guidance and development ("Mentor").
+Score: 60 (different core verbs)
+
+**Primary object/target comparison:**
+
+* The primary objects are different:
+	+ "Data access" refers to a resource or system.
+	+ "Junior data roles" refers to individuals or employees.
+Score: 40 (different primary objects)
+
+**Professional domain assessment:**
+
+* Both responsibilities fall within the technical domain, specifically related to data management and security.
+Score: 100 (same professional domain)
+
+**Final score calculation:**
+
+Since there is no perfect match in core action verb and primary object/target, I will focus on the domain alignment. The fact that both responsibilities are within the same technical domain gives them a high similarity score.
+
+However, considering the significant differences in core action verbs and primary objects, I would rate the overall similarity as 80-89 (related but distinct responsibilities).
+
+Final score: 85

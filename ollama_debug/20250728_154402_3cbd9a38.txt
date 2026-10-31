@@ -1,0 +1,34 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Coordinate with data stakeholders on data access and support"  
+B: "Merge datasets from multiple sources"
+
+
+=== RESPONSE ===
+Core A: Coordinate (data stakeholders, data access and support)
+Core B: Merge (datasets, multiple sources)
+Functionally Equivalent: No
+Score: 0
+Reason: While both tasks involve working with data, coordinating data access and support is a more general task related to communication and collaboration, whereas merging datasets is a specific technical task in the data engineering domain.
+
+Response time: 13.46s

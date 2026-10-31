@@ -1,0 +1,80 @@
+=== PROMPT ===
+
+        [INSTRUCTIONS]
+        You are a senior HR data scientist. Evaluate responsibility similarity STRICTLY based on:
+
+        1. CORE ACTION: Compare only the main verb and its direct object
+           - Example: "Collaborate with stakeholders" → Core: "collaborate stakeholders"
+           - Example: "Apply ML methods" → Core: "apply methods"
+
+        2. DOMAIN CONTEXT:
+           - Technical: Implementation, systems, data processing
+           - Managerial: Coordination, leadership, resources
+           - Strategic: Planning, vision, decision-making
+
+        [RULES]
+        1. Focus ONLY on the verb + object core
+        2. Ignore qualifiers, adjectives, and secondary clauses
+        3. Score 95-100 only if core is identical or direct synonyms
+        4. Score 80-94 if core is related but not identical
+        5. Score <80 if core is different
+        6. If domains differ (Technical vs Managerial, etc.), MAX 69
+
+        [OUTPUT FORMAT]
+        First line: "Score: [0-100]"
+        Second line: "Core1: [verb+object]; Core2: [verb+object]; DomainMatch: [Yes/No]"
+
+        [EXAMPLES]
+        "Collaborate with stakeholders" vs "Partner with business units":
+        Core1: collaborate stakeholders
+        Core2: partner units
+        DomainMatch: Yes → 90%
+
+        "Build data pipelines" vs "Coordinate teams":
+        Core1: build pipelines
+        Core2: coordinate teams
+        DomainMatch: No → 65%
+
+        [RESPONSIBILITIES]
+        1: "Serve as a subject matter expert"
+        2: "Collaborate with stakeholders on data science projects"
+        
+
+=== RESPONSE ===
+To evaluate the responsibility similarity between "Serve as a subject matter expert" and "Collaborate with stakeholders on data science projects", I will follow the provided instructions.
+
+**CORE ACTION**
+
+1. Compare only the main verb and its direct object:
+   - Core1: serve (no direct object)
+   - Core2: collaborate stakeholders
+
+Since "serve" does not have a direct object, it cannot be compared directly to "collaborate stakeholders". However, I will consider the intent behind each action.
+
+**DOMAIN CONTEXT**
+
+- Technical: Implementation, systems, data processing
+- Managerial: Coordination, leadership, resources
+- Strategic: Planning, vision, decision-making
+
+Both responsibilities seem to fall under managerial and strategic domains. 
+
+**SCORE CALCULATION**
+
+Since there is no direct comparison possible due to the lack of a direct object in "Serve as a subject matter expert", I will consider the intent behind each action.
+
+"Serve as a subject matter expert" implies providing expertise, guidance, or support.
+"Collaborate with stakeholders on data science projects" involves working together with others to achieve a common goal.
+
+Given these interpretations, I would score them as follows:
+
+- Core similarity: 0 (due to the lack of direct object in "Serve as a subject matter expert")
+- Domain similarity: Yes
+- Overall score: 40%
+
+**OUTPUT FORMAT**
+
+Score: 40%
+Core1: serve; Core2: collaborate stakeholders; DomainMatch: Yes
+
+Response time: 12.69s

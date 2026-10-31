@@ -1,0 +1,45 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Validate data quality"  
+B: "Maintain transformation scripts"
+
+
+=== RESPONSE ===
+Here are the results:
+
+Core A: Validate  
+Core B: Maintain  
+Functionally Equivalent: No  
+Score: 20  
+Reason: While both tasks involve working with data, "validate" implies checking for errors or inconsistencies, whereas "maintain" suggests updating or keeping existing scripts in a consistent state. They serve different functions and are not directly equivalent.
+
+However, if we normalize the technical synonyms, we can see that both tasks involve ensuring data integrity:
+
+Core A: Validate  
+Core B: Maintain (can be normalized to "ensure data consistency")
+
+Functionally Equivalent: Yes  
+Score: 80  
+Reason: Both tasks aim to ensure data quality and consistency. While the wording is different, they share a common goal and are likely performed in the same technical domain (data engineering or related).
+
+Response time: 6.81s

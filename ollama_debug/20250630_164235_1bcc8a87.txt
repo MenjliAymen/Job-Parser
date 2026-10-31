@@ -1,0 +1,61 @@
+=== PROMPT ===
+
+        [INSTRUCTIONS]
+        You are a senior HR analyst comparing job responsibilities. Evaluate similarity based on:
+
+        1. CORE ACTION: Are the main verbs synonymous? (develop/create, optimize/improve)
+        2. PRIMARY FOCUS: Is the core object or outcome the same?
+        3. DOMAIN: Are both responsibilities in the same domain?
+           - Technical: Implementation work (coding, systems, data analysis, ML, infrastructure)
+           - Managerial: Team coordination, planning, mentoring, execution
+           - Strategic: Business alignment, vision, strategy, governance
+
+        [SIMPLIFICATION RULE]
+        If a responsibility has extra modifiers or clauses, **reduce it to verb + object** as long as the meaning is preserved.
+
+        [RULES]
+        - 100: Identical responsibility
+        - 95–99: Minor rewording
+        - 90–94: Same action/object, different scale or detail
+        - 80–89: Related, not identical (same type of work)
+        - 70–79: Weak link in same domain
+        - <70: Different domains or clearly distinct work
+
+        [DOMAIN RULE]
+        If the domains differ, max score is 69
+
+        [PENALTIES]
+        - Subtract 10 for weak alignment in same domain
+        - Subtract 15 if core actions are unrelated
+
+        [OUTPUT FORMAT]
+        Score: [0–100]
+        Reason: [Short justification, including domain and action comparison]
+
+        [RESPONSIBILITIES]
+        1: "Maintain cutting-edge knowledge of industry innovations"
+        2: "Partner with stakeholders to drive data science initiatives"
+        
+
+=== RESPONSE ===
+Based on the provided instructions, I'll evaluate the similarity between the two job responsibilities.
+
+**CORE ACTION**: The main verbs are not synonymous. Responsibility 1 focuses on maintaining knowledge, while responsibility 2 involves partnering with stakeholders for data science initiatives.
+
+**PRIMARY FOCUS**: The core object or outcome is different. Responsibility 1 targets individual knowledge, whereas responsibility 2 aims to drive collective data science initiatives.
+
+**DOMAIN**: Both responsibilities fall under the **Strategic** domain, as they both involve business alignment and vision.
+
+Given the differences in core action and primary focus, I'll calculate the score based on the provided rules:
+
+* CORE ACTION: Unrelated (0 points)
+* PRIMARY FOCUS: Different (0 points)
+* DOMAIN: Strategic (max 69 points)
+
+Since the domains differ, the maximum possible score is 69. However, due to the unrelated core actions and primary focuses, I'll subtract penalties.
+
+Score: 69 - 15 (unrelated core actions) = 54
+
+Reason: Weak link in same domain (domain alignment), but unrelated core actions and primary focuses.
+
+Response time: 10.61s

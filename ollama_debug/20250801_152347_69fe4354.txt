@@ -1,0 +1,35 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Collaborate on data science projects"  
+B: "Maintain transformation scripts"
+
+
+=== RESPONSE ===
+Core A: Collaborate on data science projects (Data Science Project Management)
+Core B: Maintain transformation scripts (Script Maintenance, Data Preprocessing)
+
+Functionally Equivalent: No
+Score: 0
+Reason: While both tasks involve data-related work, the primary task in A is managing and overseeing data science projects as a whole, which includes various aspects such as research, modeling, and analysis. On the other hand, B focuses on maintaining and preprocessing data through scripts, which is only one part of the data science project lifecycle. Therefore, they serve different functions and are not functionally equivalent.
+
+Response time: 17.11s

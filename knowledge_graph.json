@@ -1,0 +1,51 @@
+{
+  "version": "1.1",
+  "nodes": {
+    "10989c24-5de9-4d92-a792-55fe1be32c04": {
+      "name": "Collaborate on data science projects",
+      "synonyms": [],
+      "weight": 1,
+      "relationships": []
+    },
+    "d5a53ad8-d83c-4fa2-9740-6fad3138f19a": {
+      "name": "Extract, transform, and analyze data",
+      "synonyms": [],
+      "weight": 1,
+      "relationships": [
+        "f0c8bb8b-9f20-4d00-afc4-7dc6cbba8268"
+      ]
+    },
+    "f0c8bb8b-9f20-4d00-afc4-7dc6cbba8268": {
+      "name": "Generate actionable insights",
+      "synonyms": [],
+      "weight": 1,
+      "relationships": [
+        "d5a53ad8-d83c-4fa2-9740-6fad3138f19a"
+      ]
+    },
+    "41db1e53-f5c2-45ed-80f5-3368cac0cec2": {
+      "name": "Improve data literacy across the organization",
+      "synonyms": [],
+      "weight": 1,
+      "relationships": []
+    },
+    "97b41a0b-6496-4013-954d-caefbf701980": {
+      "name": "Coordinate with data stakeholders",
+      "synonyms": [],
+      "weight": 1,
+      "relationships": []
+    },
+    "3f47ed4a-5e07-403a-9f08-fd4590d53bed": {
+      "name": "Stay current on industry best practices",
+      "synonyms": [],
+      "weight": 1,
+      "relationships": []
+    },
+    "ebc04d72-3bb0-4531-8664-e30210be9c47": {
+      "name": "Manage projects and provide mentorship",
+      "synonyms": [],
+      "weight": 1,
+      "relationships": []
+    }
+  }
+}

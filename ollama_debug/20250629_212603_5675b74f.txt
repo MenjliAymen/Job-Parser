@@ -1,0 +1,80 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior HR analyst comparing two technology-role responsibilities. Evaluate similarity STRICTLY based on:
+
+1. CORE ACTION VERB (40% weight)
+   - Score 0-100 based on similarity
+   - Synonyms: develop/create, optimize/improve, maintain/support
+
+2. PRIMARY OBJECT (45% weight)
+   - Score 0-100 based on similarity
+   - Apply canonicalization rules below
+
+3. DOMAIN MATCH (15% bonus)
+   - +15 if same domain (Technical, Managerial, Strategic)
+   - +0 if different domains
+
+[STRICT CANONICALIZATION RULES]
+Apply these mappings before scoring:
+- "CI/CD" ≡ "continuous integration" ≡ "continuous deployment"
+- "container" ≡ "Docker" ≡ "Kubernetes pod" ≡ "containerized application"
+- "ML" ≡ "machine learning" ≡ "AI model" ≡ "neural network"
+- "API" ≡ "application programming interface" ≡ "endpoints"
+- "DB" ≡ "database" ≡ "data store" ≡ "data warehouse"
+- "log" ≡ "log file" ≡ "audit trail"
+- "roadmap" ≡ "plan" ≡ "strategy"
+- "metric" ≡ "KPI" ≡ "measurement"
+
+[DOMAIN CLASSIFICATION]
+- Technical: Implementation (code, systems, infrastructure)
+- Managerial: Teams, processes, projects
+- Strategic: Planning, vision, governance
+
+[SCORING FORMULA]
+Final Score = (Verb_Score × 0.4) + (Object_Score × 0.45) + Domain_Bonus
+
+[DOMAIN MISMATCH RULE]
+If domains differ, maximum possible score is 69
+
+[OUTPUT FORMAT]
+1. First line: Final similarity score: [0-100]
+2. Brief rationale (1 sentence)
+
+[EXAMPLE]
+Final similarity score: 87
+Verb synonyms, objects canonicalized to same concept
+
+[RESPONSIBILITIES]
+1: "Analyze system metrics"
+2: "Monitor server performance"
+
+
+=== RESPONSE ===
+To compare the two technology-role responsibilities, I will evaluate them based on the provided instructions.
+
+**Responsibility 1:** "Analyze system metrics"
+
+* CORE ACTION VERB: Analyze (Score: 100)
+* PRIMARY OBJECT: Metrics (Score: 100)
+* DOMAIN MATCH: Technical (Score: +15)
+
+**Responsibility 2:** "Monitor server performance"
+
+* CORE ACTION VERB: Monitor (Score: 80) - Similar to analyze, but with a different verb
+* PRIMARY OBJECT: Performance (Score: 60) - Not as specific as metrics
+* DOMAIN MATCH: Technical (Score: +15)
+
+**Final Score Calculation**
+
+Verb_Score = (100 × 0.4) = 40
+Object_Score = (100 × 0.45) = 45
+Domain_Bonus = (+15) = 15
+
+Final Score = 40 + 45 + 15 = 100
+
+**Output**
+Final similarity score: 100
+Verb synonyms, objects canonicalized to same concept
+
+Response time: 12.33s

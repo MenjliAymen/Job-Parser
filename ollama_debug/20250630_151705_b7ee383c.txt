@@ -1,0 +1,98 @@
+=== PROMPT ===
+
+        [STRICT INSTRUCTIONS]
+        You are a senior HR data scientist. Evaluate similarity with PRECISION:
+
+        1. CORE VERB CLASSIFICATION (40% weight):
+           - Implementation: build, code, develop, implement, optimize
+           - Analysis: analyze, examine, investigate, study
+           - Management: coordinate, manage, oversee, lead
+           - Collaboration: collaborate, liaise, partner, interface
+           - Education: educate, train, mentor, coach
+
+        2. PRIMARY FOCUS (45% weight):
+           - Technical: data, systems, models, infrastructure
+           - Business: stakeholders, strategy, decisions, literacy
+           - Process: workflows, pipelines, projects
+           - People: teams, roles, mentorship
+
+        3. SUBDOMAIN ALIGNMENT (15% bonus):
+           - Must match: data engineering vs ML vs analytics vs management
+           - +15% only for exact subdomain match
+
+        [STRICT RULES]
+        - <70 if:
+          - Different verb classes OR 
+          - Different focus categories OR
+          - Different subdomains
+        - 70-79: Same domain but different verb classes
+        - 80-89: Same verb class + same focus category
+        - 90-100: Same verb class + same focus + same subdomain
+
+        [DOMAIN RULE]
+        Different domains ALWAYS ≤69. Subdomains:
+        - Data Engineering: ETL, pipelines, infrastructure
+        - Machine Learning: models, algorithms, ML
+        - Analytics: analysis, insights, reporting
+        - Management: coordination, leadership
+        - Education: training, literacy, mentoring
+
+        [EXAMPLES]
+        "Build data pipelines" vs "Optimize ETL": 95% (same: implement/tech/data-eng)
+        "Analyze datasets" vs "Coordinate teams": 65% (different: analysis vs management)
+        "Train junior staff" vs "Improve data literacy": 85% (same education focus)
+
+        [OUTPUT FORMAT]
+        First line: "Score: [0-100]"
+        Second line: "VerbClass: []; Focus: []; Subdomain: []"
+
+        [RESPONSIBILITIES]
+        1: "Manage projects and provide mentorship"
+        2: "Extract, transform, and analyze data from multiple sources"
+        
+
+=== RESPONSE ===
+To evaluate the similarity between the two statements, I'll break down each component according to the provided categories.
+
+**CORE VERB CLASSIFICATION**
+
+* Statement 1: "Build data pipelines"
+* Statement 2: "Extract, transform, and analyze data from multiple sources"
+
+Both statements contain the verb "build" (Implementation), which is a common thread. However, Statement 2 also contains the verbs "extract," "transform," and "analyze," which are more closely related to data processing than building.
+
+Score for CORE VERB CLASSIFICATION: 60% (different focus categories)
+
+**PRIMARY FOCUS**
+
+* Statement 1: Technical (data, systems, models, infrastructure)
+* Statement 2: Business (stakeholders, strategy, decisions, literacy)
+
+Both statements have a technical focus, but Statement 2 is more closely aligned with business operations.
+
+Score for PRIMARY FOCUS: 70% (same domain but different verb classes)
+
+**SUBDOMAIN ALIGNMENT**
+
+* Statement 1: Data Engineering
+* Statement 2: Business Operations
+
+There is no exact subdomain match between the two statements. However, since Statement 2 has a business focus and Statement 1 has a technical data engineering focus, we can consider them related but not exactly aligned.
+
+Score for SUBDOMAIN ALIGNMENT: -5% (different subdomains)
+
+**FINAL SCORE**
+
+To calculate the final score, I'll use the following weights:
+
+* CORE VERB CLASSIFICATION: 40%
+* PRIMARY FOCUS: 45%
+* SUBDOMAIN ALIGNMENT: 15%
+
+Final Score = (0.4 x 60) + (0.45 x 70) + (0.15 x -5)
+= 24 + 31.5 - 0.75
+= 54.25
+
+Rounded to the nearest whole number, the final score is: 54
+
+Response time: 14.36s

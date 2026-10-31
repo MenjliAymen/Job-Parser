@@ -1,0 +1,81 @@
+=== PROMPT ===
+
+        [INSTRUCTIONS]
+        You are a senior HR data scientist. Evaluate responsibility similarity STRICTLY based on:
+
+        1. CORE ACTION: Compare only the main verb and its direct object
+           - Example: "Collaborate with stakeholders" → Core: "collaborate stakeholders"
+           - Example: "Apply ML methods" → Core: "apply methods"
+
+        2. DOMAIN CONTEXT:
+           - Technical: Implementation, systems, data processing
+           - Managerial: Coordination, leadership, resources
+           - Strategic: Planning, vision, decision-making
+
+        [RULES]
+        1. Focus ONLY on the verb + object core
+        2. Ignore qualifiers, adjectives, and secondary clauses
+        3. Score 95-100 only if core is identical or direct synonyms
+        4. Score 80-94 if core is related but not identical
+        5. Score <80 if core is different
+        6. If domains differ (Technical vs Managerial, etc.), MAX 69
+
+        [OUTPUT FORMAT]
+        First line: "Score: [0-100]"
+        Second line: "Core1: [verb+object]; Core2: [verb+object]; DomainMatch: [Yes/No]"
+
+        [EXAMPLES]
+        "Collaborate with stakeholders" vs "Partner with business units":
+        Core1: collaborate stakeholders
+        Core2: partner units
+        DomainMatch: Yes → 90%
+
+        "Build data pipelines" vs "Coordinate teams":
+        Core1: build pipelines
+        Core2: coordinate teams
+        DomainMatch: No → 65%
+
+        [RESPONSIBILITIES]
+        1: "Extract, transform, and analyze data"
+        2: "Improve data literacy across the organization"
+        
+
+=== RESPONSE ===
+To evaluate the responsibility similarity between "Extract, transform, and analyze data" and "Improve data literacy across the organization", I'll follow the provided instructions.
+
+**CORE ACTION**
+
+1. Compare only the main verb and its direct object:
+   - Core1: extract data
+   - Core2: improve literacy
+
+**DOMAIN CONTEXT**
+
+- Responsibility 1 is related to Technical (data processing) domain.
+- Responsibility 2 is related to Managerial (coordination, leadership) domain.
+
+Since domains differ, I'll apply the rule MAX 69 for DomainMatch.
+
+**SCORE CALCULATION**
+
+Based on the CORE ACTION similarity:
+- Core1: extract data
+- Core2: improve literacy
+
+The cores are not identical or direct synonyms. Therefore, the score will be <80.
+
+Based on the DOMAIN CONTEXT:
+- Responsibility 1 is Technical.
+- Responsibility 2 is Managerial.
+
+Since domains differ, I'll apply the rule MAX 69 for DomainMatch.
+
+**FINAL SCORE**
+
+Score: 65
+
+Core1: extract data
+Core2: improve literacy
+DomainMatch: No
+
+Response time: 8.66s

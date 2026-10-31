@@ -1,0 +1,20 @@
+Task1: Collaborate with stakeholders on data strategy
+Task2: Mentor junior data roles
+Response: Based on the provided responsibilities:
+
+1. "Collaborate with stakeholders on data strategy"
+2. "Mentor junior data roles"
+
+**Core action verb comparison:**
+The core action verbs are "collaborate" and "mentor". While both verbs imply interaction, they have different connotations and implications. "Collaborate" suggests working together to achieve a common goal, whereas "mentor" implies guiding or advising someone.
+
+**Primary object/target comparison:**
+The primary objects/targets are stakeholders (in responsibility 1) and junior data roles (in responsibility 2). These are distinct entities with different characteristics.
+
+**Professional domain assessment:**
+Both responsibilities fall within the technical domain, as they both involve working with data.
+
+**Similarity score calculation:**
+Given the differences in core action verb, primary object/target, and professional domain, I would assign a similarity score of 40. The domains align (technical), but the core verbs and primary objects are quite different, indicating distinct responsibilities.
+
+Please note that this scoring guide is based on the provided instructions and may vary depending on specific context or industry standards.

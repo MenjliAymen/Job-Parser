@@ -1,0 +1,100 @@
+=== PROMPT ===
+
+        [STRICT INSTRUCTIONS]
+        You are a senior HR data scientist. Evaluate similarity with PRECISION:
+
+        1. CORE VERB CLASSIFICATION (40% weight):
+           - Implementation: build, code, develop, implement, optimize
+           - Analysis: analyze, examine, investigate, study
+           - Management: coordinate, manage, oversee, lead
+           - Collaboration: collaborate, liaise, partner, interface
+           - Education: educate, train, mentor, coach
+
+        2. PRIMARY FOCUS (45% weight):
+           - Technical: data, systems, models, infrastructure
+           - Business: stakeholders, strategy, decisions, literacy
+           - Process: workflows, pipelines, projects
+           - People: teams, roles, mentorship
+
+        3. SUBDOMAIN ALIGNMENT (15% bonus):
+           - Must match: data engineering vs ML vs analytics vs management
+           - +15% only for exact subdomain match
+
+        [STRICT RULES]
+        - <70 if:
+          - Different verb classes OR 
+          - Different focus categories OR
+          - Different subdomains
+        - 70-79: Same domain but different verb classes
+        - 80-89: Same verb class + same focus category
+        - 90-100: Same verb class + same focus + same subdomain
+
+        [DOMAIN RULE]
+        Different domains ALWAYS ≤69. Subdomains:
+        - Data Engineering: ETL, pipelines, infrastructure
+        - Machine Learning: models, algorithms, ML
+        - Analytics: analysis, insights, reporting
+        - Management: coordination, leadership
+        - Education: training, literacy, mentoring
+
+        [EXAMPLES]
+        "Build data pipelines" vs "Optimize ETL": 95% (same: implement/tech/data-eng)
+        "Analyze datasets" vs "Coordinate teams": 65% (different: analysis vs management)
+        "Train junior staff" vs "Improve data literacy": 85% (same education focus)
+
+        [OUTPUT FORMAT]
+        First line: "Score: [0-100]"
+        Second line: "VerbClass: []; Focus: []; Subdomain: []"
+
+        [RESPONSIBILITIES]
+        1: "Manage projects and provide mentorship"
+        2: "Coordinate with data stakeholders to secure data access"
+        
+
+=== RESPONSE ===
+To evaluate the similarity between the two responsibilities, I'll apply the provided rules.
+
+**Similarity Evaluation**
+
+1. CORE VERB CLASSIFICATION:
+   - Responsibility 1: "Manage projects and provide mentorship"
+     - Verb class: Management
+   - Responsibility 2: "Coordinate with data stakeholders to secure data access"
+     - Verb class: Management
+
+   Since both responsibilities have the same verb class (Management), this is a good starting point.
+
+2. PRIMARY FOCUS:
+   - Responsibility 1: "Manage projects and provide mentorship"
+     - Focus category: People
+   - Responsibility 2: "Coordinate with data stakeholders to secure data access"
+     - Focus category: Business
+
+   The focus categories are different (People vs Business), which is a concern.
+
+3. SUBDOMAIN ALIGNMENT:
+   - Responsibility 1: No clear subdomain match
+   - Responsibility 2: No clear subdomain match
+
+   Neither responsibility has an exact subdomain match, so the 15% bonus for alignment does not apply.
+
+**Similarity Score Calculation**
+
+Since there are differences in both verb class and focus category, but no subdomain alignment, I'll calculate the score based on the provided rules:
+
+- Different domains: ≤69
+- Same domain but different verb classes: 70-79
+- Same verb class + same focus category: 80-89
+- Same verb class + same focus + same subdomain: 90-100
+
+Given that there are differences in both focus categories and no subdomain alignment, the score falls into the range of ≤69.
+
+**Final Score**
+
+Score: 60
+
+VerbClass: [Management]
+Focus: []
+Subdomain: []
+
+Response time: 14.01s

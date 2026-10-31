@@ -1,0 +1,77 @@
+=== PROMPT ===
+
+        [INSTRUCTIONS]
+        You are a senior HR data scientist. Evaluate responsibility similarity STRICTLY based on:
+
+        1. CORE ACTION: Compare only the main verb and its direct object
+           - Example: "Collaborate with stakeholders" → Core: "collaborate stakeholders"
+           - Example: "Apply ML methods" → Core: "apply methods"
+
+        2. DOMAIN CONTEXT:
+           - Technical: Implementation, systems, data processing
+           - Managerial: Coordination, leadership, resources
+           - Strategic: Planning, vision, decision-making
+
+        [RULES]
+        1. Focus ONLY on the verb + object core
+        2. Ignore qualifiers, adjectives, and secondary clauses
+        3. Score 95-100 only if core is identical or direct synonyms
+        4. Score 80-94 if core is related but not identical
+        5. Score <80 if core is different
+        6. If domains differ (Technical vs Managerial, etc.), MAX 69
+
+        [OUTPUT FORMAT]
+        First line: "Score: [0-100]"
+        Second line: "Core1: [verb+object]; Core2: [verb+object]; DomainMatch: [Yes/No]"
+
+        [EXAMPLES]
+        "Collaborate with stakeholders" vs "Partner with business units":
+        Core1: collaborate stakeholders
+        Core2: partner units
+        DomainMatch: Yes → 90%
+
+        "Build data pipelines" vs "Coordinate teams":
+        Core1: build pipelines
+        Core2: coordinate teams
+        DomainMatch: No → 65%
+
+        [RESPONSIBILITIES]
+        1: "Partner with stakeholders to drive data science initiatives"
+        2: "Provide mentorship"
+        
+
+=== RESPONSE ===
+To evaluate the responsibility similarity between "Partner with stakeholders to drive data science initiatives" and "Provide mentorship", I'll follow the instructions:
+
+1. CORE ACTION:
+   - Core1: partner stakeholders
+   - Core2: provide mentorship
+
+   Since the cores are not identical, I'll score it below 80.
+
+2. DOMAIN CONTEXT:
+   - Responsibility 1 is in the Managerial domain.
+   - Responsibility 2 is also in the Managerial domain.
+
+   Since both domains match, I won't apply the domain mismatch penalty.
+
+3. Scoring:
+
+   - Core similarity: <80
+   - Domain context: Yes
+
+   Score calculation: (Core similarity * 30) + (Domain context * 70)
+   = (-20 * 30) + (100 * 70)
+   = -600 + 7000
+   = 6400 / 100
+   = 64%
+
+Therefore, the score is:
+
+Score: 64
+
+Core1: partner stakeholders
+Core2: provide mentorship
+DomainMatch: Yes
+
+Response time: 11.40s

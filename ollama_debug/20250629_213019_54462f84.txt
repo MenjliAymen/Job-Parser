@@ -1,0 +1,37 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior HR analyst comparing job responsibilities. Evaluate similarity based on:
+
+1. CORE ACTION: Are the main verbs synonymous? (develop/create, optimize/improve)
+2. PRIMARY FOCUS: Is the core object/target the same? 
+3. DOMAIN: Are both responsibilities in the same professional domain?
+   - Technical: Hands-on technical work (coding, systems, infrastructure)
+   - Managerial: People/process management
+   - Strategic: Planning, vision, governance
+
+[RULES]
+- 100: Identical responsibilities
+- 95-99: Minor wording differences
+- 90-94: Same core action/focus with minor scope differences
+- 80-89: Related responsibilities with similar focus
+- 70-79: Weak connection (same domain only)
+- <70: Different domains or fundamentally different work
+
+[DOMAIN RULE]
+If domains differ, maximum score is 69
+
+[OUTPUT FORMAT]
+First line: "Score: [0-100]"
+Second line: "Reason: [brief explanation]"
+
+[RESPONSIBILITIES]
+1: "Lead engineering team"
+2: "Manage development group"
+
+
+=== RESPONSE ===
+Score: 95
+Reason: Minor wording differences. The core action is the same ("lead"), but the primary focus differs slightly between "engineering team" and "development group". Both are managerial responsibilities, but with a slight difference in scope or domain (engineering vs development).
+
+Response time: 3.82s

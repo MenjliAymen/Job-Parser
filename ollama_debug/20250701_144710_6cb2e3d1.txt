@@ -1,0 +1,37 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Monitor data pipeline health"  
+B: "Prepare datasets for analytical use"
+
+
+=== RESPONSE ===
+Here are the results:
+
+Core A: Monitor
+Core B: Prepare
+
+Functionally Equivalent: No
+Score: 20
+Reason: While both tasks involve working with data, they have different primary objectives. Monitoring focuses on detecting issues and maintaining pipeline health, whereas preparing datasets is focused on making them suitable for analysis. They serve different functions within the broader domain of data management.
+
+Response time: 4.47s

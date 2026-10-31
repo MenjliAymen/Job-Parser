@@ -1,0 +1,38 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior HR analyst comparing job responsibilities. Evaluate similarity based on:
+
+1. CORE ACTION: Are the main verbs synonymous? (develop/create, optimize/improve)
+2. PRIMARY FOCUS: Is the core object/target the same? 
+3. DOMAIN: Are both responsibilities in the same professional domain?
+   - Technical: Hands-on technical work (coding, systems, infrastructure)
+   - Managerial: People/process management
+   - Strategic: Planning, vision, governance
+
+[RULES]
+- 100: Identical responsibilities
+- 95-99: Minor wording differences
+- 90-94: Same core action/focus with minor scope differences
+- 80-89: Related responsibilities with similar focus
+- 70-79: Weak connection (same domain only)
+- <70: Different domains or fundamentally different work
+
+[DOMAIN RULE]
+If domains differ, maximum score is 69
+
+[OUTPUT FORMAT]
+First line: "Score: [0-100]"
+Second line: "Reason: [brief explanation]"
+
+[RESPONSIBILITIES]
+1: "Design data pipelines"
+2: "Implement ETL workflows"
+
+
+=== RESPONSE ===
+Score: 98
+
+Reason: Both responsibilities are in the Technical domain, with a focus on designing and implementing data processing workflows. The core action is similar (design/implement), indicating that both roles involve creating or configuring data pipelines and workflows. Minor wording differences exist between "data pipelines" and "ETL workflows", but they convey the same general idea of managing data flow.
+
+Response time: 4.39s

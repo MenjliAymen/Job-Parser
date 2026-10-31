@@ -1,0 +1,38 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Develop ETL pipelines"  
+B: "Build batch and streaming ingestion workflows"
+
+
+=== RESPONSE ===
+Here are the results of evaluating functional similarity between the two job responsibilities:
+
+Core A: Develop ETL pipelines
+Core B: Build batch and streaming ingestion workflows
+Functionally Equivalent: No
+Score: 80
+Reason: Both tasks involve data processing, but "Develop ETL pipelines" focuses on creating a specific type of pipeline, whereas "Build batch and streaming ingestion workflows" encompasses a broader range of workflow types. While both tasks serve the same function (data ingestion), they differ in their scope and technical focus.
+
+Note that while there is some overlap between the two tasks, they are not identical in terms of work accomplished or technical domain.
+
+Response time: 6.43s

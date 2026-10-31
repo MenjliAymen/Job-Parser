@@ -1,0 +1,35 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter comparing two job responsibilities. Your goal is to evaluate whether the two tasks are functionally equivalent, partially related, or unrelated — in the context of tech roles.
+
+[COMPARE BY]
+1. TASK OUTCOME: What work is being accomplished? (e.g., building pipelines, training models)
+2. TOOLCHAIN CONTEXT: Are similar tools, data, or frameworks involved?
+3. TECHNICAL DOMAIN: Are both tasks in the same skill set or job scope?
+
+[SCORING]
+- 95–100: Near-identical function (different phrasing, same outcome)
+- 85–94: Strong similarity (same domain, same goal, minor variation)
+- 70–84: Related area or goal, but differs in depth, scope, or role
+- <70: Different technical domains or unrelated work
+
+[OUTPUT FORMAT]
+Score: [0–100]  
+Reason: [Explain functional overlap and technical domain]
+
+[RESPONSIBILITIES]
+A: "Build data ingestion systems"  
+B: "Perform data wrangling"
+
+
+
+=== RESPONSE ===
+Score: 85-94
+Reason: Both tasks are in the same skill set (data engineering) and share a similar goal of preparing data for analysis or processing. While the specific outcome is slightly different, both tasks involve working with data to transform it into a usable format.
+
+The main difference lies in the scope and depth of the work. "Build data ingestion systems" implies designing and implementing a system that captures and transports data from various sources, whereas "Perform data wrangling" focuses on cleaning, transforming, and preparing existing data for analysis or other purposes. Both tasks require strong technical skills, but they differ in their emphasis on system design versus data processing.
+
+The toolchain context is also similar, as both tasks likely involve working with data storage solutions (e.g., databases), data processing frameworks (e.g., Apache Beam, Spark), and programming languages (e.g., Java, Python). However, the specific tools and technologies used may vary depending on the organization's preferences or existing infrastructure.
+
+Response time: 7.78s

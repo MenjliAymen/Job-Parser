@@ -1,0 +1,28 @@
+Task1: Extract, transform, and analyze data
+Task2: Collaborate with stakeholders on data strategy
+Response: Based on the provided responsibilities:
+
+1. "Extract, transform, and analyze data"
+2. "Collaborate with stakeholders on data strategy"
+
+**Core action verb comparison:**
+The core action verbs are different:
+- "Extract, transform, and analyze" (action-oriented)
+- "Collaborate" (relationship-focused)
+
+Score for core action verb similarity: 30
+
+**Primary object/target comparison:**
+The primary objects are also different:
+- Data (object of analysis)
+- Stakeholders (objects of collaboration)
+
+Score for primary object similarity: 30
+
+**Professional domain assessment:**
+Both responsibilities fall under the technical domain, as they involve data analysis and strategy.
+
+Score for domain alignment: 100
+
+**Final score calculation:**
+Since both core action verb and primary object/target are not similar, the overall score is based on the domain alignment. The final score is 100 (identical responsibilities in terms of professional domain).

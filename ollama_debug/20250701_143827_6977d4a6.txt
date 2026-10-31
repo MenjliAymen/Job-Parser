@@ -1,0 +1,36 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Prepare datasets for analytical use"  
+B: "Develop ETL pipelines"
+
+
+=== RESPONSE ===
+Here are the results:
+
+Core A: Preprocess  
+Core B: Develop ETL pipelines  
+Functionally Equivalent: No  
+Score: 60  
+Reason: While both tasks involve data preparation, "preprocess" is a more general term that can encompass various data cleaning and transformation activities. In contrast, "develop ETL pipelines" implies creating specific data integration workflows, which may not be directly equivalent to preprocessing datasets. However, the core function of preparing data for analysis is shared between the two tasks.
+
+Response time: 5.21s

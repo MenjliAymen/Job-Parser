@@ -1,0 +1,18 @@
+Task1: Collaborate with stakeholders on data strategy
+Task2: Evangelize data literacy
+Response: Based on the provided responsibilities:
+
+1. "Collaborate with stakeholders on data strategy"
+2. "Evangelize data literacy"
+
+**Core action verb comparison:**
+The core action verbs are "collaborate" and "evangelize". While both verbs convey a sense of promoting or sharing information, they have different connotations. "Collaborate" implies working together with others to achieve a common goal, whereas "evangelize" suggests enthusiastically promoting or spreading a message.
+
+**Primary object/target comparison:**
+The primary objects are "stakeholders" and "data literacy". The two concepts are related but distinct. Stakeholders refer to individuals or groups who have an interest in or influence over a particular issue, while data literacy refers to the ability to understand and work with data effectively.
+
+**Domain alignment:**
+Both responsibilities appear to be within the professional domain of technical or managerial roles, as they both involve working with data.
+
+**Score (0-100):**
+Based on the analysis, I would score these responsibilities as 60. While they share some similarities in terms of their focus on data, the core action verbs and primary objects are not identical, and the domains may be slightly different depending on interpretation. The responsibilities seem to have a related but distinct scope.

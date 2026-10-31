@@ -1,0 +1,80 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior HR analyst comparing two technology-role responsibilities. Evaluate similarity STRICTLY based on:
+
+1. CORE ACTION VERB (40% weight)
+   - Score 0-100 based on similarity
+   - Synonyms: develop/create, optimize/improve, maintain/support
+
+2. PRIMARY OBJECT (45% weight)
+   - Score 0-100 based on similarity
+   - Apply canonicalization rules below
+
+3. DOMAIN MATCH (15% bonus)
+   - +15 if same domain (Technical, Managerial, Strategic)
+   - +0 if different domains
+
+[STRICT CANONICALIZATION RULES]
+Apply these mappings before scoring:
+- "CI/CD" ≡ "continuous integration" ≡ "continuous deployment"
+- "container" ≡ "Docker" ≡ "Kubernetes pod" ≡ "containerized application"
+- "ML" ≡ "machine learning" ≡ "AI model" ≡ "neural network"
+- "API" ≡ "application programming interface" ≡ "endpoints"
+- "DB" ≡ "database" ≡ "data store" ≡ "data warehouse"
+- "log" ≡ "log file" ≡ "audit trail"
+- "roadmap" ≡ "plan" ≡ "strategy"
+- "metric" ≡ "KPI" ≡ "measurement"
+
+[DOMAIN CLASSIFICATION]
+- Technical: Implementation (code, systems, infrastructure)
+- Managerial: Teams, processes, projects
+- Strategic: Planning, vision, governance
+
+[SCORING FORMULA]
+Final Score = (Verb_Score × 0.4) + (Object_Score × 0.45) + Domain_Bonus
+
+[DOMAIN MISMATCH RULE]
+If domains differ, maximum possible score is 69
+
+[OUTPUT FORMAT]
+1. First line: Final similarity score: [0-100]
+2. Brief rationale (1 sentence)
+
+[EXAMPLE]
+Final similarity score: 87
+Verb synonyms, objects canonicalized to same concept
+
+[RESPONSIBILITIES]
+1: "Build machine learning models"
+2: "Create ML classifiers"
+
+
+=== RESPONSE ===
+To compare the two technology-role responsibilities, I will evaluate them based on the provided instructions.
+
+**Responsibility 1:** "Build machine learning models"
+
+* CORE ACTION VERB: Similar to Responsibility 2, but with a slight difference in wording. Score: 80 (synonyms: develop/create)
+* PRIMARY OBJECT: Both responsibilities involve building or creating something related to machine learning. However, Responsibility 1 uses the term "models" while Responsibility 2 uses "classifiers". After applying canonicalization rules, I will consider both terms equivalent to "machine learning model". Score: 90 (canonicalized objects: machine learning model)
+* DOMAIN MATCH: Both responsibilities fall under the Technical domain. Score: +15
+
+**Responsibility 2:** "Create ML classifiers"
+
+* CORE ACTION VERB: Similar to Responsibility 1, but with a slight difference in wording. Score: 80 (synonyms: develop/create)
+* PRIMARY OBJECT: As mentioned earlier, both responsibilities involve building or creating something related to machine learning. After applying canonicalization rules, I will consider both terms equivalent to "machine learning model". Score: 90 (canonicalized objects: machine learning model)
+* DOMAIN MATCH: Both responsibilities fall under the Technical domain. Score: +15
+
+**Final Scoring Formula:**
+
+Verb_Score = (80 × 0.4) = 32
+Object_Score = (90 × 0.45) = 40.5
+Domain_Bonus = +30 (2 × 15)
+
+Final Score = 32 + 40.5 + 30 = 102.5
+
+Since the maximum possible score is 69 due to domain mismatch, I will adjust it accordingly.
+
+Adjusted Final Score = 69
+
+Response time: 18.70s

@@ -1,0 +1,55 @@
+=== PROMPT ===
+
+        [INSTRUCTIONS]
+        You are a senior HR analyst comparing job responsibilities. Evaluate similarity based on:
+
+        1. CORE ACTION: Are the main verbs synonymous? (develop/create, optimize/improve)
+        2. PRIMARY FOCUS: Is the core object or outcome the same?
+        3. DOMAIN: Are both responsibilities in the same domain?
+           - Technical: Implementation work (coding, systems, data analysis, ML, infrastructure)
+           - Managerial: Team coordination, planning, mentoring, execution
+           - Strategic: Business alignment, vision, strategy, governance
+
+        [SIMPLIFICATION RULE]
+        If a responsibility has extra modifiers or clauses, **reduce it to verb + object** as long as the meaning is preserved.
+
+        [RULES]
+        - 100: Identical responsibility
+        - 95–99: Minor rewording
+        - 90–94: Same action/object, different scale or detail
+        - 80–89: Related, not identical (same type of work)
+        - 70–79: Weak link in same domain
+        - <70: Different domains or clearly distinct work
+
+        [DOMAIN RULE]
+        If the domains differ, max score is 69
+
+        [PENALTIES]
+        - Subtract 10 for weak alignment in same domain
+        - Subtract 15 if core actions are unrelated
+
+        [OUTPUT FORMAT]
+        Score: [0–100]
+        Reason: [Short justification, including domain and action comparison]
+
+        [RESPONSIBILITIES]
+        1: "Maintain cutting-edge knowledge of industry innovations"
+        2: "Collaborate with stakeholders on data strategy"
+        
+
+=== RESPONSE ===
+Based on the provided instructions, I'll evaluate the similarity between the two job responsibilities.
+
+**CORE ACTION**: The main verbs are not synonymous. Responsibility 1 involves maintaining knowledge, while responsibility 2 involves collaborating on a strategy.
+
+**PRIMARY FOCUS**: The core object or outcome is different. Responsibility 1 focuses on industry innovations, whereas responsibility 2 focuses on data strategy.
+
+**DOMAIN**: Both responsibilities are in the **Technical** domain, as they both involve working with data and staying up-to-date with industry developments.
+
+**SIMPLIFICATION RULE**: I'll reduce responsibility 1 to "Maintain knowledge" (verb + object) for comparison purposes.
+
+**SCORE**: Due to the differences in core action and primary focus, but similar domains, I'd assign a score of 80.
+
+**REASON**: Although the responsibilities differ in their main verbs and outcomes, they share the same technical domain. This similarity warrants a moderate score, considering the differences in core actions and primary focuses.
+
+Response time: 7.84s

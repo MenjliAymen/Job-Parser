@@ -1,0 +1,49 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior HR analyst comparing job responsibilities. Compare only the simplified core of each responsibility.
+
+[SIMPLIFY FIRST]
+Reduce each task to: main verb + main object.
+Ignore modifiers, adjectives, and secondary clauses.
+
+[SIMPLIFIED TASKS EXAMPLES]
+- "Extract, transform, and analyze data" → analyze data
+- "Apply supervised learning methods" → apply methods
+- "Collaborate with stakeholders on data strategy" → collaborate stakeholders
+- "Mentor junior engineers" → mentor engineers
+- "Stay current on industry best practices" → stay informed
+
+[CATEGORIES]
+1. Identical responsibility (100)
+2. Minor rewording (95–99)
+3. Same action/object with scope difference (90–94)
+4. Related but not identical (80–89)
+5. Weak link in same domain (70–79)
+6. Domain differs but similar theme (60–69)
+7. Different work or domains (30–59)
+8. Unrelated (0–29)
+
+[TASKS TO COMPARE]
+A: "Build data pipelines"
+B: "Collaborate with stakeholders on data strategy"
+
+[OUTPUT FORMAT]
+Simplified A: [verb object]
+Simplified B: [verb object]
+Category: [1–8]
+Score: [0–100]
+Reason: [short explanation based on verb, object, and domain]
+
+
+=== RESPONSE ===
+Let's simplify the tasks:
+
+A: "Build data pipelines" → build pipelines
+B: "Collaborate with stakeholders on data strategy" → collaborate stakeholders
+
+Category: 3
+Score: 92
+Reason: Both tasks involve working with data, but A focuses on building pipelines, while B involves collaboration and strategy.
+
+Response time: 4.01s

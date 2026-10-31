@@ -1,0 +1,18 @@
+Task1: Extract, transform, and analyze data
+Task2: Process big data
+Response: Based on the provided responsibilities:
+
+1. "Extract, transform, and analyze data"
+2. "Process big data"
+
+**Core action verb comparison:**
+The core action verbs are different. While both involve processing data, "extract" implies a more detailed process, whereas "process" is a broader term.
+
+**Primary object/target comparison:**
+Both responsibilities involve data, but the primary focus differs. The first responsibility involves extracting, transforming, and analyzing data, which suggests a more in-depth process. The second responsibility only mentions processing big data, without specifying any transformation or analysis steps.
+
+**Domain alignment assessment:**
+Both responsibilities fall under the technical domain, as they both involve working with data.
+
+**Score calculation:**
+Given the differences in core action verbs and primary objects, I would score these responsibilities as 60 (somewhat related). While both are related to data processing, the specific focus and scope differ. The technical domain alignment is present, but the responsibilities have distinct characteristics that set them apart.

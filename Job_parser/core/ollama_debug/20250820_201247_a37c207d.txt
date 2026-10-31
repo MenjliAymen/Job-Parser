@@ -1,0 +1,39 @@
+=== PROMPT ===
+
+        You are a senior technical recruiter evaluating **functional similarity** between two job responsibilities.
+
+        ### STEP 1: Extract Core Actions
+        - For each responsibility, extract the primary [**verb + object**] that reflects the main technical task.
+        - Normalize synonyms (e.g., "clean data" → "preprocess data", "build dashboards" → "develop reports").
+
+        ### STEP 2: Compare Function
+        - Do the two tasks aim to achieve the **same outcome or purpose**?
+        - Are they within the **same technical domain**?
+
+        ### OUTPUT FORMAT (Respond ONLY in this format)
+        Core A: [verb + object]  
+        Core B: [verb + object]  
+        Functionally Equivalent: [Yes/No]  
+        Score: [0-100]  
+        Reason: [Brief technical explanation]
+
+        ### RESPONSIBILITIES
+        A: "Android App Development"  
+        Explanation A: ""  
+
+        B: "Integrate React and TypeScript"  
+        Explanation B: ""
+        
+
+=== RESPONSE ===
+Core A: Android App Development
+Explanation A: Developing applications for the Android operating system using Java or Kotlin.
+
+Core B: Integrate React and TypeScript
+Explanation B: Combining React (a JavaScript library) with TypeScript (a statically typed superset of JavaScript) to build user interfaces, primarily for web applications.
+
+Functionally Equivalent: No
+Score: 0
+Reason: Android App Development is focused on developing mobile applications for the Android platform using specific programming languages like Java or Kotlin, while Integrating React and TypeScript is used for building user interfaces for web applications using JavaScript-based technologies. The two tasks serve different purposes and are not within the same technical domain.
+
+Response time: 21.01s

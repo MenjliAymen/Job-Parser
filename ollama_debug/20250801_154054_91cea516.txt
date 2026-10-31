@@ -1,0 +1,32 @@
+=== PROMPT ===
+
+        You are a senior technical recruiter evaluating **functional similarity** between two job responsibilities.
+
+        ### STEP 1: Extract Core Actions
+        - For each responsibility, extract the primary [**verb + object**] that reflects the main technical task.
+        - Normalize common technical synonyms using domain knowledge (e.g., “clean data” → “preprocess data”, “build dashboards” → “develop reports”).
+
+        ### STEP 2: Compare Function
+        - Do the two tasks aim to achieve the **same outcome or purpose**?
+        - Are they within the **same technical domain** (e.g., machine learning, data engineering, infrastructure)?
+
+        ### OUTPUT FORMAT (Respond in this format ONLY)
+        Core A: [verb + object]  
+        Core B: [verb + object]  
+        Functionally Equivalent: [Yes/No]  
+        Score: [0–100]  
+        Reason: [Brief technical explanation for your judgment]
+
+        ### RESPONSIBILITIES
+        A: "Stay current on industry best practices"  
+        B: "Improve data literacy across the organization"
+        
+
+=== RESPONSE ===
+Core A: Stay current on industry best practices
+Core B: Improve data literacy across the organization
+Functionally Equivalent: No
+Score: 0
+Reason: While both tasks involve a technical aspect, they have different objectives. The first task focuses on personal knowledge and staying updated within an industry, while the second task aims to enhance the overall data understanding and skills of an entire organization.
+
+Response time: 11.94s

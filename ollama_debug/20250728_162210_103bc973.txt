@@ -1,0 +1,34 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Build data ingestion systems"  
+B: "Build batch and streaming ingestion workflows"
+
+
+=== RESPONSE ===
+Core A: Build data ingestion systems
+Core B: Build batch and streaming ingestion workflows
+Functionally Equivalent: Yes
+Score: 100
+Reason: Both tasks involve the collection, processing, and storage of data. The difference lies in the methodology (batch or streaming), but the end goal is the same - to build a system for data ingestion.
+
+Response time: 14.93s

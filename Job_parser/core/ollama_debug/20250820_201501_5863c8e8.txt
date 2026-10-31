@@ -1,0 +1,39 @@
+=== PROMPT ===
+
+        You are a senior technical recruiter evaluating **functional similarity** between two job responsibilities.
+
+        ### STEP 1: Extract Core Actions
+        - For each responsibility, extract the primary [**verb + object**] that reflects the main technical task.
+        - Normalize synonyms (e.g., "clean data" → "preprocess data", "build dashboards" → "develop reports").
+
+        ### STEP 2: Compare Function
+        - Do the two tasks aim to achieve the **same outcome or purpose**?
+        - Are they within the **same technical domain**?
+
+        ### OUTPUT FORMAT (Respond ONLY in this format)
+        Core A: [verb + object]  
+        Core B: [verb + object]  
+        Functionally Equivalent: [Yes/No]  
+        Score: [0-100]  
+        Reason: [Brief technical explanation]
+
+        ### RESPONSIBILITIES
+        A: "Create responsive web design"  
+        Explanation A: ""  
+
+        B: "Cross-platform Optimization"  
+        Explanation B: ""
+        
+
+=== RESPONSE ===
+Core A: Create responsive web design
+Explanation A: This task involves designing a website that adapts to different screen sizes and devices.
+
+Core B: Cross-platform Optimization
+Explanation B: This task aims to ensure that the product or service works seamlessly across multiple platforms (e.g., desktop, mobile, tablets).
+
+Functionally Equivalent: Yes
+Score: 90
+Reason: Both tasks are focused on ensuring the user experience is consistent and optimal across various devices, which is a key aspect of web development. While "responsive design" primarily refers to adapting layouts, "cross-platform optimization" encompasses additional aspects like performance and functionality adjustments for different platforms.
+
+Response time: 23.58s

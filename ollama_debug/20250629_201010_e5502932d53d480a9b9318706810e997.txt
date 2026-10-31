@@ -1,0 +1,93 @@
+=== PROMPT ===
+[INSTRUCTIONS]
+You are a senior HR analyst comparing two technology-role responsibilities. Evaluate similarity STRICTLY based on:
+
+  1. **Core action verb** (must match or be synonymous for high similarity)
+  2. **Primary object/target** (must match, be clearly related, or canonicalize to the same concept)
+  3. **Professional domain**, classified as:
+     - Technical: hands-on implementation (e.g., code, models, systems)
+     - Managerial: team/process ownership
+     - Strategic: planning, hiring, vision, governance
+
+Normalize both tasks into **VERB–OBJECT–DOMAIN** triples. Apply synonym mapping and concept canonicalization, then score based on:
+
+  • VERB = 50%
+  • OBJECT = 40%
+  • DOMAIN = 10%
+
+---
+
+[CANONICALIZATION EXAMPLES]
+
+Group similar concepts:
+- “ETL workflow”, “data pipeline”, “dataflow” → “data pipeline”
+- “ML model”, “machine learning model”, “neural network” → “ML model”
+- “dashboard”, “report”, “BI visualization” → “dashboard”
+- “team size”, “headcount”, “staffing” → “headcount”
+- “offsite”, “retreat”, “company trip” → “employee event”
+- “infrastructure”, “compute environment”, “Kubernetes cluster” → “infrastructure”
+
+---
+
+[DOMAIN MATCH BOOST]
+
+If both tasks have the same domain classification (e.g., both Technical),
+increase the similarity score by 5 points, reflecting stronger alignment.
+
+---
+
+[PENALTIES FOR LOW SIMILARITY]
+
+- Assign a score **<70** if:
+  • VERB and OBJECT are unrelated (no clear semantic or canonical connection)
+  • AND domains differ (e.g., “develop ML model” vs “plan budget”)
+  • OR objects refer to completely different concepts without overlap (technical vs managerial, strategic vs technical)
+
+- Assign **80–89** only if:
+  • VERB or OBJECT partially align (e.g., similar domain but different primary object)
+  • OR there's a shared domain or business context but different core actions
+
+- Assign **≥90** only if:
+  • VERB and OBJECT are the same or canonical equivalents
+  • AND domains match exactly
+
+---
+
+[SCORING GUIDE]
+
+100: Identical responsibilities  
+95–99: Minor wording or scope differences  
+90–94: Similar focus, slightly different scope  
+80–89: Related but not equivalent (partial alignment)  
+70–79: Some conceptual connection, weak relation  
+<70: Fundamentally different tasks or domains with unrelated verbs and objects
+
+
+---
+
+[OUTPUT FORMAT]
+
+Respond with ONLY:
+• A single integer score (0–100)
+• Optional one-line rationale (if score ≥90), prefixed by `Rationale:`
+• Do **not** repeat the tasks or output multiple scores
+
+✅ Example Output:
+94 Rationale: Same verb + object, slightly different scope.
+
+❌ Invalid Output:
+“Similarity is 94%. Both involve…” ← Do not do this.
+
+---
+
+[RESPONSIBILITIES]
+1: "Fix bugs in codebase"
+2: "Organize company retreat"
+
+=== RESPONSE ===
+• VERB–OBJECT–DOMAIN: Fix - codebase - Technical
+• VERB–OBJECT–DOMAIN: Organize - employee event - Managerial
+
+Score: 80 Rationale: Partial alignment, shared domain but different primary object.
+
+Response time: 3.69s

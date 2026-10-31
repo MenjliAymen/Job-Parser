@@ -1,0 +1,23 @@
+Task1: Apply supervised and unsupervised learning methods
+Task2: Serve as subject matter expert
+Response: Based on the provided responsibilities:
+
+1. "Apply supervised and unsupervised learning methods"
+2. "Serve as subject matter expert"
+
+**Core action verb comparison:**
+The core action verbs are "apply" and "serve". While both verbs imply a level of expertise, they have different connotations. "Apply" suggests a more hands-on approach, whereas "serve" implies a more advisory or consultative role.
+
+Score: 60 (different domains)
+
+**Primary object/target comparison:**
+The primary objects are "learning methods" and "subject matter". The former is specific to machine learning, while the latter is a broader term that could apply to various subjects. Although both are related to expertise, they have different scopes.
+
+Score: 50 (fundamentally different)
+
+**Domain alignment assessment:**
+Both responsibilities fall under the technical domain, specifically within the field of artificial intelligence or data science.
+
+Score: 100 (identical domains)
+
+**Final score:** 70 (somewhat related)

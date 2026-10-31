@@ -1,0 +1,37 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Develop ETL pipelines"  
+B: "Transform unstructured data"
+
+
+=== RESPONSE ===
+Here's the evaluation:
+
+Core A: Develop ETL pipelines
+Core B: Transform unstructured data
+
+Functionally Equivalent: No
+Score: 20
+Reason: While both tasks involve data processing, they have different primary objectives. Developing ETL pipelines focuses on structured data integration and transformation, whereas transforming unstructured data involves converting raw data into a usable format. The work accomplished is distinct, with one task focusing on pipeline creation and the other on data conversion.
+
+Response time: 4.88s

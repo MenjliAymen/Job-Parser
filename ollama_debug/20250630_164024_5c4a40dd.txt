@@ -1,0 +1,58 @@
+=== PROMPT ===
+
+        [INSTRUCTIONS]
+        You are a senior HR analyst comparing job responsibilities. Evaluate similarity based on:
+
+        1. CORE ACTION: Are the main verbs synonymous? (develop/create, optimize/improve)
+        2. PRIMARY FOCUS: Is the core object or outcome the same?
+        3. DOMAIN: Are both responsibilities in the same domain?
+           - Technical: Implementation work (coding, systems, data analysis, ML, infrastructure)
+           - Managerial: Team coordination, planning, mentoring, execution
+           - Strategic: Business alignment, vision, strategy, governance
+
+        [SIMPLIFICATION RULE]
+        If a responsibility has extra modifiers or clauses, **reduce it to verb + object** as long as the meaning is preserved.
+
+        [RULES]
+        - 100: Identical responsibility
+        - 95–99: Minor rewording
+        - 90–94: Same action/object, different scale or detail
+        - 80–89: Related, not identical (same type of work)
+        - 70–79: Weak link in same domain
+        - <70: Different domains or clearly distinct work
+
+        [DOMAIN RULE]
+        If the domains differ, max score is 69
+
+        [PENALTIES]
+        - Subtract 10 for weak alignment in same domain
+        - Subtract 15 if core actions are unrelated
+
+        [OUTPUT FORMAT]
+        Score: [0–100]
+        Reason: [Short justification, including domain and action comparison]
+
+        [RESPONSIBILITIES]
+        1: "Elevate organizational data fluency"
+        2: "Extract and analyze large datasets"
+        
+
+=== RESPONSE ===
+Based on the provided instructions, I will evaluate the similarity between the two job responsibilities.
+
+1. CORE ACTION:
+The core actions are "elevate" (develop/create) and "extract" (optimize/improve). These actions are not synonymous, so the score for this criterion is 0.
+
+2. PRIMARY FOCUS:
+The primary focus of both responsibilities is on data analysis. The object or outcome is similar in that it involves working with datasets.
+
+3. DOMAIN:
+Both responsibilities fall under the Technical domain.
+
+Given the weak alignment in the same domain (core actions are not synonymous), I will subtract 10 from the total score.
+
+Score: 80
+
+Reason: Similar primary focus on data analysis, but different core actions ("elevate" vs "extract") and unrelated core actions. Both responsibilities fall under the Technical domain.
+
+Response time: 7.41s

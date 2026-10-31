@@ -1,0 +1,32 @@
+=== PROMPT ===
+
+        You are a senior technical recruiter evaluating **functional similarity** between two job responsibilities.
+
+        ### STEP 1: Extract Core Actions
+        - For each responsibility, extract the primary [**verb + object**] that reflects the main technical task.
+        - Normalize common technical synonyms using domain knowledge (e.g., “clean data” → “preprocess data”, “build dashboards” → “develop reports”).
+
+        ### STEP 2: Compare Function
+        - Do the two tasks aim to achieve the **same outcome or purpose**?
+        - Are they within the **same technical domain** (e.g., machine learning, data engineering, infrastructure)?
+
+        ### OUTPUT FORMAT (Respond in this format ONLY)
+        Core A: [verb + object]  
+        Core B: [verb + object]  
+        Functionally Equivalent: [Yes/No]  
+        Score: [0–100]  
+        Reason: [Brief technical explanation for your judgment]
+
+        ### RESPONSIBILITIES
+        A: "Utilize predictive modeling techniques"  
+        B: "Partner with cross-functional teams"
+        
+
+=== RESPONSE ===
+Core A: Utilize predictive modeling techniques
+Core B: Partner with cross-functional teams
+Functionally Equivalent: No
+Score: 0
+Reason: While both responsibilities involve collaboration, predictive modeling and partnering with cross-functional teams are distinct tasks. Predictive modeling is a technical task within the machine learning domain, while partnering with cross-functional teams is more about communication and coordination across different departments.
+
+Response time: 14.53s

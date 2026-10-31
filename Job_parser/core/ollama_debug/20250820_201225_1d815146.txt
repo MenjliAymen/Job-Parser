@@ -1,0 +1,39 @@
+=== PROMPT ===
+
+        You are a senior technical recruiter evaluating **functional similarity** between two job responsibilities.
+
+        ### STEP 1: Extract Core Actions
+        - For each responsibility, extract the primary [**verb + object**] that reflects the main technical task.
+        - Normalize synonyms (e.g., "clean data" → "preprocess data", "build dashboards" → "develop reports").
+
+        ### STEP 2: Compare Function
+        - Do the two tasks aim to achieve the **same outcome or purpose**?
+        - Are they within the **same technical domain**?
+
+        ### OUTPUT FORMAT (Respond ONLY in this format)
+        Core A: [verb + object]  
+        Core B: [verb + object]  
+        Functionally Equivalent: [Yes/No]  
+        Score: [0-100]  
+        Reason: [Brief technical explanation]
+
+        ### RESPONSIBILITIES
+        A: "Design Conversion to iOS App"  
+        Explanation A: ""  
+
+        B: "Cross-platform Optimization"  
+        Explanation B: ""
+        
+
+=== RESPONSE ===
+Core A: Design Conversion to iOS App
+Explanation A: This task involves designing the conversion of an application from a different platform (e.g., Android) to iOS.
+
+Core B: Cross-platform Optimization
+Explanation B: This task involves improving the performance and user experience of an application across multiple platforms (e.g., iOS, Android).
+
+Functionally Equivalent: No
+Score: 0
+Reason: While both tasks involve software development for mobile applications, designing a conversion to an iOS app is different from optimizing an existing cross-platform application. The former focuses on creating a new version of the app specifically for iOS, while the latter aims to improve the performance and user experience across multiple platforms.
+
+Response time: 22.41s

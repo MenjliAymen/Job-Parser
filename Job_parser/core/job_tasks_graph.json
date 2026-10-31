@@ -1,0 +1,57 @@
+{
+  "version": "1.2",
+  "nodes": {
+    "955fd00e-cfc6-4ecd-ac28-f278371c84dd": {
+      "name": "Design Conversion to iOS App",
+      "synonyms": [],
+      "weight": 2,
+      "relationships": [],
+      "last_similarity": 0.0,
+      "groups": [
+        "c6149da1-52a6-4496-8016-8512c4c98d5f"
+      ]
+    },
+    "17ccd57f-5415-4270-896a-ed96838a4561": {
+      "name": "Android App Development",
+      "synonyms": [],
+      "weight": 2,
+      "relationships": [],
+      "last_similarity": 0.0,
+      "groups": [
+        "c6149da1-52a6-4496-8016-8512c4c98d5f"
+      ]
+    },
+    "82104e16-efa1-4825-8f94-c0070a9abba9": {
+      "name": "Integrate React and TypeScript",
+      "synonyms": [],
+      "weight": 2,
+      "relationships": [],
+      "last_similarity": 0.0,
+      "groups": [
+        "c6149da1-52a6-4496-8016-8512c4c98d5f"
+      ]
+    },
+    "f66b78c8-c539-437e-860f-0ac4e8328c9a": {
+      "name": "Cross-platform Optimization",
+      "synonyms": [],
+      "weight": 2,
+      "relationships": [],
+      "last_similarity": 0.0,
+      "groups": [
+        "c6149da1-52a6-4496-8016-8512c4c98d5f"
+      ]
+    }
+  },
+  "groups": {
+    "c6149da1-52a6-4496-8016-8512c4c98d5f": {
+      "name": "Frontend/UI/Mobile Development",
+      "description": "",
+      "nodes": [
+        "955fd00e-cfc6-4ecd-ac28-f278371c84dd",
+        "17ccd57f-5415-4270-896a-ed96838a4561",
+        "82104e16-efa1-4825-8f94-c0070a9abba9",
+        "f66b78c8-c539-437e-860f-0ac4e8328c9a"
+      ]
+    }
+  }
+}

@@ -1,0 +1,110 @@
+=== PROMPT ===
+[INSTRUCTIONS]
+You are a senior HR analyst comparing two technology-role responsibilities. Evaluate similarity STRICTLY based on:
+
+  1. **Core action verb** (must match or be synonymous for high similarity)
+  2. **Primary object/target** (must match, be clearly related, or canonicalize to the same concept)
+  3. **Professional domain**, classified as:
+     - Technical: hands-on implementation (e.g., code, models, systems)
+     - Managerial: team/process ownership
+     - Strategic: planning, hiring, vision, governance
+
+Normalize both tasks into **VERB–OBJECT–DOMAIN** triples. Apply synonym mapping and concept canonicalization, then score based on:
+
+  • VERB = 40%
+  • OBJECT = 45%
+  • DOMAIN = 15%
+
+---
+
+[CANONICALIZATION EXAMPLES]
+
+Group similar concepts:
+- “ETL workflow”, “data pipeline”, “dataflow” → “data pipeline”
+- “ML model”, “machine learning model”, “neural network” → “ML model”
+- “dashboard”, “report”, “BI visualization” → “dashboard”
+- “team size”, “headcount”, “staffing” → “headcount”
+- “offsite”, “retreat”, “company trip” → “employee event”
+- “infrastructure”, “compute environment”, “Kubernetes cluster” → “infrastructure”
+
+---
+
+[DOMAIN MATCH BOOST]
+
+If both tasks have the same domain classification (e.g., both Technical),
+increase the similarity score by 5 points, reflecting stronger alignment.
+
+---
+
+[PENALTIES FOR LOW SIMILARITY]
+
+• Assign <70 only if:
+  - The verbs are fundamentally unrelated (e.g., “lead” vs “optimize”)
+  - OR the objects are in unrelated domains or conceptual fields (e.g., “security logs” vs “Kubernetes cluster”)
+
+
+- Assign **70–79** only if there is some weak conceptual connection, e.g., shared domain but different verbs and objects.
+
+- Assign **80–89** ONLY if:
+  • The verbs or objects partially align or are loosely related.
+  • The domains match.
+
+- Assign **≥90** ONLY if:
+  • The verbs and objects are identical or canonical equivalents.
+  • The domains match exactly.
+
+---
+
+IMPORTANT:
+
+- If the domains differ, similarity score must NOT exceed 69 regardless of verb or object similarity.
+
+---
+
+[SCORING GUIDE]
+
+100: Identical responsibilities  
+95–99: Minor wording differences  
+90–94: Similar focus but slightly different scope  
+80–89: Related, but not equivalent (only if domains match)  
+70–79: Some conceptual connection (same domain)  
+<70: Fundamentally different tasks or domains (or domain mismatch)
+
+
+---
+
+[OUTPUT FORMAT]
+
+Respond with ONLY a single integer similarity score between 0–100 based on your calculation using the weighted formula:
+• VERB (40%) + OBJECT (45%) + DOMAIN (15%)
+
+DO NOT round down or apply arbitrary score cutoffs — calculate based on normalized weights.
+Only return the final score and optional rationale.
+• Do **not** repeat the tasks or output multiple scores
+
+✅ Example Output:
+94 Rationale: Same verb + object, slightly different scope.
+
+❌ Invalid Output:
+“Similarity is 94%. Both involve…” ← Do not do this.
+
+---
+
+[RESPONSIBILITIES]
+1: "Lead customer focus groups"
+2: "Manage Kubernetes cluster stability"
+
+=== RESPONSE ===
+VERB–OBJECT–DOMAIN triples:
+
+1. Lead - Customer Focus Groups - Managerial
+2. Manage - Kubernetes Cluster Stability - Technical
+
+Normalized scores:
+- VERB = 0 (no match)
+- OBJECT = 90 (canonicalized to "cluster")
+- DOMAIN = 10 (Managerial and Technical domains differ)
+
+Similarity score: 80 Rationale: Some conceptual connection due to shared domain, but different verbs and objects.
+
+Response time: 4.93s

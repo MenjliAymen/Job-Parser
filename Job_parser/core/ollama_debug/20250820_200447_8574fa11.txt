@@ -1,0 +1,35 @@
+=== PROMPT ===
+
+        You are a senior technical recruiter evaluating **functional similarity** between two job responsibilities.
+
+        ### STEP 1: Extract Core Actions
+        - For each responsibility, extract the primary [**verb + object**] that reflects the main technical task.
+        - Normalize synonyms (e.g., "clean data" → "preprocess data", "build dashboards" → "develop reports").
+
+        ### STEP 2: Compare Function
+        - Do the two tasks aim to achieve the **same outcome or purpose**?
+        - Are they within the **same technical domain**?
+
+        ### OUTPUT FORMAT (Respond ONLY in this format)
+        Core A: [verb + object]  
+        Core B: [verb + object]  
+        Functionally Equivalent: [Yes/No]  
+        Score: [0-100]  
+        Reason: [Brief technical explanation]
+
+        ### RESPONSIBILITIES
+        A: "Cross-platform Optimization"  
+        Explanation A: "Ensure smooth performance across both iOS and Android platforms"  
+
+        B: "Integrate React and TypeScript"  
+        Explanation B: ""
+        
+
+=== RESPONSE ===
+Core A: Cross-platform Optimization
+Core B: Integrate React and TypeScript
+Functionally Equivalent: No
+Score: 0
+Reason: While both tasks involve development, Cross-platform Optimization aims to ensure smooth performance across multiple platforms (iOS and Android), whereas integrating React and TypeScript is a specific development task within the frontend domain.
+
+Response time: 15.83s

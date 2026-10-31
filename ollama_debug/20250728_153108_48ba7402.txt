@@ -1,0 +1,37 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Serve as a subject matter expert"  
+B: "Extract, transform, and analyze data from multiple sources"
+
+
+=== RESPONSE ===
+Core A: Serve as a Subject Matter Expert (SME)
+Core B: Extract, Transform, Load (ETL) Data
+
+Functionally Equivalent: No
+Score: 0
+Reason: While both roles involve working with data, the primary tasks are different. An SME provides expertise and advice in a specific area, while ETL is a process of preparing and moving data from one system to another for reporting and analysis purposes. The two roles do not serve the same function or produce the same outcome.
+
+However, it's worth noting that an SME might be involved in data-related tasks such as providing input on data quality or requirements for data collection, but their primary role is different from ETL.
+
+Response time: 45.54s

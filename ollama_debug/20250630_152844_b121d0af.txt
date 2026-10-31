@@ -1,0 +1,101 @@
+=== PROMPT ===
+
+        [STRICT INSTRUCTIONS]
+        You are a senior HR data scientist. Evaluate similarity with PRECISION:
+
+        1. CORE VERB CLASSIFICATION (40% weight):
+           - Implementation: build, code, develop, implement, optimize
+           - Analysis: analyze, examine, investigate, study
+           - Management: coordinate, manage, oversee, lead
+           - Collaboration: collaborate, liaise, partner, interface
+           - Education: educate, train, mentor, coach
+
+        2. PRIMARY FOCUS (45% weight):
+           - Technical: data, systems, models, infrastructure
+           - Business: stakeholders, strategy, decisions, literacy
+           - Process: workflows, pipelines, projects
+           - People: teams, roles, mentorship
+
+        3. SUBDOMAIN ALIGNMENT (15% bonus):
+           - Must match: data engineering vs ML vs analytics vs management
+           - +15% only for exact subdomain match
+
+        [STRICT RULES]
+        - <70 if:
+          - Different verb classes OR 
+          - Different focus categories OR
+          - Different subdomains
+        - 70-79: Same domain but different verb classes
+        - 80-89: Same verb class + same focus category
+        - 90-100: Same verb class + same focus + same subdomain
+
+        [DOMAIN RULE]
+        Different domains ALWAYS ≤69. Subdomains:
+        - Data Engineering: ETL, pipelines, infrastructure
+        - Machine Learning: models, algorithms, ML
+        - Analytics: analysis, insights, reporting
+        - Management: coordination, leadership
+        - Education: training, literacy, mentoring
+
+        [EXAMPLES]
+        "Build data pipelines" vs "Optimize ETL": 95% (same: implement/tech/data-eng)
+        "Analyze datasets" vs "Coordinate teams": 65% (different: analysis vs management)
+        "Train junior staff" vs "Improve data literacy": 85% (same education focus)
+
+        [OUTPUT FORMAT]
+        First line: "Score: [0-100]"
+        Second line: "VerbClass: []; Focus: []; Subdomain: []"
+
+        [RESPONSIBILITIES]
+        1: "Collaborate with data partners"
+        2: "Collaborate with stakeholders on data science projects"
+        
+
+=== RESPONSE ===
+To evaluate the similarity between the two phrases, I'll break down each component and calculate the precision score.
+
+**CORE VERB CLASSIFICATION**
+
+* Phrase 1: "Collaborate with data partners"
+	+ Verb class: Collaboration
+* Phrase 2: "Collaborate with stakeholders on data science projects"
+	+ Verb class: Collaboration
+
+Both phrases have the same verb class, which is a good starting point.
+
+**PRIMARY FOCUS**
+
+* Phrase 1: "Collaborate with data partners"
+	+ Focus category: People (teams, roles)
+* Phrase 2: "Collaborate with stakeholders on data science projects"
+	+ Focus category: Business (stakeholders, strategy)
+
+The focus categories are different between the two phrases.
+
+**SUBDOMAIN ALIGNMENT**
+
+* Phrase 1: No exact subdomain match
+* Phrase 2: No exact subdomain match
+
+Neither phrase has an exact subdomain match.
+
+**PRECISION SCORE CALCULATION**
+
+Since there are differences in both verb class and focus category, as well as no subdomain alignment, the score will be below 70.
+
+Let's calculate the score:
+
+* Verb class similarity: 100% (same)
+* Focus category similarity: 0% (different)
+* Subdomain alignment: 0% (no match)
+
+Score = (Verb class similarity x 40%) + (Focus category similarity x 45%) + (Subdomain alignment x 15%)
+= (1 x 40%) + (0 x 45%) + (0 x 15%)
+= 40%
+
+**OUTPUT**
+
+Score: 40
+VerbClass: [Collaboration]; Focus: []; Subdomain: []
+
+Response time: 14.17s

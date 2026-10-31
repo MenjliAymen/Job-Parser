@@ -1,0 +1,39 @@
+=== PROMPT ===
+
+        You are a senior technical recruiter evaluating **functional similarity** between two job responsibilities.
+
+        ### STEP 1: Extract Core Actions
+        - For each responsibility, extract the primary [**verb + object**] that reflects the main technical task.
+        - Normalize synonyms (e.g., "clean data" → "preprocess data", "build dashboards" → "develop reports").
+
+        ### STEP 2: Compare Function
+        - Do the two tasks aim to achieve the **same outcome or purpose**?
+        - Are they within the **same technical domain**?
+
+        ### OUTPUT FORMAT (Respond ONLY in this format)
+        Core A: [verb + object]  
+        Core B: [verb + object]  
+        Functionally Equivalent: [Yes/No]  
+        Score: [0-100]  
+        Reason: [Brief technical explanation]
+
+        ### RESPONSIBILITIES
+        A: "Design Conversion to iOS App"  
+        Explanation A: ""  
+
+        B: "Integrate React and TypeScript"  
+        Explanation B: ""
+        
+
+=== RESPONSE ===
+Core A: Design Conversion to iOS App
+Explanation A: This task involves designing the conversion of an existing application from a different platform (not specified) to the iOS platform.
+
+Core B: Integrate React and TypeScript
+Explanation B: This task involves integrating the JavaScript library React with TypeScript, a typed superset of JavaScript, for developing user interfaces.
+
+Functionally Equivalent: No
+Score: 0
+Reason: Designing an iOS app (Core A) is not functionally equivalent to integrating React and TypeScript (Core B). While both tasks involve software development, they are in different technical domains with distinct objectives. The former focuses on mobile application development for a specific platform, while the latter concerns front-end web development using specific technologies.
+
+Response time: 25.09s

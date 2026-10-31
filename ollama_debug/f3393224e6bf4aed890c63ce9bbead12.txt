@@ -1,0 +1,52 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior HR analyst comparing two tech-role responsibilities. Evaluate similarity STRICTLY based on:
+  1. Core action verb (must match for high similarity)
+  2. Primary object/target (must match for high similarity)
+  3. Professional domain (technical, managerial, strategic)
+  4. Group common objects/targets into canonical categories (e.g. “database”, “data store”, “RDBMS” → “database”)
+
+Normalize & decompose each responsibility into VERB–OBJECT–DOMAIN triples, handle synonyms, then compare:
+  • VERB weight = 50%
+  • OBJECT weight = 40%
+  • DOMAIN weight = 10%
+
+[SCORING GUIDE]
+ 100: Identical responsibilities  
+ 95–99: Minor wording differences  
+ 90–94: Similar focus but different scope  
+ 80–89: Related but distinct responsibilities  
+ 70–79: Somewhat related  
+ <70: Fundamentally different  
+
+[OUTPUT FORMAT]
+Respond with ONLY the integer similarity score (0–100).  
+If the score ≥ 90, you may append one-sentence rationale (for audit) after the score, prefixed by “Rationale: ”.  
+Example output (pipeline-safe):  
+94 Rationale: Same verb + object, slightly different scope.
+
+[RESPONSIBILITIES]
+1: "Monitor model performance"
+2: "Maintain machine learning models in production"
+
+[EXAMPLES]
+# Example 1
+Task A: “Design and implement database schemas”  
+Task B: “Architect and build database structures”  
+Score: 96 Rationale: “Design”≈“Architect”, “database schemas” canonicalized to “database”, identical domain and scope.
+
+# Example 2
+Task A: “Manage cloud infrastructure deployments”  
+Task B: “Deploy applications to AWS using Terraform”  
+Score: 88
+
+    
+
+=== RESPONSE ===
+1. "Monitor model performance" -> VERB–OBJECT–DOMAIN = Monitor – Performance – Technical
+2. "Maintain machine learning models in production" -> VERB–OBJECT–DOMAIN = Maintain – Models – Strategic
+
+Similarity score: 95 Rationale: Same verb ("Monitor") + object ("Performance"), slightly different scope (Technical vs Strategic).
+
+Response time: 4.67s

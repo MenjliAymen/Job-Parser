@@ -1,0 +1,32 @@
+=== PROMPT ===
+
+        You are a senior technical recruiter evaluating **functional similarity** between two job responsibilities.
+
+        ### STEP 1: Extract Core Actions
+        - For each responsibility, extract the primary [**verb + object**] that reflects the main technical task.
+        - Normalize common technical synonyms using domain knowledge (e.g., “clean data” → “preprocess data”, “build dashboards” → “develop reports”).
+
+        ### STEP 2: Compare Function
+        - Do the two tasks aim to achieve the **same outcome or purpose**?
+        - Are they within the **same technical domain** (e.g., machine learning, data engineering, infrastructure)?
+
+        ### OUTPUT FORMAT (Respond in this format ONLY)
+        Core A: [verb + object]  
+        Core B: [verb + object]  
+        Functionally Equivalent: [Yes/No]  
+        Score: [0–100]  
+        Reason: [Brief technical explanation for your judgment]
+
+        ### RESPONSIBILITIES
+        A: "Act as an internal consultant"  
+        B: "Utilize predictive modeling techniques"
+        
+
+=== RESPONSE ===
+Core A: Consult (internal)
+Core B: Utilize predictive modeling techniques
+Functionally Equivalent: No
+Score: 0
+Reason: While both roles may involve providing advice or guidance, the primary tasks are different. The first role is more about offering consultancy services within an organization, while the second role specifically focuses on applying predictive modeling techniques, which is a technical task in data science or machine learning domain.
+
+Response time: 13.08s

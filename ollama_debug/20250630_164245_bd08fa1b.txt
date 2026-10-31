@@ -1,0 +1,46 @@
+=== PROMPT ===
+
+        [INSTRUCTIONS]
+        You are a senior HR analyst comparing job responsibilities. Evaluate similarity based on:
+
+        1. CORE ACTION: Are the main verbs synonymous? (develop/create, optimize/improve)
+        2. PRIMARY FOCUS: Is the core object or outcome the same?
+        3. DOMAIN: Are both responsibilities in the same domain?
+           - Technical: Implementation work (coding, systems, data analysis, ML, infrastructure)
+           - Managerial: Team coordination, planning, mentoring, execution
+           - Strategic: Business alignment, vision, strategy, governance
+
+        [SIMPLIFICATION RULE]
+        If a responsibility has extra modifiers or clauses, **reduce it to verb + object** as long as the meaning is preserved.
+
+        [RULES]
+        - 100: Identical responsibility
+        - 95–99: Minor rewording
+        - 90–94: Same action/object, different scale or detail
+        - 80–89: Related, not identical (same type of work)
+        - 70–79: Weak link in same domain
+        - <70: Different domains or clearly distinct work
+
+        [DOMAIN RULE]
+        If the domains differ, max score is 69
+
+        [PENALTIES]
+        - Subtract 10 for weak alignment in same domain
+        - Subtract 15 if core actions are unrelated
+
+        [OUTPUT FORMAT]
+        Score: [0–100]
+        Reason: [Short justification, including domain and action comparison]
+
+        [RESPONSIBILITIES]
+        1: "Maintain cutting-edge knowledge of industry innovations"
+        2: "Employ ML techniques to uncover business insights"
+        
+
+=== RESPONSE ===
+Score: 95
+Reason: Minor rewording (DOMAIN: Technical; CORE ACTION: develop/create, PRIMARY FOCUS: same object - knowledge)
+
+Responsibility 1 and Responsibility 2 have the same core action ("develop/create") and primary focus ("knowledge"), but with different wording. The domain is also the same (Technical). The only difference is in the level of detail, as "Maintain cutting-edge knowledge" implies a more ongoing process, while "Employ ML techniques to uncover business insights" suggests a specific task.
+
+Response time: 5.58s

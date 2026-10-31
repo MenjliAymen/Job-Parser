@@ -1,0 +1,99 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior HR analyst comparing two technology-role responsibilities. Evaluate similarity STRICTLY based on:
+
+1. CORE ACTION VERB (40% weight)
+   - Score 0-100 based on similarity
+   - Synonyms: develop/create, optimize/improve, maintain/support
+
+2. PRIMARY OBJECT (45% weight)
+   - Score 0-100 based on similarity
+   - Apply canonicalization rules below
+
+3. DOMAIN MATCH (15% bonus)
+   - +15 if same domain (Technical, Managerial, Strategic)
+   - +0 if different domains
+
+[STRICT CANONICALIZATION RULES]
+Apply these mappings before scoring:
+- "CI/CD" ≡ "continuous integration" ≡ "continuous deployment"
+- "container" ≡ "Docker" ≡ "Kubernetes pod" ≡ "containerized application"
+- "ML" ≡ "machine learning" ≡ "AI model" ≡ "neural network"
+- "API" ≡ "application programming interface" ≡ "endpoints"
+- "DB" ≡ "database" ≡ "data store" ≡ "data warehouse"
+- "log" ≡ "log file" ≡ "audit trail"
+- "roadmap" ≡ "plan" ≡ "strategy"
+- "metric" ≡ "KPI" ≡ "measurement"
+
+[DOMAIN CLASSIFICATION]
+- Technical: Implementation (code, systems, infrastructure)
+- Managerial: Teams, processes, projects
+- Strategic: Planning, vision, governance
+
+[SCORING FORMULA]
+Final Score = (Verb_Score × 0.4) + (Object_Score × 0.45) + Domain_Bonus
+
+[DOMAIN MISMATCH RULE]
+If domains differ, maximum possible score is 69
+
+[OUTPUT FORMAT]
+1. First line: Final similarity score: [0-100]
+2. Brief rationale (1 sentence)
+
+[EXAMPLE]
+Final similarity score: 87
+Verb synonyms, objects canonicalized to same concept
+
+[RESPONSIBILITIES]
+1: "Manage cloud infrastructure"
+2: "Administer AWS resources"
+
+
+=== RESPONSE ===
+To evaluate the similarity between the two technology-role responsibilities, I'll apply the provided instructions.
+
+**Canonicalization**
+
+1. "Manage cloud infrastructure" ≡ "infrastructure management"
+2. "Administer AWS resources" ≡ "AWS resource administration"
+
+**Core Action Verb (40% weight)**
+
+The core action verbs are "manage", "administer". Since they are synonyms, I'll score them as 100.
+
+**Primary Object (45% weight)**
+
+Using the canonicalization rules:
+
+1. "infrastructure management" ≡ "infrastructure"
+2. "AWS resource administration" ≡ "resources"
+
+I'll apply the domain classification rules to determine the primary object's domain:
+- Infrastructure is classified under Technical.
+- Resources are classified under Managerial.
+
+Since the domains differ, I'll use the Domain Mismatch Rule and calculate the score as follows:
+
+Primary Object Score = (100 × 0.45) - (Technical weight × 0.55)
+= 45 - (0.55 × 0.45)
+= 45 - 0.2475
+≈ 44.75
+
+**Domain Bonus (15% bonus)**
+
+Since the domains differ, I'll apply the Domain Mismatch Rule and add a bonus:
+Domain Bonus = +69 (maximum possible score)
+
+**Final Score**
+
+Verb Score × 0.4 + Primary Object Score × 0.45 + Domain Bonus
+= 100 × 0.4 + 44.75 × 0.45 + 69
+= 40 + 20.13 + 69
+≈ 129.13
+
+However, since the maximum possible score is 100 (Domain Mismatch Rule), I'll cap it at 100.
+
+Final similarity score: 100
+
+Response time: 18.38s

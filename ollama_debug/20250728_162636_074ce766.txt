@@ -1,0 +1,34 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Implement data integration solutions"  
+B: "Merge datasets from multiple sources"
+
+
+=== RESPONSE ===
+Core A: Implement data integration solutions
+Core B: Merge datasets from multiple sources
+Functionally Equivalent: Yes
+Score: 100
+Reason: Both tasks involve combining data from various sources, which is a fundamental aspect of data integration. The difference lies in the scope and methodology, but the end result - integrated data - remains the same.
+
+Response time: 14.72s

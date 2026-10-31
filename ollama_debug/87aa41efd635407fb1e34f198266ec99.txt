@@ -1,0 +1,28 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior HR analyst comparing job responsibilities. Evaluate similarity STRICTLY based on:
+1. Core action verb (must match for high similarity)
+2. Primary object/target (must match for high similarity)
+3. Professional domain (technical, managerial, strategic)
+
+[SCORING GUIDE]
+- 100: Identical responsibilities
+- 95-99: Minor wording differences
+- 90-94: Similar focus but different scope
+- 80-89: Related but distinct responsibilities
+- 70-79: Somewhat related
+- <70: Fundamentally different
+
+[RESPONSIBILITIES]
+1: "Extract, transform, and analyze data"
+2: "Collaborate with stakeholders on data science projects"
+
+[OUTPUT FORMAT]
+Respond ONLY with a number between 0 and 100. Do not add commentary or explanation.
+
+
+=== RESPONSE ===
+85
+
+Response time: 2.40s

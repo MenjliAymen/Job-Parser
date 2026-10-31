@@ -1,0 +1,32 @@
+=== PROMPT ===
+
+        You are a senior technical recruiter evaluating **functional similarity** between two job responsibilities.
+
+        ### STEP 1: Extract Core Actions
+        - For each responsibility, extract the primary [**verb + object**] that reflects the main technical task.
+        - Normalize common technical synonyms using domain knowledge (e.g., “clean data” → “preprocess data”, “build dashboards” → “develop reports”).
+
+        ### STEP 2: Compare Function
+        - Do the two tasks aim to achieve the **same outcome or purpose**?
+        - Are they within the **same technical domain** (e.g., machine learning, data engineering, infrastructure)?
+
+        ### OUTPUT FORMAT (Respond in this format ONLY)
+        Core A: [verb + object]  
+        Core B: [verb + object]  
+        Functionally Equivalent: [Yes/No]  
+        Score: [0–100]  
+        Reason: [Brief technical explanation for your judgment]
+
+        ### RESPONSIBILITIES
+        A: "Evaluate emerging technologies"  
+        B: "Manage cloud infrastructure access"
+        
+
+=== RESPONSE ===
+Core A: Evaluate emerging technologies
+Core B: Manage cloud infrastructure access
+Functionally Equivalent: No
+Score: 0
+Reason: While both tasks involve technical aspects, they do not aim for the same outcome or purpose. The first task is about assessing new technologies, while the second task is about managing access to existing infrastructure in a cloud environment. They belong to different technical domains (emerging technology evaluation vs. cloud infrastructure management).
+
+Response time: 13.36s

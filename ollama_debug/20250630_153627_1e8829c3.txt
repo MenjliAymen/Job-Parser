@@ -1,0 +1,115 @@
+=== PROMPT ===
+
+        [STRICT INSTRUCTIONS]
+        You are a senior HR data scientist. Evaluate similarity with PRECISION:
+
+        1. CORE VERB CLASSIFICATION (40% weight):
+           - Implementation: build, code, develop, implement, optimize
+           - Analysis: analyze, examine, investigate, study
+           - Management: coordinate, manage, oversee, lead
+           - Collaboration: collaborate, liaise, partner, interface
+           - Education: educate, train, mentor, coach
+
+        2. PRIMARY FOCUS (45% weight):
+           - Technical: data, systems, models, infrastructure
+           - Business: stakeholders, strategy, decisions, literacy
+           - Process: workflows, pipelines, projects
+           - People: teams, roles, mentorship
+
+        3. SUBDOMAIN ALIGNMENT (15% bonus):
+           - Must match: data engineering vs ML vs analytics vs management
+           - +15% only for exact subdomain match
+
+        [STRICT RULES]
+        - <70 if:
+          - Different verb classes OR 
+          - Different focus categories OR
+          - Different subdomains
+        - 70-79: Same domain but different verb classes
+        - 80-89: Same verb class + same focus category
+        - 90-100: Same verb class + same focus + same subdomain
+
+        [DOMAIN RULE]
+        Different domains ALWAYS ≤69. Subdomains:
+        - Data Engineering: ETL, pipelines, infrastructure
+        - Machine Learning: models, algorithms, ML
+        - Analytics: analysis, insights, reporting
+        - Management: coordination, leadership
+        - Education: training, literacy, mentoring
+
+        [EXAMPLES]
+        "Build data pipelines" vs "Optimize ETL": 95% (same: implement/tech/data-eng)
+        "Analyze datasets" vs "Coordinate teams": 65% (different: analysis vs management)
+        "Train junior staff" vs "Improve data literacy": 85% (same education focus)
+
+        [OUTPUT FORMAT]
+        First line: "Score: [0-100]"
+        Second line: "VerbClass: []; Focus: []; Subdomain: []"
+
+        [RESPONSIBILITIES]
+        1: "Collaborate with stakeholders on data science projects"
+        2: "Manage projects and provide mentorship"
+        
+
+=== RESPONSE ===
+To evaluate the similarity between the two responsibilities, I'll apply the provided rules.
+
+**Responsibility 1:** "Collaborate with stakeholders on data science projects"
+
+* CORE VERB CLASSIFICATION:
+	+ Implementation: None
+	+ Analysis: None
+	+ Management: None
+	+ Collaboration: Collaborate ( exact match)
+	+ Education: None
+
+* PRIMARY FOCUS:
+	+ Technical: Data Science (exact match)
+	+ Business: Stakeholders (exact match)
+	+ Process: Projects (exact match)
+	+ People: Teams (exact match)
+
+* SUBDOMAIN ALIGNMENT:
+	+ Must match: Data Science vs Collaboration vs Management (not exact subdomain, but close to Collaboration)
+
+**Responsibility 2:** "Manage projects and provide mentorship"
+
+* CORE VERB CLASSIFICATION:
+	+ Implementation: None
+	+ Analysis: None
+	+ Management: Manage (exact match)
+	+ Collaboration: None
+	+ Education: Mentor (exact match)
+
+* PRIMARY FOCUS:
+	+ Technical: None
+	+ Business: Projects (exact match)
+	+ Process: None
+	+ People: Teams (exact match), Mentorship (exact focus category)
+
+* SUBDOMAIN ALIGNMENT:
+	+ Must match: Management vs Collaboration vs Education (not exact subdomain, but close to Management and Collaboration)
+
+**Similarity Evaluation**
+
+* CORE VERB CLASSIFICATION: Same (Collaborate/Manage)
+* PRIMARY FOCUS: Similar (Data Science/Projects), different focus categories (Business vs Process)
+* SUBDOMAIN ALIGNMENT: Not exact match
+
+**Score Calculation**
+
+Since there's a difference in the primary focus category, I'll calculate the score based on the CORE VERB CLASSIFICATION and SUBDOMAIN ALIGNMENT.
+
+* CORE VERB CLASSIFICATION: 100% (same verb classes: Collaborate/Manage)
+* SUBDOMAIN ALIGNMENT: -15% (not exact subdomain match)
+
+**Final Score:** 85%
+
+**Output Format**
+
+Score: 85
+VerbClass: [Collaborate, Manage]
+Focus: [Data Science, Projects]
+Subdomain: []
+
+Response time: 17.85s

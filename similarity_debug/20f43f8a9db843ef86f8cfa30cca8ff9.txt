@@ -1,0 +1,19 @@
+Task1: Process big data
+Task2: Collaborate with stakeholders
+Response: Based on the provided responsibilities:
+
+1. "Process big data"
+2. "Collaborate with stakeholders"
+
+**Core action verb comparison:**
+The core action verbs are different. "Process" implies a technical or analytical task, while "Collaborate" suggests a social or interpersonal interaction.
+
+**Primary object/target comparison:**
+The primary objects are also different. "Big data" is a specific type of data, while "stakeholders" refers to individuals or groups with an interest in the organization.
+
+**Domain alignment assessment:**
+Both responsibilities seem to be related to organizational operations, but they belong to different domains. "Process big data" falls under technical or analytical tasks, whereas "Collaborate with stakeholders" is more focused on interpersonal relationships and communication.
+
+**Score:** 30
+
+The score is below 70 because the core action verbs, primary objects, and domains are not similar. While both responsibilities might be found in an organizational setting, they have distinct characteristics that set them apart from each other.

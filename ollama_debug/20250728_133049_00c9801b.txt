@@ -1,0 +1,37 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Build data ingestion systems"  
+B: "Merge datasets from multiple sources"
+
+
+=== RESPONSE ===
+Here's the evaluation:
+
+Core A: Build  
+Core B: Merge  
+
+Functionally Equivalent: No  
+Score: 20  
+Reason: While both tasks involve working with data, they have different primary objectives. Building a data ingestion system involves designing and implementing a system to collect, transform, and load data into a target location, whereas merging datasets from multiple sources focuses on combining existing data sets. They are not directly equivalent in terms of outcome or function.
+
+Response time: 5.25s

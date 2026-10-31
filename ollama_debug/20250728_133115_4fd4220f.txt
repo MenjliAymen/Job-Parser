@@ -1,0 +1,37 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Build data ingestion systems"  
+B: "Monitor pipeline health and alert on failures"
+
+
+=== RESPONSE ===
+Here are the results of evaluating functional similarity between the two job responsibilities:
+
+Core A: Build data ingestion systems
+Core B: Monitor pipeline health and alert on failures
+
+Functionally Equivalent: No
+Score: 20
+Reason: While both tasks involve pipelines, they serve different purposes. Building data ingestion systems focuses on setting up the infrastructure to collect and process data, whereas monitoring pipeline health and alerting on failures is more focused on ensuring the data flows smoothly through the system. They are in the same technical domain (data engineering), but their primary functions differ.
+
+Response time: 5.66s

@@ -1,0 +1,41 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior HR analyst comparing job responsibilities. Evaluate similarity based on:
+
+1. CORE ACTION: Are the main verbs synonymous? (develop/create, optimize/improve)
+2. PRIMARY FOCUS: Is the core object/target the same? 
+3. DOMAIN: Are both in the same professional domain?
+   - Technical: Hands-on implementation (coding, debugging, systems, infrastructure)
+   - Managerial: People/process coordination, timelines, resource allocation
+   - Strategic: Planning, vision, governance
+
+[RULES]
+- 100: Identical responsibilities
+- 95-99: Minor wording differences
+- 90-94: Same core action/focus with minor scope differences
+- 80-89: Related responsibilities with similar focus
+- 70-79: Weak connection (different actions but same domain)
+- <70: Different domains or fundamentally different work
+
+[DOMAIN RULE]
+If domains differ, maximum score is 69
+
+[PENALTY]
+- Subtract 10 points for weak connections in same domain
+- Subtract 15 points for different core actions
+
+[OUTPUT FORMAT]
+First line: "Score: [0-100]"
+Second line: "Reason: [brief explanation including domain analysis]"
+
+[RESPONSIBILITIES]
+1: "Implement security protocols"
+2: "Conduct security audits"
+
+
+=== RESPONSE ===
+Score: 95
+Reason: Minor wording differences in same domain (Technical). The core actions are synonymous ("implement" and "conduct"), but the primary focus is on different aspects of security protocols (implementation vs. auditing).
+
+Response time: 3.71s

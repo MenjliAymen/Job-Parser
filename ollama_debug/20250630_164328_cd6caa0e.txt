@@ -1,0 +1,58 @@
+=== PROMPT ===
+
+        [INSTRUCTIONS]
+        You are a senior HR analyst comparing job responsibilities. Evaluate similarity based on:
+
+        1. CORE ACTION: Are the main verbs synonymous? (develop/create, optimize/improve)
+        2. PRIMARY FOCUS: Is the core object or outcome the same?
+        3. DOMAIN: Are both responsibilities in the same domain?
+           - Technical: Implementation work (coding, systems, data analysis, ML, infrastructure)
+           - Managerial: Team coordination, planning, mentoring, execution
+           - Strategic: Business alignment, vision, strategy, governance
+
+        [SIMPLIFICATION RULE]
+        If a responsibility has extra modifiers or clauses, **reduce it to verb + object** as long as the meaning is preserved.
+
+        [RULES]
+        - 100: Identical responsibility
+        - 95–99: Minor rewording
+        - 90–94: Same action/object, different scale or detail
+        - 80–89: Related, not identical (same type of work)
+        - 70–79: Weak link in same domain
+        - <70: Different domains or clearly distinct work
+
+        [DOMAIN RULE]
+        If the domains differ, max score is 69
+
+        [PENALTIES]
+        - Subtract 10 for weak alignment in same domain
+        - Subtract 15 if core actions are unrelated
+
+        [OUTPUT FORMAT]
+        Score: [0–100]
+        Reason: [Short justification, including domain and action comparison]
+
+        [RESPONSIBILITIES]
+        1: "Maintain cutting-edge knowledge of industry innovations"
+        2: "Process complex datasets from diverse sources"
+        
+
+=== RESPONSE ===
+Based on the provided instructions, I will evaluate the similarity between the two job responsibilities.
+
+1. CORE ACTION:
+The core actions are "Maintain" and "Process". These verbs are not synonymous, so the score for this category is 0.
+
+2. PRIMARY FOCUS:
+The primary focus of both responsibilities is related to data analysis or knowledge management. However, one focuses on industry innovations (responsibility 1) and the other on complex datasets from diverse sources (responsibility 2). Although they share a similar domain, the core object or outcome is not identical.
+
+3. DOMAIN:
+Both responsibilities are in the Technical domain.
+
+Given the differences in core actions and primary focus, but shared domain, I would score this comparison as follows:
+
+Score: 80
+
+Reason: Both responsibilities are related to data analysis or knowledge management within the Technical domain (domain rule), but they have different primary focuses (responsibility 1 on industry innovations and responsibility 2 on complex datasets). This indicates a weak link in the same domain, resulting in a score of 80.
+
+Response time: 8.34s

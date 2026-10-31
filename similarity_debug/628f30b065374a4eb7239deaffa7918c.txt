@@ -1,0 +1,18 @@
+Task1: Extract, transform, and analyze data
+Task2: Stay current with industry best practices
+Response: Based on the provided responsibilities:
+
+1. "Extract, transform, and analyze data"
+2. "Stay current with industry best practices"
+
+**Core action verb comparison:**
+The core action verbs are different. The first responsibility involves analyzing data, while the second responsibility focuses on staying current.
+
+**Primary object/target comparison:**
+The primary objects/targets are also different. The first responsibility targets data, while the second responsibility targets industry best practices.
+
+**Domain alignment comparison:**
+Both responsibilities fall under the technical domain, as they both involve working with data and industry knowledge.
+
+**Final score (0-100):**
+Based on the analysis, I would give a score of 20. The core action verbs are different, and the primary objects/targets are also distinct. Although both responsibilities share some overlap in terms of domain alignment, the differences in core action verb and primary object/target make them fundamentally different.

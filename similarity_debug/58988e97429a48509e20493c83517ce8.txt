@@ -1,0 +1,34 @@
+Task1: Evangelize data literacy
+Task2: Extract, transform, and analyze large datasets
+Response: Based on the provided responsibilities:
+
+1. "Evangelize data literacy"
+2. "Extract, transform, and analyze large datasets"
+
+**Core action verb comparison:**
+The core action verbs are different:
+- "Evangelize" implies promoting or spreading a message (in this case, data literacy).
+- "Extract, transform, and analyze" involves processing and interpreting data.
+
+Score: 30
+
+**Primary object/target comparison:**
+The primary objects are also different:
+- The first responsibility targets "data literacy", which is an abstract concept.
+- The second responsibility targets "large datasets", which are concrete data entities.
+
+Score: 30
+
+**Professional domain assessment:**
+Both responsibilities fall within the technical domain, as they both involve working with data.
+
+Score: 100 (same domain)
+
+**Final score calculation:**
+Since the core action verb and primary object/target are different, but the domains align, the final score is a combination of these factors. However, given that the domains match, I will prioritize this aspect.
+
+The lowest score (30) for both core action verbs and primary objects suggests that these responsibilities have distinct focuses. Considering the alignment in professional domain, I will adjust the scores to reflect a higher similarity.
+
+**Final score:** 80
+
+This score indicates that while the responsibilities share some similarities in terms of working with data, they have different focuses and approaches.

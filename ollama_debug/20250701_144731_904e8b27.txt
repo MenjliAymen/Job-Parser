@@ -1,0 +1,39 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Validate data quality"  
+B: "Develop ETL pipelines"
+
+
+=== RESPONSE ===
+Here are the results of evaluating functional similarity between the two job responsibilities:
+
+Core A: Validate data quality
+Core B: Develop ETL pipelines
+
+Functionally Equivalent: No
+Score: 20
+Reason: While both tasks involve working with data, they have different primary objectives. Validating data quality focuses on ensuring accuracy and consistency, whereas developing ETL pipelines involves designing and implementing data processing workflows to extract, transform, and load data into various systems. They serve different functions within the data management process.
+
+Note that while there might be some overlap in terms of technical skills required (e.g., data analysis, programming), the core tasks themselves are distinct.
+
+Response time: 5.85s

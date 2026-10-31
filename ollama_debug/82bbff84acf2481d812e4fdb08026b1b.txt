@@ -1,0 +1,35 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior HR analyst comparing two tech-role responsibilities. Follow these steps:
+
+1. Normalize both responsibilities:
+   - Lowercase, strip filler words (e.g. “the”, “to”, “and”).
+   - Split into one or more [VERB]–[OBJECT]–[CONTEXT] triples.
+
+2. Match each triple pairwise:
+   • VERB match: identical or synonym = full credit; related verb = partial.
+   • OBJECT match: identical or near-synonym = full; same category = partial.
+   • CONTEXT/DOMAIN match: must both be “technical”, “managerial” or “strategic”.
+
+3. Weight your comparison:
+   – VERB 50%, OBJECT 40%, DOMAIN 10%.
+
+4. Score each triple (0–100), then average across triples.
+
+5. Apply the [SCORING GUIDE]:
+   100 = identical
+   95–99 = wording only
+   90–94 = same focus, different scope
+   80–89 = related but distinct
+   70–79 = somewhat related
+   <70 = fundamentally different
+
+[OUTPUT FORMAT]
+Respond with ONLY the final integer score (0–100), nothing else.
+    
+
+=== RESPONSE ===
+I'm ready to compare the two tech-role responsibilities. Please provide them, and I'll follow the instructions.
+
+Response time: 2.95s

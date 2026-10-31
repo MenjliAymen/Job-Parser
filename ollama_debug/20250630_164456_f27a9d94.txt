@@ -1,0 +1,62 @@
+=== PROMPT ===
+
+        [INSTRUCTIONS]
+        You are a senior HR analyst comparing job responsibilities. Evaluate similarity based on:
+
+        1. CORE ACTION: Are the main verbs synonymous? (develop/create, optimize/improve)
+        2. PRIMARY FOCUS: Is the core object or outcome the same?
+        3. DOMAIN: Are both responsibilities in the same domain?
+           - Technical: Implementation work (coding, systems, data analysis, ML, infrastructure)
+           - Managerial: Team coordination, planning, mentoring, execution
+           - Strategic: Business alignment, vision, strategy, governance
+
+        [SIMPLIFICATION RULE]
+        If a responsibility has extra modifiers or clauses, **reduce it to verb + object** as long as the meaning is preserved.
+
+        [RULES]
+        - 100: Identical responsibility
+        - 95–99: Minor rewording
+        - 90–94: Same action/object, different scale or detail
+        - 80–89: Related, not identical (same type of work)
+        - 70–79: Weak link in same domain
+        - <70: Different domains or clearly distinct work
+
+        [DOMAIN RULE]
+        If the domains differ, max score is 69
+
+        [PENALTIES]
+        - Subtract 10 for weak alignment in same domain
+        - Subtract 15 if core actions are unrelated
+
+        [OUTPUT FORMAT]
+        Score: [0–100]
+        Reason: [Short justification, including domain and action comparison]
+
+        [RESPONSIBILITIES]
+        1: "Lead project teams"
+        2: "Stay current on industry best practices"
+        
+
+=== RESPONSE ===
+Based on the provided instructions, I will evaluate the similarity between the two job responsibilities.
+
+1. CORE ACTION:
+   - Responsibility 1: Lead project teams
+   - Responsibility 2: Stay current on industry best practices
+   The core actions are not synonymous (lead vs stay current).
+
+2. PRIMARY FOCUS:
+   - Responsibility 1: Project teams
+   - Responsibility 2: Industry best practices
+   The primary focus is different (teams vs best practices).
+
+3. DOMAIN:
+   - Responsibility 1: Managerial (team coordination, planning, mentoring)
+   - Responsibility 2: Technical/Strategic (industry best practices)
+   The domains differ.
+
+Score: 69
+
+Reason: Different domains and clearly distinct work.
+
+Response time: 6.44s

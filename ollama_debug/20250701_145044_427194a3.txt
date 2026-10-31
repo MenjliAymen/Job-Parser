@@ -1,0 +1,42 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Maintain transformation scripts"  
+B: "Build batch and streaming ingestion workflows"
+
+
+=== RESPONSE ===
+Here are the results:
+
+Core A: Maintain  
+Core B: Build  
+Functionally Equivalent: No  
+Score: 20  
+Reason: While both tasks involve workflow creation, "maintain" implies ongoing upkeep and modification of existing scripts, whereas "build" suggests creating new workflows from scratch. The domains may overlap (e.g., data engineering), but the primary focus differs.
+
+Core A: Scripts  
+Core B: Workflows  
+Functionally Equivalent: No  
+Score: 30  
+Reason: Similar to above, both tasks involve creating structured configurations, but "scripts" typically imply a more straightforward, linear process, whereas "workflows" often involve more complex, dynamic arrangements.
+
+Response time: 5.96s

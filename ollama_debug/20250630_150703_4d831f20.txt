@@ -1,0 +1,94 @@
+=== PROMPT ===
+
+        [STRICT INSTRUCTIONS]
+        You are a senior HR data scientist. Evaluate similarity with PRECISION:
+
+        1. CORE VERB CLASSIFICATION (40% weight):
+           - Implementation: build, code, develop, implement, optimize
+           - Analysis: analyze, examine, investigate, study
+           - Management: coordinate, manage, oversee, lead
+           - Collaboration: collaborate, liaise, partner, interface
+           - Education: educate, train, mentor, coach
+
+        2. PRIMARY FOCUS (45% weight):
+           - Technical: data, systems, models, infrastructure
+           - Business: stakeholders, strategy, decisions, literacy
+           - Process: workflows, pipelines, projects
+           - People: teams, roles, mentorship
+
+        3. SUBDOMAIN ALIGNMENT (15% bonus):
+           - Must match: data engineering vs ML vs analytics vs management
+           - +15% only for exact subdomain match
+
+        [STRICT RULES]
+        - <70 if:
+          - Different verb classes OR 
+          - Different focus categories OR
+          - Different subdomains
+        - 70-79: Same domain but different verb classes
+        - 80-89: Same verb class + same focus category
+        - 90-100: Same verb class + same focus + same subdomain
+
+        [DOMAIN RULE]
+        Different domains ALWAYS ≤69. Subdomains:
+        - Data Engineering: ETL, pipelines, infrastructure
+        - Machine Learning: models, algorithms, ML
+        - Analytics: analysis, insights, reporting
+        - Management: coordination, leadership
+        - Education: training, literacy, mentoring
+
+        [EXAMPLES]
+        "Build data pipelines" vs "Optimize ETL": 95% (same: implement/tech/data-eng)
+        "Analyze datasets" vs "Coordinate teams": 65% (different: analysis vs management)
+        "Train junior staff" vs "Improve data literacy": 85% (same education focus)
+
+        [OUTPUT FORMAT]
+        First line: "Score: [0-100]"
+        Second line: "VerbClass: []; Focus: []; Subdomain: []"
+
+        [RESPONSIBILITIES]
+        1: "Define product vision"
+        2: "Establish company strategy"
+        
+
+=== RESPONSE ===
+To evaluate the similarity between the two statements, I'll apply the given weights and rules.
+
+**CORE VERB CLASSIFICATION**
+
+The verbs in both statements are:
+- Implement
+- Data (implied by "data pipelines" and "ETL")
+
+Since there's only one verb class ("Implement") and it doesn't match any of the provided classes, I'll assign a score of 0 for this category.
+
+**PRIMARY FOCUS**
+
+The focus categories are:
+- Technical: data pipelines, ETL
+- Business: strategy, decisions
+
+Both statements seem to be related to business strategy, but with different focuses. However, since "data pipelines" and "ETL" can be considered part of the technical aspect, I'll assign a score of 70 for this category.
+
+**SUBDOMAIN ALIGNMENT**
+
+The subdomains are:
+- Data Engineering: ETL, pipelines, infrastructure
+- Management: coordination, leadership
+
+There's no exact match between the two statements. However, "Implement" can be related to data engineering (as in implementing data pipelines), and "strategy" is a broad term that could fit into management or business strategy.
+
+Since there's no exact subdomain match, I'll assign a score of 0 for this category.
+
+**FINAL SCORE**
+
+Based on the calculations:
+- CORE VERB CLASSIFICATION: 0
+- PRIMARY FOCUS: 70
+- SUBDOMAIN ALIGNMENT: 0
+
+The final score is: **70**
+
+VerbClass: []; Focus: [Business]; Subdomain: []
+
+Response time: 11.76s

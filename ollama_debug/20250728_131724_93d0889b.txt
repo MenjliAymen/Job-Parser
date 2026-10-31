@@ -1,0 +1,37 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Improve data literacy across the organization"  
+B: "Execute data preprocessing"
+
+
+=== RESPONSE ===
+Here's my evaluation:
+
+Core A: Improve data literacy  
+Core B: Execute data preprocessing  
+
+Functionally Equivalent: No  
+Score: 20  
+Reason: While both tasks involve working with data, they have different goals. Improving data literacy aims to increase understanding and usage of data across the organization, whereas executing data preprocessing focuses on preparing data for analysis or other purposes. They are not directly equivalent in terms of outcome or function.
+
+Response time: 4.70s

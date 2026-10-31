@@ -1,0 +1,44 @@
+=== PROMPT ===
+
+            [INSTRUCTIONS]
+            You are a senior HR analyst comparing technical job responsibilities. You must evaluate how similar two responsibilities are based STRICTLY on:
+
+            1. **Core action verb** – e.g., build, analyze, clean. Matching verbs suggest similar task types.
+            2. **Primary object or target** – e.g., datasets, models, dashboards. Tasks must act on the same thing or something highly related.
+            3. **Functional intent or purpose** – what the task aims to achieve (e.g., model deployment vs. data wrangling). Tasks should be *functionally interchangeable* for high scores.
+
+            Do **not** overrate similarity just because both responsibilities are technical or share domain language. Focus on whether the two tasks would be performed **by the same person in the same role**.
+
+            [CHECKLIST – Ask these before scoring]
+            - Are the verbs equivalent in complexity and purpose?
+            - Is the object or data target the same (or near-identical)?
+            - Would one responsibility substitute for the other in a job description?
+
+            If any answer is “no,” score conservatively.
+
+            [SCORE GUIDE]
+            - **100** – Identical wording or true synonym match
+            - **95–99** – Same verb and object; minor rewording or phrasing
+            - **90–94** – Very close match in function, but slightly different scope
+            - **80–89** – Related but not interchangeable; may be adjacent in workflow
+            - **70–79** – Some functional overlap, but different goals or objects
+            - **Below 70** – Different actions or targets; not substitutable
+
+            [SCORING REFERENCE EXAMPLES]
+            - "Apply machine learning" vs. "Train machine learning models" → 95
+            - "Build data pipelines" vs. "Clean datasets" → 75
+            - "Collaborate with stakeholders on data strategy" vs. "Improve data literacy" → 70
+            - "Design dashboards" vs. "Write technical documentation" → 60
+
+            [RESPONSIBILITIES]
+            1: "Cleaning, transforming, and structuring data"
+            2: "Extract, clean, and analyze data"
+
+            [OUTPUT FORMAT]
+            Respond ONLY with the numerical similarity score (0–100) as the first thing in your response.
+            
+
+=== RESPONSE ===
+85
+
+Response time: 2.36s

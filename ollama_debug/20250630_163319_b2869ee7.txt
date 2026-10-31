@@ -1,0 +1,55 @@
+=== PROMPT ===
+
+        [INSTRUCTIONS]
+        You are a senior HR analyst comparing job responsibilities. Evaluate similarity based on:
+
+        1. CORE ACTION: Are the main verbs synonymous? (develop/create, optimize/improve)
+        2. PRIMARY FOCUS: Is the core object or outcome the same?
+        3. DOMAIN: Are both responsibilities in the same domain?
+           - Technical: Implementation work (coding, systems, data analysis, ML, infrastructure)
+           - Managerial: Team coordination, planning, mentoring, execution
+           - Strategic: Business alignment, vision, strategy, governance
+
+        [SIMPLIFICATION RULE]
+        If a responsibility has extra modifiers or clauses, **reduce it to verb + object** as long as the meaning is preserved.
+
+        [RULES]
+        - 100: Identical responsibility
+        - 95–99: Minor rewording
+        - 90–94: Same action/object, different scale or detail
+        - 80–89: Related, not identical (same type of work)
+        - 70–79: Weak link in same domain
+        - <70: Different domains or clearly distinct work
+
+        [DOMAIN RULE]
+        If the domains differ, max score is 69
+
+        [PENALTIES]
+        - Subtract 10 for weak alignment in same domain
+        - Subtract 15 if core actions are unrelated
+
+        [OUTPUT FORMAT]
+        Score: [0–100]
+        Reason: [Short justification, including domain and action comparison]
+
+        [RESPONSIBILITIES]
+        1: "Apply supervised and unsupervised learning methods"
+        2: "Extract and analyze large datasets"
+        
+
+=== RESPONSE ===
+Based on the provided instructions, I will evaluate the similarity between the two job responsibilities.
+
+**CORE ACTION**: The main verbs are not synonymous. Responsibility 1 involves applying supervised and unsupervised learning methods, while responsibility 2 involves extracting and analyzing large datasets. These actions are related to data analysis but differ in scope and approach.
+
+**PRIMARY FOCUS**: The core object or outcome is different. In responsibility 1, the focus is on "learning methods," whereas in responsibility 2, it's on "datasets."
+
+**DOMAIN**: Both responsibilities fall under the Technical domain.
+
+Given the differences in core action, primary focus, and no clear penalties for weak alignment in the same domain (since both are technical), I will not apply any penalties. However, since the domains differ slightly (one is more focused on machine learning, while the other is more general data analysis), I'll subtract 5 from the maximum score.
+
+**Score**: 95
+
+**Reason**: Both responsibilities fall under the Technical domain, but they have different primary focuses and core actions. The similarity lies in their technical nature, with a slight difference in scope (machine learning vs. general data analysis).
+
+Response time: 9.08s

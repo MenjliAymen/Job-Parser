@@ -1,0 +1,46 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Improve data literacy across the organization"  
+B: "Monitor data pipeline health"
+
+
+=== RESPONSE ===
+Here are the evaluations:
+
+**Responsibility A:** "Improve data literacy across the organization"
+Core A: Educate users  
+Core B: Monitor pipeline health
+
+Functionally Equivalent: No
+Score: 0
+Reason: While both tasks involve data, Responsibility A focuses on user education and awareness, whereas Responsibility B is concerned with ensuring the reliability and performance of a specific data pipeline. They serve different functions.
+
+**Responsibility B:** "Monitor data pipeline health"
+Core A: Monitor pipeline health  
+Core B: Educate users
+
+Functionally Equivalent: No
+Score: 0
+Reason: Similar to the previous evaluation, these two tasks are distinct in their focus. Responsibility B is concerned with ensuring the operational integrity of a data pipeline, whereas Responsibility A aims to improve user understanding and literacy. They serve different functions.
+
+Response time: 6.91s

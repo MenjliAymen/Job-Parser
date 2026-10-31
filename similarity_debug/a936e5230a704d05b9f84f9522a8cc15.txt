@@ -1,0 +1,38 @@
+Task1: Extract, transform, and analyze data
+Task2: Maintain knowledge of current industry standards
+Response: Based on the provided responsibilities:
+
+1. "Extract, transform, and analyze data"
+2. "Maintain knowledge of current industry standards"
+
+**Core action verb comparison:**
+The core action verbs are different:
+- "Extract" implies a removal or gathering process.
+- "Transform" suggests changing or modifying something.
+- "Analyze" involves breaking down or interpreting data.
+
+Score for core action verb similarity: 20 (different actions)
+
+**Primary object/target comparison:**
+The primary objects are also different:
+- Data is the primary object in responsibility 1.
+- Industry standards are the primary object in responsibility 2.
+
+Score for primary object similarity: 20 (different targets)
+
+**Professional domain assessment:**
+Both responsibilities fall under the technical domain, as they both involve data and industry knowledge.
+
+Score for domain alignment: 80 (same domain, different focus)
+
+**Final score calculation:**
+To calculate the final score, we need to assign weights to each category. Let's use a simple approach where each category contributes equally to the final score:
+
+Core action verb similarity: 20/100
+Primary object/target similarity: 20/100
+Domain alignment: 60/100 (since it's a strong match)
+
+Final score calculation:
+(20 + 20 + 60) / 3 = 50
+
+The final score is 50, indicating that the responsibilities are somewhat related but fundamentally different.

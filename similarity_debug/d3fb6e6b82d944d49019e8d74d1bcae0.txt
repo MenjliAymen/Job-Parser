@@ -1,0 +1,18 @@
+Task1: Oversee project delivery
+Task2: Evangelize data literacy
+Response: Based on the provided responsibilities:
+
+1. "Oversee project delivery"
+2. "Evangelize data literacy"
+
+**Core action verb comparison:**
+"Oversee" and "Evangelize" are not similar core action verbs. "Oversee" implies a management or supervisory role, while "Evangelize" means to promote or spread a message.
+
+**Primary object/target comparison:**
+The primary objects/targets are different. "Project delivery" refers to the process of completing a project, whereas "data literacy" refers to the ability to understand and work with data effectively.
+
+**Professional domain assessment:**
+Both responsibilities fall under the technical domain, as they both involve working with data.
+
+**Final score (0-100):**
+Based on the analysis, I would give a score of 20. The core action verbs are not similar, the primary objects/targets are different, and while the domains are related, they are distinct.

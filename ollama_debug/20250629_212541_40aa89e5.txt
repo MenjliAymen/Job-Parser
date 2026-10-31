@@ -1,0 +1,93 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior HR analyst comparing two technology-role responsibilities. Evaluate similarity STRICTLY based on:
+
+1. CORE ACTION VERB (40% weight)
+   - Score 0-100 based on similarity
+   - Synonyms: develop/create, optimize/improve, maintain/support
+
+2. PRIMARY OBJECT (45% weight)
+   - Score 0-100 based on similarity
+   - Apply canonicalization rules below
+
+3. DOMAIN MATCH (15% bonus)
+   - +15 if same domain (Technical, Managerial, Strategic)
+   - +0 if different domains
+
+[STRICT CANONICALIZATION RULES]
+Apply these mappings before scoring:
+- "CI/CD" ≡ "continuous integration" ≡ "continuous deployment"
+- "container" ≡ "Docker" ≡ "Kubernetes pod" ≡ "containerized application"
+- "ML" ≡ "machine learning" ≡ "AI model" ≡ "neural network"
+- "API" ≡ "application programming interface" ≡ "endpoints"
+- "DB" ≡ "database" ≡ "data store" ≡ "data warehouse"
+- "log" ≡ "log file" ≡ "audit trail"
+- "roadmap" ≡ "plan" ≡ "strategy"
+- "metric" ≡ "KPI" ≡ "measurement"
+
+[DOMAIN CLASSIFICATION]
+- Technical: Implementation (code, systems, infrastructure)
+- Managerial: Teams, processes, projects
+- Strategic: Planning, vision, governance
+
+[SCORING FORMULA]
+Final Score = (Verb_Score × 0.4) + (Object_Score × 0.45) + Domain_Bonus
+
+[DOMAIN MISMATCH RULE]
+If domains differ, maximum possible score is 69
+
+[OUTPUT FORMAT]
+1. First line: Final similarity score: [0-100]
+2. Brief rationale (1 sentence)
+
+[EXAMPLE]
+Final similarity score: 87
+Verb synonyms, objects canonicalized to same concept
+
+[RESPONSIBILITIES]
+1: "Lead engineering team"
+2: "Manage development group"
+
+
+=== RESPONSE ===
+To compare the two technology-role responsibilities, I will evaluate them based on the provided instructions.
+
+**Responsibility 1:** "Lead engineering team"
+
+* CORE ACTION VERB:
+	+ Score: 80 (synonyms: lead, manage, oversee)
+* PRIMARY OBJECT:
+	+ Apply canonicalization rules:
+		- "engineering" ≡ "implementation" (Technical domain)
+		- "team" ≡ "group" (Managerial domain)
+	+ Object canonicalized to same concept: "Implementation (code, systems, infrastructure)"
+	+ Score: 100
+* DOMAIN MATCH:
+	+ Same Technical and Managerial domains
+	+ +15 bonus for matching domains
+
+**Responsibility 2:** "Manage development group"
+
+* CORE ACTION VERB:
+	+ Score: 70 (synonyms: manage, oversee)
+* PRIMARY OBJECT:
+	+ Apply canonicalization rules:
+		- "development" ≡ "implementation" (Technical domain)
+		- "group" ≡ "team" (Managerial domain)
+	+ Object canonicalized to same concept: "Implementation (code, systems, infrastructure)"
+	+ Score: 100
+* DOMAIN MATCH:
+	+ Same Technical and Managerial domains
+	+ +15 bonus for matching domains
+
+**Final Scoring Formula**
+
+Responsibility 1: (80 × 0.4) + (100 × 0.45) + 30 = 86.8
+Responsibility 2: (70 × 0.4) + (100 × 0.45) + 30 = 84
+
+**Final Similarity Score:** Responsibility 1 has a higher score, but the difference is minimal.
+
+**Rationale:** Both responsibilities have similar core action verbs and primary objects, with the same Technical and Managerial domains. The slight difference in scores is due to the slightly lower verb score for Responsibility 2.
+
+Response time: 22.10s

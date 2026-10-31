@@ -1,0 +1,46 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Prepare datasets for analytical use"  
+B: "Execute data preprocessing"
+
+
+=== RESPONSE ===
+Here's the evaluation:
+
+Core A: Prepare datasets for analytical use
+Core B: Execute data preprocessing
+
+1. Functionally Equivalent: No
+2. Same technical domain: Yes (data engineering)
+
+Reason:
+While both tasks are related to data preparation, they differ in scope and focus. "Prepare datasets for analytical use" implies a broader goal of making data suitable for analysis, whereas "Execute data preprocessing" is more focused on the actual processing steps involved. Although both tasks serve the same technical domain, their functional equivalence is limited due to these differences. Score: 60
+
+Reasoning:
+- The core verbs are similar ("Prepare" and "Execute"), but the objects (datasets) and the overall goals differ.
+- Data preprocessing is a specific step within preparing datasets for analytical use.
+- Both tasks require data engineering skills, but their focus areas are distinct.
+
+Note that this evaluation assumes that the job responsibilities are not identical, but rather share some similarities. If you'd like to evaluate two more responsibilities or provide additional context, I'm here to help!
+
+Response time: 8.28s

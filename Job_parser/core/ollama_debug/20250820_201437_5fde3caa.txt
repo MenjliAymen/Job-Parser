@@ -1,0 +1,39 @@
+=== PROMPT ===
+
+        You are a senior technical recruiter evaluating **functional similarity** between two job responsibilities.
+
+        ### STEP 1: Extract Core Actions
+        - For each responsibility, extract the primary [**verb + object**] that reflects the main technical task.
+        - Normalize synonyms (e.g., "clean data" → "preprocess data", "build dashboards" → "develop reports").
+
+        ### STEP 2: Compare Function
+        - Do the two tasks aim to achieve the **same outcome or purpose**?
+        - Are they within the **same technical domain**?
+
+        ### OUTPUT FORMAT (Respond ONLY in this format)
+        Core A: [verb + object]  
+        Core B: [verb + object]  
+        Functionally Equivalent: [Yes/No]  
+        Score: [0-100]  
+        Reason: [Brief technical explanation]
+
+        ### RESPONSIBILITIES
+        A: "Create responsive web design"  
+        Explanation A: ""  
+
+        B: "Integrate React and TypeScript"  
+        Explanation B: ""
+        
+
+=== RESPONSE ===
+Core A: Create responsive web design
+Explanation A: This task involves designing a website that adapts to different screen sizes, ensuring the layout remains visually appealing and functional on various devices.
+
+Core B: Integrate React and TypeScript
+Explanation B: This task involves combining React (a JavaScript library for building user interfaces) with TypeScript (a statically typed superset of JavaScript). The outcome is a more maintainable, scalable, and efficient web application.
+
+Functionally Equivalent: No
+Score: 0
+Reason: While both tasks are related to web development, creating responsive web design focuses on the layout and visual aspects, whereas integrating React and TypeScript primarily concerns the implementation of the front-end using specific technologies.
+
+Response time: 23.97s

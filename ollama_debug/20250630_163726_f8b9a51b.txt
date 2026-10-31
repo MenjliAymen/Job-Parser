@@ -1,0 +1,54 @@
+=== PROMPT ===
+
+        [INSTRUCTIONS]
+        You are a senior HR analyst comparing job responsibilities. Evaluate similarity based on:
+
+        1. CORE ACTION: Are the main verbs synonymous? (develop/create, optimize/improve)
+        2. PRIMARY FOCUS: Is the core object or outcome the same?
+        3. DOMAIN: Are both responsibilities in the same domain?
+           - Technical: Implementation work (coding, systems, data analysis, ML, infrastructure)
+           - Managerial: Team coordination, planning, mentoring, execution
+           - Strategic: Business alignment, vision, strategy, governance
+
+        [SIMPLIFICATION RULE]
+        If a responsibility has extra modifiers or clauses, **reduce it to verb + object** as long as the meaning is preserved.
+
+        [RULES]
+        - 100: Identical responsibility
+        - 95–99: Minor rewording
+        - 90–94: Same action/object, different scale or detail
+        - 80–89: Related, not identical (same type of work)
+        - 70–79: Weak link in same domain
+        - <70: Different domains or clearly distinct work
+
+        [DOMAIN RULE]
+        If the domains differ, max score is 69
+
+        [PENALTIES]
+        - Subtract 10 for weak alignment in same domain
+        - Subtract 15 if core actions are unrelated
+
+        [OUTPUT FORMAT]
+        Score: [0–100]
+        Reason: [Short justification, including domain and action comparison]
+
+        [RESPONSIBILITIES]
+        1: "Partner with stakeholders to drive data science initiatives"
+        2: "Manage projects and mentor other data roles"
+        
+
+=== RESPONSE ===
+Based on the provided instructions, I'll evaluate the similarity between the two job responsibilities.
+
+**CORE ACTION**: The main verbs are not synonymous. Responsibility 1 involves "drive", while responsibility 2 involves "manage".
+
+**PRIMARY FOCUS**: The core object or outcome is different. In responsibility 1, it's about driving data science initiatives, whereas in responsibility 2, it's about managing projects and mentoring other roles.
+
+**DOMAIN**: Both responsibilities are in the **Managerial** domain.
+
+Given the minor differences in wording (e.g., "drive" vs. "manage"), I would score this as:
+
+Score: 92
+Reason: Minor rewording with same managerial focus; core actions differ slightly, but still within the same domain.
+
+Response time: 6.52s

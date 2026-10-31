@@ -1,0 +1,37 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Maintain transformation scripts"  
+B: "Design and maintain data transformation workflows"
+
+
+=== RESPONSE ===
+Here are the results:
+
+Core A: Maintain  
+Core B: Design and maintain  
+
+Functionally Equivalent: No  
+Score: 60  
+Reason: While both tasks involve maintaining or managing data transformations, "maintain" implies a more passive role of keeping existing scripts up-to-date, whereas "design and maintain" suggests a more active role in creating and updating workflows. The domain knowledge indicates that both tasks are related to data engineering, but the focus differs between script maintenance and workflow design.
+
+Response time: 4.93s

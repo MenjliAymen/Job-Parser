@@ -1,0 +1,23 @@
+Task1: Extract, transform, and analyze data
+Task2: Evangelize data literacy
+Response: Based on the provided responsibilities:
+
+1. "Extract, transform, and analyze data"
+2. "Evangelize data literacy"
+
+**Core action verb comparison:**
+The core action verbs are different:
+- "Extract" implies a physical or technical process.
+- "Transform" suggests a change in form or structure.
+- "Analyze" involves breaking down complex information into understandable parts.
+- "Evangelize" means to spread or promote a message, idea, or cause.
+
+**Primary object/target comparison:**
+The primary objects are also different:
+- The first responsibility targets data.
+- The second responsibility targets literacy (specifically, data literacy).
+
+**Domain alignment comparison:**
+Both responsibilities fall under the technical domain.
+
+Given these differences in core action verb and primary object, I would score this pair of responsibilities as 40.

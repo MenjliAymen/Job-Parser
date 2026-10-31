@@ -1,0 +1,54 @@
+=== PROMPT ===
+
+[INSTRUCTIONS]
+You are a senior technical recruiter evaluating functional similarity between two job responsibilities. Focus on what *work* is accomplished, not just phrasing.
+
+[SIMPLIFY]
+For each responsibility:
+- Extract the core [verb + object] that captures the primary task.
+- Use your domain knowledge to normalize technical synonyms (e.g., "clean data" = "preprocess").
+
+[COMPARE]
+1. Do both tasks produce the same outcome or serve the same function?
+2. Are they in the same technical domain? (e.g., data engineering, ML, infra)
+
+[OUTPUT FORMAT]
+Core A: [verb + object]  
+Core B: [verb + object]  
+Functionally Equivalent: [Yes/No]  
+Score: [0–100]  
+Reason: [Brief explanation]
+
+[RESPONSIBILITIES]
+A: "Clean datasets for analysis"  
+B: "Build batch ingestion workflows"
+
+
+=== RESPONSE ===
+Here's the evaluation:
+
+Core A: Clean  
+Core B: Build  
+Functionally Equivalent: No  
+Score: 20  
+Reason: While both tasks involve data, "cleaning" implies preprocessing and quality control, whereas "building" suggests creating a workflow to ingest data in batches. They serve different functions and are not directly equivalent.
+
+However, if we normalize the technical synonyms:
+
+Core A: Preprocess  
+Core B: Create  
+
+Functionally Equivalent: No  
+Score: 20  
+Reason: Although both tasks involve data processing, "preprocessing" implies a specific set of quality control steps, whereas "creating" a workflow suggests designing and implementing an ingestion process. They serve different functions and are not directly equivalent.
+
+If we consider the broader context of data engineering:
+
+Core A: Preprocess  
+Core B: Create  
+
+Functionally Equivalent: Yes  
+Score: 80  
+Reason: In the domain of data engineering, both tasks involve working with data. "Preprocessing" can be a part of creating a batch ingestion workflow, and vice versa. They are functionally equivalent in this context.
+
+Response time: 8.85s

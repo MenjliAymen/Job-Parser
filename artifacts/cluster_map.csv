@@ -1,0 +1,286 @@
+title,cluster_id,normalized_title
+Web Scraping,18,Web Scraping
+Real Estate Data Analysis,55,Real Estate Business
+Property Valuation,59,Property Valuation
+Market Trends,24,Market Trends
+Data Extraction,14,Data Extraction
+LinkedIn Data Structures,37,LinkedIn Data Extraction
+User Interface Design,30,UI/UX Design
+Data Analysis,3,Data Analysis
+Company Benchmarking,87,Company Benchmarking
+Keyword Research,17,Business Research
+Product Data Extraction,14,Data Extraction
+Data Cleaning and Structure,3,Data Analysis
+Category Specific,42,Category Reassignment
+Data Scraping,18,Web Scraping
+Data Cleaning,3,Data Analysis
+Data Normalization,12,Data Transformation
+Automation Scripts,25,Automation Tools
+ETL Pipelines,80,ETL Pipelines
+Database Structures,3,Data Analysis
+Problem Solving,96,Problem Solving
+Attention to Detail,73,Attention to Detail
+OCR Technology,6,Image Processing
+Zoho CRM Integration,70,Zoho CRM Integration
+API Capabilities,10,API Integration
+Data Structure,3,Data Analysis
+Team Collaboration,21,Team Collaboration
+LinkedIn Platform Policies,37,LinkedIn Data Extraction
+Contact Information Gathering,88,Contact Information Gathering
+Marketing Strategy,58,Marketing Strategy
+Email Collection,15,Email Collection
+Mobile App Development,7,Web Development
+API Integration,10,API Integration
+Cross-Platform Compatibility,8,B2B Platforms
+AI Summarization,56,AI Research
+Workflow Automation,25,Automation Tools
+Database Management,3,Data Analysis
+Compliance and Data Handling,27,Legal Compliance
+IP Ban Prevention,38,Anti-Ban Constraints
+System Optimization,119,System Optimization
+Data Structuring,3,Data Analysis
+Video Transcription,32,Video Transcription
+Lead Generation,110,Lead Generation
+Email Verification,15,Email Collection
+Spreadsheet Organization,20,Excel Skills
+Contact List Cleaning,88,Contact Information Gathering
+GDPR & CAN-SPAM Compliance,90,GDPR & CAN-SPAM Compliance
+Scalability Optimization,119,System Optimization
+Performance Improvement,43,Performance Improvement
+Security Implementation,27,Legal Compliance
+Documentation Maintenance,71,Documentation Maintenance
+Cloud-Based Solutions,102,Cloud-Based Solutions
+Google Sheets API Integration,10,API Integration
+Python Programming,5,Python Programming
+Data Quality Assurance,46,Data Quality Assurance
+Script Development,7,Web Development
+Data Collection,3,Data Analysis
+Automated Matching,79,Automated Matching
+Database Integration,3,Data Analysis
+Run Control and Monitoring,98,Run Control and Monitoring
+Anti-Ban Constraints,38,Anti-Ban Constraints
+Dashboard Development,23,Dashboard Development
+Data Organization,3,Data Analysis
+Broker Data Analysis,26,Brokerage Data Analysis
+Brokerage Data Analysis,26,Brokerage Data Analysis
+UI/UX Design (for formatting purposes only),30,UI/UX Design
+Data Management,3,Data Analysis
+Web Development,7,Web Development
+Competition Analysis,50,Competition Analysis
+Database Administration,3,Data Analysis
+Front-end Development,7,Web Development
+Back-end Development,7,Web Development
+Local Service Advertising,77,Local Service Advertising
+CPG Manufacturing,72,CPG Manufacturing
+PPC Agencies,74,PPC Agencies
+Google Maps,35,Google Maps API
+Real Estate Data Collection,55,Real Estate Business
+Data Mining,113,Data Mining
+Data Verification,9,Data Validation
+Legal Compliance,27,Legal Compliance
+AI Enrichment,56,AI Research
+Manual Validation,9,Data Validation
+Leadership Research,109,Leadership Research
+LinkedIn Research,37,LinkedIn Data Extraction
+Press Mention Research,17,Business Research
+GTM Data,19,GTM Data
+Custom Research Prompts,118,Custom Research Prompts
+AI Transcription,32,Video Transcription
+Notion API,101,Notion API
+Content Formatting,60,Data Formatting
+Smart Data Sourcing,81,Smart Data Sourcing
+Text Cleaning,0,Text Cleaning
+Data Engineering,3,Data Analysis
+"ETL (Extract, Transform, Load)",80,ETL Pipelines
+Predictive Analytics,4,Instagram Analytics
+Cloud Computing,102,Cloud-Based Solutions
+Natural Language Processing,52,Natural Language Processing
+Entity Extraction and Classification,14,Data Extraction
+Smart Filtering Algorithms,31,Data Filtering
+Content Organization,28,Content Management
+AI Classification Models,113,Data Mining
+Python-based ML Frameworks,5,Python Programming
+Knowledge Graph or Semantic Search,69,Knowledge Graph or Semantic Search
+Content Ingestion and Analysis,100,Content Ingestion and Analysis
+Structured Dashboards,23,Dashboard Development
+Match/Recommendation Engines,11,Recommendation Systems
+Imagination and Innovation,62,Imagination and Innovation
+"Sci-Fi, Fantasy & Futurism",82,"Sci-Fi, Fantasy & Futurism"
+AI Solutions,56,AI Research
+Agentic Research Pipelines,91,Agentic Research Pipelines
+K-12 Education Data Landscape,75,K-12 Education Data Landscape
+Data Gathering & Scraping,18,Web Scraping
+Demographic & Contextual Data,39,Demographic & Contextual Data
+Vendor & Solution Tracking,92,Vendor & Solution Tracking
+Output Format,60,Data Formatting
+Professional Freelancing Categories,76,Professional Freelancing Categories
+Machine Learning,113,Data Mining
+PDF Processing,86,PDF Processing
+Data Science,3,Data Analysis
+Real Estate,55,Real Estate Business
+Backend Development,7,Web Development
+Alert Systems,94,Alert Systems
+HTML Parsing,104,HTML Parsing
+Data Storage,49,Data Storage
+Risk Quantification,1,Geopolitical Risk
+Geopolitical Risk,1,Geopolitical Risk
+Regulatory Data,105,Regulatory Data
+Social Data,39,Demographic & Contextual Data
+Data Transformation,12,Data Transformation
+Programming Languages,5,Python Programming
+Tools for Data Processing,3,Data Analysis
+SQL Database Management,3,Data Analysis
+Data Entry,3,Data Analysis
+Excel Proficiency,20,Excel Skills
+Email Scraping,18,Web Scraping
+AI Consulting,56,AI Research
+Content Recommendation Systems,11,Recommendation Systems
+Multimodal Understanding,68,Multimodal Understanding
+Ranking Algorithms,11,Recommendation Systems
+User Segmentation,2,Clustering Techniques
+Video Recommendation Engines,11,Recommendation Systems
+Mobile-First Consumption,95,Mobile-First Consumption
+Excel/Google Sheets,20,Excel Skills
+Taxonomy Creation,22,Taxonomy Creation
+Taxonomy Management,22,Taxonomy Creation
+Data Enrichment,3,Data Analysis
+UI/UX Design,30,UI/UX Design
+Data Validation,9,Data Validation
+Quality Assurance,46,Data Quality Assurance
+WordPress Development,7,Web Development
+Content Management,28,Content Management
+AI Sales,56,AI Research
+Sales Process Automation,25,Automation Tools
+Data Processing,3,Data Analysis
+Stock Market Data,24,Market Trends
+Email Marketing,58,Marketing Strategy
+Social Media Marketing,51,Social Media Marketing
+Content Creation,28,Content Management
+Marketing Automation,25,Automation Tools
+Digital Marketing,58,Marketing Strategy
+Ecommerce Metrics,13,eCommerce Platforms
+Sales Strategy,58,Marketing Strategy
+Marketplace Analysis,26,Brokerage Data Analysis
+Data Cleaning & Preparation,3,Data Analysis
+Profitability Analysis,112,Profitability Analysis
+Manufacturing Industry Experience,29,Industry Analysis
+AI Integration,56,AI Research
+Social Media Scraping,18,Web Scraping
+AI Research,56,AI Research
+Technical Evaluation,36,Technical Evaluation
+Algorithm Improvement,43,Performance Improvement
+Recommendation Systems,11,Recommendation Systems
+Competitive Intelligence,50,Competition Analysis
+Natural Language Processing (NLP),52,Natural Language Processing
+Automation Tools,25,Automation Tools
+Java Development,7,Web Development
+Aerospace Industry,29,Industry Analysis
+Browser Automation,25,Automation Tools
+Video Content Download,45,Video Content Download
+Screenshot Capture,99,Screenshot Capture
+PDF Creation,86,PDF Processing
+File Storage,49,Data Storage
+LinkedIn Scraping,37,LinkedIn Data Extraction
+Filter Application,31,Data Filtering
+AI-Powered Platform Development,53,Data Platform Development
+Content Optimization,28,Content Management
+Web Scraping & Crawling,18,Web Scraping
+Backend & Automation Development,7,Web Development
+Analytics Dashboard Development,23,Dashboard Development
+Affiliate Marketing,117,Affiliate Management
+Trial Abuse Prevention,67,Trial Abuse Prevention
+Supabase Integration,34,Supabase Integration
+LinkedIn Data Extraction,37,LinkedIn Data Extraction
+AI Technologies,56,AI Research
+POS API Integration,10,API Integration
+Structured Data Handling,3,Data Analysis
+AI and Automation,56,AI Research
+Data Integration,3,Data Analysis
+Automated Outreach,108,Automated Outreach
+Opportunity Analysis,115,Opportunity Analysis
+Text Generation,0,Text Cleaning
+API Integrations,10,API Integration
+Public Data Sources,106,Public Data Sources
+DAG-based Orchestration,107,DAG-based Orchestration
+Error Handling,120,Error Handling
+Code Consistency,85,Code Consistency
+CSV File Compilation,44,CSV Format
+Instagram Analytics,4,Instagram Analytics
+Rights Management,63,Rights Management
+Fishing Gear Availability,97,Fishing Gear Availability
+Business Research,17,Business Research
+Industry Analysis,29,Industry Analysis
+Data Accuracy,9,Data Validation
+Data Completeness,114,Data Completeness
+Beautiful Soup,54,Beautiful Soup
+CSV Format,44,CSV Format
+JSON Format,116,JSON Format
+EV Readiness,61,EV Readiness
+Strata Data Collection,78,Strata Data Collection
+Market Research,17,Business Research
+List Compilation,93,List Compilation
+Contact Information Collection,88,Contact Information Gathering
+Data Consolidation,3,Data Analysis
+Excel Manipulation,20,Excel Skills
+Project Management,33,Project Management
+Data Research,3,Data Analysis
+Data Filtering,31,Data Filtering
+Excel Skills,20,Excel Skills
+Public Records,106,Public Data Sources
+Property Data,59,Property Valuation
+Internet Research,17,Business Research
+Scraping Tools,18,Web Scraping
+Email Address Collection,15,Email Collection
+Data Protection Regulations,27,Legal Compliance
+HTML Analysis,104,HTML Parsing
+XPath 1.0,47,XPath 1.0
+Business Data Enrichment,3,Data Analysis
+Email Campaign Targeting,83,Email Campaign Targeting
+Data Platform Development,53,Data Platform Development
+Machine Learning (ML),113,Data Mining
+Security and Compliance,27,Legal Compliance
+Infrastructure as Code (IaC),16,Infrastructure as Code (IaC)
+Social Media Platforms,51,Social Media Marketing
+Content Coaching,28,Content Management
+Affiliate Management,117,Affiliate Management
+Community Engagement,21,Team Collaboration
+Data Cleanliness,3,Data Analysis
+CSV/Excel File Formatting,44,CSV Format
+AI/LLM Data,19,GTM Data
+B2B Platforms,8,B2B Platforms
+FMLS Data Extraction,14,Data Extraction
+Real Estate Scraping,18,Web Scraping
+Home Inspection Business,84,Home Inspection Business
+Zillow Platform,66,Zillow Platform
+Real Estate Agents,55,Real Estate Business
+Marketing Efforts,58,Marketing Strategy
+Pricing Strategy,58,Marketing Strategy
+Pharmaceutical Industry,57,Pharmaceutical Industry
+South Korea,64,South Korea
+CSV Output,44,CSV Format
+Data Parsing,14,Data Extraction
+CSV Export,44,CSV Format
+AI Programming,56,AI Research
+Domain Name Acquisition,111,Domain Name Acquisition
+Data Gathering,3,Data Analysis
+Scraping Techniques,18,Web Scraping
+Data Formatting,60,Data Formatting
+Communication Skills,89,Communication Skills
+Data Handling,3,Data Analysis
+Google Sheets Integration,10,API Integration
+Real Estate Business,55,Real Estate Business
+Shopify Development,13,eCommerce Platforms
+Image Processing,6,Image Processing
+Google Maps API,35,Google Maps API
+Data Retrieval,3,Data Analysis
+Business Information,48,Business Information
+Data Visualization,12,Data Transformation
+Cooking Recipes,65,Cooking Recipes
+Multilingual Data,41,Multilingual Data
+Clustering Techniques,2,Clustering Techniques
+Outlier Detection,40,Outlier Detection
+Category Reassignment,42,Category Reassignment
+Semantic Word Classification,52,Natural Language Processing
+eCommerce Platforms,13,eCommerce Platforms
+Dynamic Content,28,Content Management
+Monday Board Integration,103,Monday Board Integration
